@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Demos</string>
+    <string name="viewpager1">两个ViewPager联动效果自定义</string>
+    <string name="viewpager2">两个ViewPager联动效果Magic实现</string>
+</resources>
