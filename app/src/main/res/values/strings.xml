@@ -2,4 +2,6 @@
     <string name="app_name">Demos</string>
     <string name="viewpager1">两个ViewPager联动效果自定义</string>
     <string name="viewpager2">两个ViewPager联动效果Magic实现</string>
+    <string name="layoutmanager1">自定义layoutmanager布局排名网格</string>
+    <string name="tab1">tab导航1</string>
 </resources>
