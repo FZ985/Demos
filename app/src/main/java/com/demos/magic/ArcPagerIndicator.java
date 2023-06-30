@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * author : JFZ
  * date : 2023/6/30 10:29
- * description : 圆弧指针
+ * description : 圆弧指示器
  */
 public class ArcPagerIndicator extends View implements IPagerIndicator {
 
