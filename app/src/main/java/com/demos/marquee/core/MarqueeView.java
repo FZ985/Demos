@@ -202,6 +202,7 @@ public class MarqueeView extends FrameLayout {
         boolean isMultiType = mAdapter.isMultiType();
         if (isMultiType) {
             //至少需要两个类型才能使用所类型布局
+            viewTypeCache.clear();
             for (int i = 0; i < mAdapter.getItemCount(); i++) {
                 int viewType = mAdapter.getItemViewType(i);
                 viewTypeCache.put(viewType, viewType);
