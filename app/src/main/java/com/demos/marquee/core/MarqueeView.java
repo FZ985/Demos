@@ -137,6 +137,8 @@ public class MarqueeView extends FrameLayout {
         if (mAdapter == null) return;
         if (mAdapter.getItemCount() <= 0) return;
         if (currentPosition == -1) {
+            sparseArray.clear();
+            viewTypeCache.clear();
             removeAllViews();
             currentPosition = 0;
             View view = buildItemView();
