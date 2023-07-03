@@ -49,7 +49,7 @@ public class DownLoadManager {
         THREAD_POOL.execute(downLoadTask);
     }
 
-    public void destory() {
+    public void destroy() {
         ISDOWNLOADING = false;
         Log.e("download", "##销毁下载器##");
         if (DownLoadManagerHolder.INSTANCE != null) {
@@ -69,12 +69,12 @@ public class DownLoadManager {
 
     private static boolean ISDOWNLOADING = false;
 
-    public class DownLoadTask implements Runnable {
+    public static class DownLoadTask implements Runnable {
 
-        private DownLoadBean bean;
-        private DownLoadStatusCallback<DownLoadBean> mCallBack;
+        private final DownLoadBean bean;
+        private final DownLoadStatusCallback<DownLoadBean> mCallBack;
         private RandomAccessFile raf;
-        private File mStoreFile;
+        private final File mStoreFile;
         private HttpURLConnection connection;
 
         public DownLoadTask(DownLoadBean bean,
