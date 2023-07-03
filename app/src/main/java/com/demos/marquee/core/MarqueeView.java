@@ -2,6 +2,7 @@ package com.demos.marquee.core;
 
 import android.content.Context;
 import android.database.Observable;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseIntArray;
@@ -122,6 +123,14 @@ public class MarqueeView extends FrameLayout {
     @Override
     public void addView(View child, ViewGroup.LayoutParams params) {
 
+    }
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        try {
+            super.dispatchDraw(canvas);
+        } catch (Exception e) {
+        }
     }
 
     void start() {
