@@ -12,8 +12,6 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.core.util.Pools;
 
-import com.demos.Logger;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,34 +22,35 @@ import java.util.Map;
  */
 public class MarqueeView extends FrameLayout {
 
+    //单类型使用
     private final Pools.SimplePool<View> viewPool = new Pools.SimplePool<>(4);
-
+    //多类型使用
     private final Map<Integer, View> sparseArray = new HashMap<>();
     private final SparseIntArray viewTypeCache = new SparseIntArray();
 
-    MarqueeView.Adapter mAdapter;
+    MarqueeView.Adapter mAdapter;//跑马灯适配器
 
-    private int currentPosition = -1;
+    private int currentPosition = -1;//当前显示的角标
 
-    private int oldPosition = -1;
+    private int oldPosition = -1;//避免 OnMarqueeLoopListener 重复回调
 
-    private OnMarqueeLoopListener loopListener;
+    private OnMarqueeLoopListener loopListener;//item position 轮播事件
 
-    private OnMarqueeItemClickListener clickListener;
+    private OnMarqueeItemClickListener clickListener;//item点击事件
 
-    private long duration = 3000;
+    private long duration = 3000;//轮播时间间隔
 
-    private boolean isStop = false;
+    private boolean isStop = false;//开始 与 结束 标志位
 
-    private boolean onStop = false;
+    private boolean onStop = false;//生命周期的标志位
 
-    private boolean isLoop = true;//是否轮询
+    private boolean isLoop = true;//是否开启轮询
 
-    private boolean isMarquee = true;//是否跑马灯
+    private boolean isMarquee = true;//是否开启跑马灯
 
-    private boolean isRunning = false;
+    private boolean isRunning = false;//是否在运行中
 
-    private boolean isNextEnd = false;//下一个结束
+    private boolean isNextEnd = false;//下一个结束的标志位，解决快速next时的崩溃问题
 
     public interface OnMarqueeLoopListener {
 
@@ -205,10 +204,8 @@ public class MarqueeView extends FrameLayout {
             //至少需要两个类型才能使用所类型布局
             for (int i = 0; i < mAdapter.getItemCount(); i++) {
                 int viewType = mAdapter.getItemViewType(i);
-                Logger.e("type:" + viewType);
                 viewTypeCache.put(viewType, viewType);
             }
-            Logger.e("viewTypeCache.size():" + viewTypeCache.size());
             if (viewTypeCache.size() > 1) {
                 int itemViewType = mAdapter.getItemViewType(currentPosition);
                 if (sparseArray.containsKey(itemViewType)) {
@@ -235,6 +232,8 @@ public class MarqueeView extends FrameLayout {
         if (this.mAdapter != null && this.mAdapter.hasObservers()) {
             this.mAdapter.unregisterAdapterDataObserver(mObserver);
         }
+        viewTypeCache.clear();
+        sparseArray.clear();
         super.onDetachedFromWindow();
     }
 
@@ -259,6 +258,55 @@ public class MarqueeView extends FrameLayout {
         @Override
         public void endAnimEnd(View view) {
             endEnd(view);
+        }
+    }
+
+    static class AdapterObservable extends Observable<MarqueeView.AdapterDataObserver> {
+
+        public boolean hasObservers() {
+            return !mObservers.isEmpty();
+        }
+
+        public void notifyChanged(boolean isFirst) {
+            for (int i = mObservers.size() - 1; i >= 0; i--) {
+                mObservers.get(i).onChanged(isFirst);
+            }
+        }
+
+        public void firstAnimEnd() {
+            for (int i = mObservers.size() - 1; i >= 0; i--) {
+                mObservers.get(i).firstAnimEnd();
+            }
+        }
+
+        public void startAnimEnd() {
+            for (int i = mObservers.size() - 1; i >= 0; i--) {
+                mObservers.get(i).startAnimEnd();
+            }
+        }
+
+        public void endAnimEnd(View view) {
+            for (int i = mObservers.size() - 1; i >= 0; i--) {
+                mObservers.get(i).endAnimEnd(view);
+            }
+        }
+    }
+
+    abstract static class AdapterDataObserver {
+        public void onChanged(boolean isFirst) {
+            // Do nothing
+        }
+
+        public void firstAnimEnd() {
+            // Do nothing
+        }
+
+        public void startAnimEnd() {
+            // Do nothing
+        }
+
+        public void endAnimEnd(View view) {
+            // Do nothing
         }
     }
 
@@ -313,55 +361,6 @@ public class MarqueeView extends FrameLayout {
 
         public final boolean hasObservers() {
             return mObservable.hasObservers();
-        }
-    }
-
-    static class AdapterObservable extends Observable<MarqueeView.AdapterDataObserver> {
-
-        public boolean hasObservers() {
-            return !mObservers.isEmpty();
-        }
-
-        public void notifyChanged(boolean isFirst) {
-            for (int i = mObservers.size() - 1; i >= 0; i--) {
-                mObservers.get(i).onChanged(isFirst);
-            }
-        }
-
-        public void firstAnimEnd() {
-            for (int i = mObservers.size() - 1; i >= 0; i--) {
-                mObservers.get(i).firstAnimEnd();
-            }
-        }
-
-        public void startAnimEnd() {
-            for (int i = mObservers.size() - 1; i >= 0; i--) {
-                mObservers.get(i).startAnimEnd();
-            }
-        }
-
-        public void endAnimEnd(View view) {
-            for (int i = mObservers.size() - 1; i >= 0; i--) {
-                mObservers.get(i).endAnimEnd(view);
-            }
-        }
-    }
-
-    public abstract static class AdapterDataObserver {
-        public void onChanged(boolean isFirst) {
-            // Do nothing
-        }
-
-        public void firstAnimEnd() {
-            // Do nothing
-        }
-
-        public void startAnimEnd() {
-            // Do nothing
-        }
-
-        public void endAnimEnd(View view) {
-            // Do nothing
         }
     }
 

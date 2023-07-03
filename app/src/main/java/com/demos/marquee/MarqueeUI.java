@@ -58,10 +58,9 @@ public class MarqueeUI extends AppCompatActivity {
         binding.marquee.setLoopListener(new MarqueeView.OnMarqueeLoopListener() {
             @Override
             public void onMarqueeLoop(int position) {
-                Logger.e("====pos:" + position);
+                Logger.e("当前角标：" + position);
             }
         });
-
 
         binding.marquee.setOnItemClickListener(new MarqueeView.OnMarqueeItemClickListener() {
             @Override
