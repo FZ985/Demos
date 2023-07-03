@@ -26,7 +26,7 @@ public class MarqueeExampleAdapter extends MarqueeView.Adapter {
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return data == null ? 0 : data.size();
     }
 
     @Override

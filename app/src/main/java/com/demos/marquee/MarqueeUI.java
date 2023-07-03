@@ -30,7 +30,7 @@ public class MarqueeUI extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         List<String> d = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 4; i++) {
             d.add("iiiiii" + i);
         }
 
@@ -39,12 +39,29 @@ public class MarqueeUI extends AppCompatActivity {
             adapter.setData(d);
         });
 
+        binding.btn1.setOnClickListener(v -> {
+            binding.marquee.setMarquee(true);
+        });
+        binding.btn2.setOnClickListener(v -> {
+            binding.marquee.setMarquee(false);
+        });
+        binding.btn4.setOnClickListener(v -> {
+            binding.marquee.next();
+        });
+        binding.btn3.setOnClickListener(v -> {
+            binding.marquee.setLoop(true);
+        });
+        binding.btn5.setOnClickListener(v -> {
+            binding.marquee.setLoop(false);
+        });
+
         binding.marquee.setLoopListener(new MarqueeView.OnMarqueeLoopListener() {
             @Override
             public void onMarqueeLoop(int position) {
                 Logger.e("====pos:" + position);
             }
         });
+
 
         binding.marquee.setOnItemClickListener(new MarqueeView.OnMarqueeItemClickListener() {
             @Override

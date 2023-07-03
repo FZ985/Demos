@@ -23,6 +23,8 @@ public class MarqueeView extends FrameLayout {
 
     private int currentPosition = -1;
 
+    private int oldPosition = -1;
+
     private OnMarqueeLoopListener loopListener;
 
     private OnMarqueeItemClickListener clickListener;
@@ -32,6 +34,12 @@ public class MarqueeView extends FrameLayout {
     private boolean isStop = false;
 
     private boolean onStop = false;
+
+    private boolean isLoop = true;//是否轮询
+
+    private boolean isMarquee = true;//是否跑马灯
+
+    private boolean isRunning = false;
 
     public interface OnMarqueeLoopListener {
 
@@ -65,13 +73,18 @@ public class MarqueeView extends FrameLayout {
         public void run() {
             int childCount = getChildCount();
             if (childCount > 0) {
-                View firstView = getChildAt(0);
-                mAdapter.exitAnim(firstView);
-                currentPosition += 1;
                 int itemCount = mAdapter.getItemCount();
+                View firstView = getChildAt(0);
+                currentPosition += 1;
                 if (currentPosition >= itemCount) {
-                    currentPosition = 0;
+                    if (isLoop) {
+                        currentPosition = 0;
+                    } else {
+                        isRunning = false;
+                        return;
+                    }
                 }
+                mAdapter.exitAnim(firstView);
                 if (itemCount > 0) {
                     View itemView = buildItemView();
                     mAdapter.onConvert(getContext(), itemView, currentPosition);
@@ -101,40 +114,50 @@ public class MarqueeView extends FrameLayout {
     void start() {
         if (mAdapter == null) return;
         if (mAdapter.getItemCount() <= 0) return;
-        removeAllViews();
-        currentPosition = 0;
-        View view = buildItemView();
-        super.addView(view);
-        mAdapter.onConvert(getContext(), view, currentPosition);
-        isStop = false;
-        registerClick(view, currentPosition);
-        view.post(() -> mAdapter.firstAnim(view, currentPosition));
+        if (currentPosition == -1) {
+            removeAllViews();
+            currentPosition = 0;
+            View view = buildItemView();
+            super.addView(view);
+            mAdapter.onConvert(getContext(), view, currentPosition);
+            isStop = false;
+            registerClick(view, currentPosition);
+            view.post(() -> mAdapter.firstAnim(view, currentPosition));
+        } else {
+            startLoop(10);
+        }
     }
 
     private void registerClick(View view, int position) {
-        view.setOnClickListener(v -> {
-            if (clickListener != null) {
-                clickListener.onMarqueeItemClick(view, position);
-            }
-        });
+        if (clickListener != null) {
+            view.setOnClickListener(v -> clickListener.onMarqueeItemClick(view, position));
+        }
     }
 
-    private void startLoop() {
+    private void startLoop(long duration) {
+        isStop = false;
+        isRunning = true;
+        if (loopListener != null && oldPosition != currentPosition && currentPosition < mAdapter.getItemCount()) {
+            oldPosition = currentPosition;
+            loopListener.onMarqueeLoop(currentPosition);
+        }
         postDelayed(run, duration);
     }
 
     void firstEnd() {
-        if (loopListener != null) {
-            loopListener.onMarqueeLoop(currentPosition);
-        }
-        startLoop();
+        startEnd();
     }
 
     void startEnd() {
-        if (loopListener != null) {
-            loopListener.onMarqueeLoop(currentPosition);
+        if (isMarquee)
+            startLoop(duration);
+        else {
+            isRunning = false;
+            if (loopListener != null && oldPosition != currentPosition && currentPosition < mAdapter.getItemCount()) {
+                oldPosition = currentPosition;
+                loopListener.onMarqueeLoop(currentPosition);
+            }
         }
-        startLoop();
     }
 
     void endEnd(View view) {
@@ -144,6 +167,7 @@ public class MarqueeView extends FrameLayout {
 
     void stop() {
         isStop = true;
+        isRunning = false;
         removeCallbacks(run);
     }
 
@@ -286,7 +310,7 @@ public class MarqueeView extends FrameLayout {
     public void onResume() {
         if (onStop && isStop && mAdapter != null && mAdapter.getItemCount() > 0) {
             onStop = false;
-            startLoop();
+            startLoop(duration);
         }
     }
 
@@ -310,7 +334,33 @@ public class MarqueeView extends FrameLayout {
         this.clickListener = listener;
     }
 
+    //设置时间间隔
     public void setDuration(long duration) {
         this.duration = duration;
+    }
+
+    //设置是否 开启跑马灯
+    public void setMarquee(boolean marquee) {
+        isMarquee = marquee;
+        if (isMarquee && !isRunning) {
+            startEnd();
+        }
+    }
+
+    //手动下一个,只有为开启跑马灯的时候才可以
+    public void next() {
+        if (!isMarquee) {
+            if (isRunning) {
+                stop();
+            }
+            start();
+        }
+    }
+
+    public void setLoop(boolean isLoop) {
+        this.isLoop = isLoop;
+        if (isLoop && !isRunning) {
+            start();
+        }
     }
 }
