@@ -5,11 +5,15 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.view.View;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 
 import net.lucode.hackware.magicindicator.FragmentContainerHelper;
+import net.lucode.hackware.magicindicator.buildins.ArgbEvaluatorHolder;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.model.PositionData;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,7 +26,13 @@ public class OneHalfLinePagerIndicator extends View implements IPagerIndicator {
     private final RectF mInnerRect = new RectF();
     private final RectF mRect = new RectF();
 
+    private List<Integer> mColors;
+
     private List<PositionData> mPositionDataList;
+
+    private Interpolator mStartInterpolator = new LinearInterpolator();
+    private Interpolator mEndInterpolator = new LinearInterpolator();
+
 
     public OneHalfLinePagerIndicator(Context context) {
         super(context);
@@ -50,9 +60,22 @@ public class OneHalfLinePagerIndicator extends View implements IPagerIndicator {
         PositionData current = FragmentContainerHelper.getImitativePositionData(mPositionDataList, position);
         PositionData next = FragmentContainerHelper.getImitativePositionData(mPositionDataList, position + 1);
 
-        mInnerRect.left = current.mContentLeft + (next.mContentLeft - current.mContentLeft) * positionOffset;
+        // 计算颜色
+        if (mColors != null && mColors.size() > 0) {
+            int currentColor = mColors.get(Math.abs(position) % mColors.size());
+            int nextColor = mColors.get(Math.abs(position + 1) % mColors.size());
+            int color = ArgbEvaluatorHolder.eval(positionOffset, currentColor, nextColor);
+            mPaint.setColor(color);
+        }
+
+//        mInnerRect.left = current.mContentLeft + (next.mContentLeft - current.mContentLeft) * positionOffset;
+//        mInnerRect.right = current.mContentRight + (next.mContentRight - current.mContentRight) * positionOffset;
+//        mInnerRect.top = current.mContentTop + (next.mContentTop - current.mContentTop) * positionOffset;
+//        mInnerRect.bottom = current.mContentBottom + (next.mContentBottom - current.mContentBottom) * positionOffset;
+
+        mInnerRect.left = current.mContentLeft + (next.mContentLeft - current.mContentLeft) * mStartInterpolator.getInterpolation(positionOffset);
+        mInnerRect.right = current.mContentRight + (next.mContentRight - current.mContentRight) * mEndInterpolator.getInterpolation(positionOffset);
         mInnerRect.top = current.mContentTop + (next.mContentTop - current.mContentTop) * positionOffset;
-        mInnerRect.right = current.mContentRight + (next.mContentRight - current.mContentRight) * positionOffset;
         mInnerRect.bottom = current.mContentBottom + (next.mContentBottom - current.mContentBottom) * positionOffset;
 
         invalidate();
@@ -71,8 +94,18 @@ public class OneHalfLinePagerIndicator extends View implements IPagerIndicator {
         mPositionDataList = dataList;
     }
 
-    public OneHalfLinePagerIndicator setColor(int color) {
-        mPaint.setColor(color);
+    public OneHalfLinePagerIndicator setColors(Integer... colors) {
+        mColors = Arrays.asList(colors);
+        return this;
+    }
+
+    public OneHalfLinePagerIndicator setStartInterpolator(Interpolator mStartInterpolator) {
+        this.mStartInterpolator = mStartInterpolator;
+        return this;
+    }
+
+    public OneHalfLinePagerIndicator setEndInterpolator(Interpolator mEndInterpolator) {
+        this.mEndInterpolator = mEndInterpolator;
         return this;
     }
 }

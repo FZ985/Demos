@@ -3,6 +3,8 @@ package com.demos.magic;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +33,7 @@ import java.util.List;
 public class MagicTabActivity1 extends AppCompatActivity {
     private ActivityMagic1Binding binding;
 
-    private final String[] t = {"哈哈哈哈", "呵呵呵呵", "嘿嘿嘿嘿", "嘻嘻嘻嘻"};
+    private final String[] t = {"哈哈", "呵呵呵呵", "嘿嘿", "嘻嘻嘻嘻"};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +79,9 @@ public class MagicTabActivity1 extends AppCompatActivity {
                         .setColors(Color.parseColor("#ff4a42"),
                                 Color.parseColor("#fcde64"),
                                 Color.parseColor("#76b0ff"),
-                                Color.parseColor("#c683fe"));
+                                Color.parseColor("#c683fe"))
+                        .setStartInterpolator(new AccelerateInterpolator())
+                        .setEndInterpolator(new DecelerateInterpolator(2f));
             }
         });
         binding.magic.setNavigator(commonNavigator);
@@ -99,7 +103,13 @@ public class MagicTabActivity1 extends AppCompatActivity {
 
             @Override
             public IPagerIndicator getIndicator(Context context) {
-                return new OneHalfLinePagerIndicator(context).setColor(Color.parseColor("#fcde64"));
+                return new OneHalfLinePagerIndicator(context)
+                        .setColors(Color.parseColor("#ff4a42"),
+                                Color.parseColor("#fcde64"),
+                                Color.parseColor("#76b0ff"),
+                                Color.parseColor("#c683fe"))
+                        .setStartInterpolator(new AccelerateInterpolator())
+                        .setEndInterpolator(new DecelerateInterpolator(2f));
             }
         });
         binding.magic2.setNavigator(commonNavigator);
