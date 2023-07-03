@@ -4,12 +4,18 @@ import android.content.Context;
 import android.database.Observable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.core.util.Pools;
+
+import com.demos.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * author : JFZ
@@ -19,6 +25,9 @@ import androidx.core.util.Pools;
 public class MarqueeView extends FrameLayout {
 
     private final Pools.SimplePool<View> viewPool = new Pools.SimplePool<>(4);
+
+    private final Map<Integer, View> sparseArray = new HashMap<>();
+    private final SparseIntArray viewTypeCache = new SparseIntArray();
 
     MarqueeView.Adapter mAdapter;
 
@@ -90,10 +99,12 @@ public class MarqueeView extends FrameLayout {
                 mAdapter.exitAnim(firstView);
                 if (itemCount > 0) {
                     View itemView = buildItemView();
-                    mAdapter.onConvert(getContext(), itemView, currentPosition);
-                    MarqueeView.super.addView(itemView);
-                    registerClick(itemView, currentPosition);
-                    itemView.post(() -> mAdapter.enterAnim(itemView, currentPosition));
+                    if (itemView != null) {
+                        mAdapter.onConvert(getContext(), itemView, currentPosition);
+                        MarqueeView.super.addView(itemView);
+                        registerClick(itemView, currentPosition);
+                        itemView.post(() -> mAdapter.enterAnim(itemView, currentPosition));
+                    }
                 }
             }
         }
@@ -121,11 +132,13 @@ public class MarqueeView extends FrameLayout {
             removeAllViews();
             currentPosition = 0;
             View view = buildItemView();
-            super.addView(view);
-            mAdapter.onConvert(getContext(), view, currentPosition);
-            isStop = false;
-            registerClick(view, currentPosition);
-            view.post(() -> mAdapter.firstAnim(view, currentPosition));
+            if (view != null) {
+                super.addView(view);
+                mAdapter.onConvert(getContext(), view, currentPosition);
+                isStop = false;
+                registerClick(view, currentPosition);
+                view.post(() -> mAdapter.firstAnim(view, currentPosition));
+            }
         } else {
             startLoop(10);
         }
@@ -168,7 +181,11 @@ public class MarqueeView extends FrameLayout {
     void endEnd(View view) {
         try {
             isNextEnd = true;
-            viewPool.release(view);
+            if (viewTypeCache.size() > 1 && mAdapter.isMultiType()) {
+
+            } else {
+                viewPool.release(view);
+            }
             removeView(view);
         } catch (Exception e) {
             removeViewAt(0);
@@ -183,11 +200,33 @@ public class MarqueeView extends FrameLayout {
     }
 
     private View buildItemView() {
-        View itemView = viewPool.acquire();
-        if (itemView == null) {
-            itemView = mAdapter.onCreateView(getContext(), currentPosition);
+        boolean isMultiType = mAdapter.isMultiType();
+        if (isMultiType) {
+            //至少需要两个类型才能使用所类型布局
+            for (int i = 0; i < mAdapter.getItemCount(); i++) {
+                int viewType = mAdapter.getItemViewType(i);
+                Logger.e("type:" + viewType);
+                viewTypeCache.put(viewType, viewType);
+            }
+            Logger.e("viewTypeCache.size():" + viewTypeCache.size());
+            if (viewTypeCache.size() > 1) {
+                int itemViewType = mAdapter.getItemViewType(currentPosition);
+                if (sparseArray.containsKey(itemViewType)) {
+                    return sparseArray.get(itemViewType);
+                } else {
+                    View itemView = mAdapter.onCreateView(getContext(), currentPosition);
+                    sparseArray.put(itemViewType, itemView);
+                    return itemView;
+                }
+            }
+        } else {
+            View itemView = viewPool.acquire();
+            if (itemView == null) {
+                itemView = mAdapter.onCreateView(getContext(), currentPosition);
+            }
+            return itemView;
         }
-        return itemView;
+        return null;
     }
 
     @Override
@@ -229,6 +268,14 @@ public class MarqueeView extends FrameLayout {
         public abstract int getItemCount();
 
         public abstract View onCreateView(Context context, int position);
+
+        public int getItemViewType(int position) {
+            return 0;
+        }
+
+        public boolean isMultiType() {
+            return false;
+        }
 
         public abstract void onConvert(Context context, View view, int position);
 
