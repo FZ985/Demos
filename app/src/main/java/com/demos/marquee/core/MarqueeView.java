@@ -3,6 +3,7 @@ package com.demos.marquee.core;
 import android.content.Context;
 import android.database.Observable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -40,6 +41,8 @@ public class MarqueeView extends FrameLayout {
     private boolean isMarquee = true;//是否跑马灯
 
     private boolean isRunning = false;
+
+    private boolean isNextEnd = false;//下一个结束
 
     public interface OnMarqueeLoopListener {
 
@@ -137,6 +140,7 @@ public class MarqueeView extends FrameLayout {
     private void startLoop(long duration) {
         isStop = false;
         isRunning = true;
+        isNextEnd = false;
         if (loopListener != null && oldPosition != currentPosition && currentPosition < mAdapter.getItemCount()) {
             oldPosition = currentPosition;
             loopListener.onMarqueeLoop(currentPosition);
@@ -145,6 +149,7 @@ public class MarqueeView extends FrameLayout {
     }
 
     void firstEnd() {
+        isNextEnd = true;
         startEnd();
     }
 
@@ -161,8 +166,14 @@ public class MarqueeView extends FrameLayout {
     }
 
     void endEnd(View view) {
-        viewPool.release(view);
-        removeView(view);
+        try {
+            isNextEnd = true;
+            viewPool.release(view);
+            removeView(view);
+        } catch (Exception e) {
+            removeViewAt(0);
+            Log.e("catch", e.getMessage());
+        }
     }
 
     void stop() {
@@ -353,7 +364,9 @@ public class MarqueeView extends FrameLayout {
             if (isRunning) {
                 stop();
             }
-            start();
+            if (isNextEnd) {
+                start();
+            }
         }
     }
 
