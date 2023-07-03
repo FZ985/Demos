@@ -48,6 +48,7 @@ public class MarqueeExampleAdapter extends MarqueeView.Adapter {
                 .alpha(0f, 1f)
                 .duration(500)
                 .onStop(() -> {
+                    //要告诉adapter动画结束了，才能开始下一个
                     if (position == 0) {
                         animEndForFirst();
                     } else {
