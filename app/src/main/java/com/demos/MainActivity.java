@@ -10,6 +10,7 @@ import com.demos.databinding.ActivityMainBinding;
 import com.demos.layoutmanager.LayoutManagerUI1;
 import com.demos.magic.MagicTabActivity1;
 import com.demos.marquee.MarqueeUI;
+import com.demos.prizedraw.PrizeDrawActivity;
 import com.demos.viewpager.toplinkcustom.TopLinkCustomActivity;
 import com.demos.viewpager.toplinkmagic.TopLinkMaigcAcivity;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         click(binding.recycler1, LayoutManagerUI1.class);
         click(binding.magic1, MagicTabActivity1.class);
         click(binding.marquee, MarqueeUI.class);
+        click(binding.prizeDraw, PrizeDrawActivity.class);
     }
 
     private void click(View view, Class<?> cls) {

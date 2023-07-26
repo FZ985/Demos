@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:allowBackup="true"
         android:name=".BaseApp"
+        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -22,11 +22,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".viewpager.toplinkcustom.TopLinkCustomActivity"/>
-        <activity android:name=".viewpager.toplinkmagic.TopLinkMaigcAcivity"/>
-        <activity android:name=".layoutmanager.LayoutManagerUI1"/>
-        <activity android:name=".magic.MagicTabActivity1"/>
-        <activity android:name=".marquee.MarqueeUI"/>
+        <activity android:name=".viewpager.toplinkcustom.TopLinkCustomActivity" />
+        <activity android:name=".viewpager.toplinkmagic.TopLinkMaigcAcivity" />
+        <activity android:name=".layoutmanager.LayoutManagerUI1" />
+        <activity android:name=".magic.MagicTabActivity1" />
+        <activity android:name=".marquee.MarqueeUI" />
+        <activity android:name=".prizedraw.PrizeDrawActivity" />
     </application>
 
 </manifest>
