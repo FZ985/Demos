@@ -301,7 +301,7 @@ public class ImageSpannable extends ImageSpan implements Span.Spannable {
         return this;
     }
 
-    private Rect textOffset = new Rect();
+    private final Rect textOffset = new Rect();
     private int textGravity = Gravity.CENTER;
     private boolean textVisibility = false;
     private int textSize = 0;
