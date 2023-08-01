@@ -39,7 +39,6 @@ public class SpanActivity extends AppCompatActivity {
         ImageSpan imageSpan = new ImageSpan(d, ImageSpan.ALIGN_BOTTOM);
         int dp50 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50f, getResources().getDisplayMetrics());
 
-
         Span.with()
                 .add(Span.build("哈哈哈哈").backgroundColor(Color.BLUE).textColor(Color.WHITE))
 
