@@ -74,6 +74,7 @@ public class SpanActivity extends AppCompatActivity {
                 .add(Span.build(new GlideSpannable(binding.tv1, "https://img2.baidu.com/it/u=3681172266,4264167375&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1690995600&t=1cff4e7d456c4118076598b7c03fe190")
                         .setRequestOption(RequestOptions.circleCropTransform())
                         .setText("网络")
+                        .setTextVisibility(true)
                         .setDrawableSize(dp50, dp50)).textColor(Color.GREEN))
 
                 //总点击事件

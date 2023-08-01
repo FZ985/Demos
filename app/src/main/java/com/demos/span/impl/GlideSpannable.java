@@ -464,7 +464,7 @@ public class GlideSpannable extends ReplacementSpan implements Span.Spannable {
 
     public GlideSpannable setText(String text) {
         this.text = text;
-        return setTextVisibility(true);
+        return this;
     }
 
     /**
