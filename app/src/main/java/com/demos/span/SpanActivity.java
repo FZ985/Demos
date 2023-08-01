@@ -72,6 +72,7 @@ public class SpanActivity extends AppCompatActivity {
                         .setMarginHorizontal(15, 15)
                         .setTextVisibility(true)).textColor(Color.BLUE))
 
+                //总点击事件
                 .totalClickListener((v, t) -> {
                     Toast.makeText(this, t, Toast.LENGTH_SHORT).show();
                 })
