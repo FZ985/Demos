@@ -44,7 +44,7 @@ public class SpanActivity extends AppCompatActivity {
 
                 .add(Span.build("\u2000").addSpan(imageSpan))
 
-                .add(Span.build("《隐私政策》").addSpan(new URLSpan("https://www.baidu.com")))
+                .add(Span.build("《百度》").addSpan(new URLSpan("https://www.baidu.com")))
 
                 .add(Span.build("点击点击").click((v, t) -> {
                     Toast.makeText(this, t, Toast.LENGTH_SHORT).show();
