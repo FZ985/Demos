@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.NinePatchDrawable;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ReplacementSpan;
 import android.util.Log;
@@ -43,6 +44,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * 默认图片垂直居中对齐文字, 使用[setAlign]可指定
  */
 public class GlideSpannable extends ReplacementSpan implements Span.Spannable {
+    private String text;
     /**
      * gif循环次数
      */
@@ -114,9 +116,9 @@ public class GlideSpannable extends ReplacementSpan implements Span.Spannable {
                 drawable = ContextCompat.getDrawable(view.getContext(), requestOption.getPlaceholderId());
             }
         } catch (Exception e) {
-            Log.e("Exception",e.getMessage());
+            Log.e("Exception", e.getMessage());
         }
-        if (drawable != null){
+        if (drawable != null) {
             drawable = setFixedRatioZoom(drawable);
         }
         return drawable;
@@ -367,7 +369,7 @@ public class GlideSpannable extends ReplacementSpan implements Span.Spannable {
 
     @Override
     public String getText() {
-        return "[Glide]";
+        return TextUtils.isEmpty(text) ? "[Glide]" : text;
     }
 
     /**
@@ -460,6 +462,11 @@ public class GlideSpannable extends ReplacementSpan implements Span.Spannable {
         return this;
     }
 
+    public GlideSpannable setText(String text) {
+        this.text = text;
+        return setTextVisibility(true);
+    }
+
     /**
      * 文字偏移值
      */
@@ -482,7 +489,7 @@ public class GlideSpannable extends ReplacementSpan implements Span.Spannable {
      * 配合[AbsoluteSizeSpan]设置字体大小则图片/文字会基线对齐, 而使用本方法则图片/文字会居中对齐
      *
      * @param size 文字大小, 单位px
-     * setTextVisibility()
+     *             setTextVisibility()
      */
     public GlideSpannable setTextSize(int size) {
         textSize = size;
