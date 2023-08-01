@@ -28,6 +28,8 @@
         <activity android:name=".magic.MagicTabActivity1" />
         <activity android:name=".marquee.MarqueeUI" />
         <activity android:name=".prizedraw.PrizeDrawActivity" />
+        <activity android:name=".textview.PicTextActivity"/>
+        <activity android:name=".span.SpanActivity"/>
     </application>
 
 </manifest>
