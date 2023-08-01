@@ -38,26 +38,40 @@ public class SpanActivity extends AppCompatActivity {
         d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
         ImageSpan imageSpan = new ImageSpan(d, ImageSpan.ALIGN_BOTTOM);
         int dp50 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50f, getResources().getDisplayMetrics());
+
+
         Span.with()
                 .add(Span.build("哈哈哈哈").backgroundColor(Color.BLUE).textColor(Color.WHITE))
+
                 .add(Span.build("\u2000").addSpan(imageSpan))
+
                 .add(Span.build("《隐私政策》").addSpan(new URLSpan("https://www.baidu.com")))
+
                 .add(Span.build("点击点击").click((v, t) -> {
                     Toast.makeText(this, t, Toast.LENGTH_SHORT).show();
                 }).textColor(Color.RED).textSize(20))
+
                 .add(Span.build("倾斜").textStyle(Typeface.ITALIC))
+
                 .add(Span.build("\u2000加粗").textStyle(Typeface.BOLD))
+
                 .add(Span.build(new ShortLabelSpannable(this, R.color.purple_500, "呕呕").leftMargin(5)))
+
                 .add(Span.build(new GlideSpannable(binding.tv1, R.drawable.ic_gif)
                         .setRequestOption(RequestOptions.centerCropTransform())
                         .setDrawableSize(dp50, dp50)))
+
                 .add(Span.build("啊啊啊啊啊啊啊啊啊啊啊啊").deleteLine().textColor(Color.BLACK))
+
                 .add(Span.build("哦哦哦哦哦哦").underLine())
+
                 .add(Span.build("\nCCCCCCCC").quoteLine(Color.BLUE, 15, 5))
+
                 .add(Span.build(new ImageSpannable(this, "图片加文字", R.drawable.bg_date_label)
                         .setDrawableSize(-1, -1)
                         .setMarginHorizontal(15, 15)
                         .setTextVisibility(true)).textColor(Color.BLUE))
+
                 .totalClickListener((v, t) -> {
                     Toast.makeText(this, t, Toast.LENGTH_SHORT).show();
                 })
