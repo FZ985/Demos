@@ -38,40 +38,28 @@ class SpanActivity : AppCompatActivity() {
 
         Span.with()
             .add("哈哈哈哈".backgroundColor(Color.BLUE).textColor(Color.WHITE))
-
             .add("\u2000".addSpan(imageSpan))
-
             .add("《百度》".addSpan(URLSpan("https://www.baidu.com")))
-
             .add("点击点击".click { _, t -> Toast.makeText(this, t, Toast.LENGTH_SHORT).show() }
                 .textColor(Color.RED)
                 .textSize(20))
-
             .add("倾斜".textStyle(Typeface.ITALIC))
-
             .add("\u2000加粗".textStyle(Typeface.BOLD))
-
             .add(ShortLabelSpannable(this, R.color.purple_500, "呕呕").leftMargin(5f).build())
-
             .add(
                 GlideSpannable(binding.tv1, R.drawable.ic_gif)
                     .setRequestOption(RequestOptions.centerCropTransform())
                     .setDrawableSize(50.dp, 50.dp).build()
             )
-
             .add("啊啊啊啊啊啊啊啊啊啊啊啊".deleteLine().textColor(Color.BLACK))
-
             .add("哦哦哦哦哦哦".underLine())
-
             .add("\nCCCCCCCC".quoteLine(Color.BLUE, 15, 5))
-
             .add(
                 ImageSpannable(this, "图片加文字", R.drawable.bg_date_label)
                     .setDrawableSize(-1, -1)
                     .setMarginHorizontal(15, 15)
                     .setTextVisibility(true).build().textColor(Color.BLUE)
             )
-
             .add(
                 GlideSpannable(
                     binding.tv1,
@@ -83,7 +71,6 @@ class SpanActivity : AppCompatActivity() {
                     .setDrawableSize(50.dp, 50.dp).build()
                     .textColor(Color.GREEN)
             )
-
             //总点击事件
             .totalClickListener { _, t -> Toast.makeText(this, t, Toast.LENGTH_SHORT).show() }
             .into(binding.tv1);
