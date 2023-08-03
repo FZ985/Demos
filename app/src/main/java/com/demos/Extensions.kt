@@ -14,11 +14,10 @@ import androidx.core.content.ContextCompat
  */
 
 val Number.dp
-    get() = (this.toFloat() * Resources.getSystem().displayMetrics.density).toInt()
+    get() = (this.toFloat() * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
 
-/*converts sp value into px*/
 val Number.sp
-    get() = (this.toFloat() * Resources.getSystem().displayMetrics.scaledDensity).toInt()
+    get() = (this.toFloat() * Resources.getSystem().displayMetrics.scaledDensity + 0.5f).toInt()
 
 fun Context.getColorCompat(@ColorRes colorRes: Int) = ContextCompat.getColor(this, colorRes)
 
