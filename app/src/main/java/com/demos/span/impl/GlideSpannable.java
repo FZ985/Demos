@@ -146,7 +146,6 @@ public class GlideSpannable extends ReplacementSpan implements Span.Spannable {
         public void unscheduleDrawable(@NonNull Drawable who, @NonNull Runnable what) {
 
         }
-
     };
 
     public GlideSpannable(TextView view, Object url) {

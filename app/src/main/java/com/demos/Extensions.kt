@@ -24,5 +24,3 @@ fun Context.getColorCompat(@ColorRes colorRes: Int) = ContextCompat.getColor(thi
 fun Context.getDrawableCompat(@DrawableRes drawableRes: Int) =
     ContextCompat.getDrawable(this, drawableRes)
 
-fun Any.logger(m: Any) = Logger.e(this.javaClass.simpleName, m.toString())
-
