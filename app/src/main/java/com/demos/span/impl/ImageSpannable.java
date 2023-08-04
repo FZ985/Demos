@@ -36,6 +36,7 @@ import java.lang.ref.WeakReference;
  * <p>
  * 需应对更复杂的图片加载需求请使用[GlideSpannable], 例如高斯模糊,棱形等效果
  */
+@SuppressWarnings("unused")
 public class ImageSpannable extends ImageSpan implements Span.Spannable {
 
     private final String text;

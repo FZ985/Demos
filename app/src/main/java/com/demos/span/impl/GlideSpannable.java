@@ -43,6 +43,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * <p>
  * 默认图片垂直居中对齐文字, 使用[setAlign]可指定
  */
+@SuppressWarnings("unused")
 public class GlideSpannable extends ReplacementSpan implements Span.Spannable {
     private String text;
     /**

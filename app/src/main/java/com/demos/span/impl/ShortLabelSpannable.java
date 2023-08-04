@@ -21,6 +21,7 @@ import com.demos.span.core.Span;
  * date : 2023/7/31 11:38
  * description : 短标签样式
  */
+@SuppressWarnings("unused")
 public class ShortLabelSpannable extends ReplacementSpan implements Span.Spannable {
     private final Context mContext;
     private final int mBgColorResId; //Icon背景颜色
