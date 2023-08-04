@@ -131,6 +131,7 @@ public class MarqueeView extends FrameLayout {
         try {
             super.dispatchDraw(canvas);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -193,7 +194,7 @@ public class MarqueeView extends FrameLayout {
         try {
             isNextEnd = true;
             if (viewTypeCache.size() > 1 && mAdapter.isMultiType()) {
-
+                System.out.println("multiType end");
             } else {
                 viewPool.release(view);
             }

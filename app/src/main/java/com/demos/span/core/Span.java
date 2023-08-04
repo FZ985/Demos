@@ -46,7 +46,7 @@ public class Span {
 
     private OnClickSpanListener onClickSpanListener;
 
-    private Span() {
+    public Span() {
         builders.clear();
     }
 
