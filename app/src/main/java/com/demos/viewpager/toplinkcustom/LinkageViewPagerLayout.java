@@ -24,6 +24,7 @@ import java.util.List;
  * Author: jfz
  * Date: 2020-12-18 13:00
  */
+@SuppressWarnings("unused")
 public class LinkageViewPagerLayout extends FrameLayout {
     private NoScrollViewPager scale_viewpager;
     private ImageView scale_more_point;

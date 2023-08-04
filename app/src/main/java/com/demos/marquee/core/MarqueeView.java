@@ -21,6 +21,7 @@ import java.util.Map;
  * date : 2023/6/30 14:46
  * description : 自定义跑马灯
  */
+@SuppressWarnings("unused")
 public class MarqueeView extends FrameLayout {
 
     //单类型使用

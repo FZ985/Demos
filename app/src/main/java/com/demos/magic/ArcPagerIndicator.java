@@ -22,6 +22,7 @@ import java.util.List;
  * date : 2023/6/30 10:29
  * description : 圆弧指示器
  */
+@SuppressWarnings("unused")
 public class ArcPagerIndicator extends View implements IPagerIndicator {
 
     private List<PositionData> mPositionDataList;

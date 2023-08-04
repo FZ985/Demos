@@ -1,15 +1,14 @@
 package com.demos.viewpager.toplinkmagic;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-
 
 import net.lucode.hackware.magicindicator.NavigatorHelper;
 import net.lucode.hackware.magicindicator.ScrollState;
@@ -22,7 +21,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.model.Positio
 
 import java.util.ArrayList;
 import java.util.List;
-
+@SuppressWarnings("unused")
 public class LinkageNavigator extends FrameLayout implements IPagerNavigator, NavigatorHelper.OnNavigatorScrollListener {
     private HorizontalScrollView mScrollView;
     private LinearLayout mTitleContainer;
@@ -30,11 +29,8 @@ public class LinkageNavigator extends FrameLayout implements IPagerNavigator, Na
     private IPagerIndicator mIndicator;
 
     private CommonNavigatorAdapter mAdapter;
-    private NavigatorHelper mNavigatorHelper;
+    private final NavigatorHelper mNavigatorHelper;
 
-    /**
-     * 提供给外部的参数配置
-     */
     /****************************************************/
     private boolean mAdjustMode;   // 自适应模式，适用于数目固定的、少量的title
     private boolean mEnablePivotScroll; // 启动中心点滚动
@@ -50,9 +46,9 @@ public class LinkageNavigator extends FrameLayout implements IPagerNavigator, Na
     private boolean isOnScroll;
 
     // 保存每个title的位置信息，为扩展indicator提供保障
-    private List<PositionData> mPositionDataList = new ArrayList<PositionData>();
+    private final List<PositionData> mPositionDataList = new ArrayList<>();
 
-    private DataSetObserver mObserver = new DataSetObserver() {
+    private final DataSetObserver mObserver = new DataSetObserver() {
 
         @Override
         public void onChanged() {
@@ -111,6 +107,7 @@ public class LinkageNavigator extends FrameLayout implements IPagerNavigator, Na
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void init() {
         removeAllViews();
 
@@ -123,12 +120,7 @@ public class LinkageNavigator extends FrameLayout implements IPagerNavigator, Na
 
         mScrollView = (HorizontalScrollView) root.findViewById(net.lucode.hackware.magicindicator.R.id.scroll_view);   // mAdjustMode为true时，mScrollView为null
         if (mScrollView != null) {
-            mScrollView.setOnTouchListener(new OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return isOnScroll;
-                }
-            });
+            mScrollView.setOnTouchListener((v, event) -> isOnScroll);
         }
         mTitleContainer = (LinearLayout) root.findViewById(net.lucode.hackware.magicindicator.R.id.title_container);
         mTitleContainer.setPadding(mLeftPadding, 0, mRightPadding, 0);

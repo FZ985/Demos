@@ -31,6 +31,7 @@ import java.util.ArrayList;
  * 1.本版采用StaticLayout进行文字绘制，如果需要设置单独点击事件的话，那么就需要拦截触摸事件和分发了。
  * 2.没有支持文字的gravity和margin
  */
+@SuppressWarnings("unused")
 public class PicAndTextView extends ViewGroup {
 
     /**

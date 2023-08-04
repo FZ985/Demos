@@ -21,6 +21,7 @@ import java.util.List;
  * date : 2023/6/30 17:48
  * description :
  */
+@SuppressWarnings("unused")
 public class OneHalfLinePagerIndicator extends View implements IPagerIndicator {
     private Paint mPaint;
     private final RectF mInnerRect = new RectF();

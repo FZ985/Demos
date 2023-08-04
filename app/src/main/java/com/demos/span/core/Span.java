@@ -36,6 +36,7 @@ import java.util.List;
  * date : 2023/7/31 09:28
  * description : 富文本的简单使用，（背景色、文字大小、删除线、下划线、加粗、倾斜等）
  */
+@SuppressWarnings("unused")
 public class Span {
 
     private final List<SpanBuilder> builders = new ArrayList<>();
