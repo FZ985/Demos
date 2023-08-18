@@ -10,6 +10,7 @@ import com.demos.databinding.ActivityMainBinding;
 import com.demos.layoutmanager.LayoutManagerUI1;
 import com.demos.magic.MagicTabActivity1;
 import com.demos.marquee.MarqueeUI;
+import com.demos.other.AppbarLayoutActivity;
 import com.demos.prizedraw.PrizeDrawActivity;
 import com.demos.span.SpanActivity;
 import com.demos.textview.PicTextActivity;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         click(binding.prizeDraw, PrizeDrawActivity.class);
         click(binding.picText, PicTextActivity.class);
         click(binding.span, SpanActivity.class);
+        click(binding.appbar, AppbarLayoutActivity.class);
     }
 
     private void click(View view, Class<?> cls) {

@@ -64,6 +64,7 @@
             android:layout_marginVertical="10dp"
             android:text="抽奖"
             android:textAllCaps="false" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/pic_text"
             android:layout_width="wrap_content"
@@ -72,6 +73,7 @@
             android:layout_marginVertical="10dp"
             android:text="pic_textview"
             android:textAllCaps="false" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/span"
             android:layout_width="wrap_content"
@@ -80,5 +82,15 @@
             android:layout_marginVertical="10dp"
             android:text="span"
             android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/appbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:text="appbar"
+            android:textAllCaps="false" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

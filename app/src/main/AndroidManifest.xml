@@ -36,6 +36,7 @@
         <activity android:name=".prizedraw.PrizeDrawActivity" />
         <activity android:name=".textview.PicTextActivity" />
         <activity android:name=".span.SpanActivity" />
+        <activity android:name=".other.AppbarLayoutActivity" />
     </application>
 
 </manifest>
