@@ -33,7 +33,7 @@ import java.util.List;
  * Author: jfz
  * Date: 2020-12-21 9:53
  */
-public class TopLinkMaigcAcivity extends AppCompatActivity {
+public class TopLinkMagicActivity extends AppCompatActivity {
     private ActivityToplinkMagicBinding binding;
     private final String[] CHANNELS = {"CUPCAKE", "DONUT", "ECLAIR", "GINGERBREAD", "HONEYCOMB", "ICE_CREAM_SANDWICH", "JELLY_BEAN", "KITKAT", "LOLLIPOP", "M", "NOUGAT"};
     private List<String> mDataList = Arrays.asList(CHANNELS);

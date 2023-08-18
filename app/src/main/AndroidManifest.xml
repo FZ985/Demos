@@ -29,7 +29,7 @@
         </activity>
 
         <activity android:name=".viewpager.toplinkcustom.TopLinkCustomActivity" />
-        <activity android:name=".viewpager.toplinkmagic.TopLinkMaigcAcivity" />
+        <activity android:name=".viewpager.toplinkmagic.TopLinkMagicActivity" />
         <activity android:name=".layoutmanager.LayoutManagerUI1" />
         <activity android:name=".magic.MagicTabActivity1" />
         <activity android:name=".marquee.MarqueeUI" />

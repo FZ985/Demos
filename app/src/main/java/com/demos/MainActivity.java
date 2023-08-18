@@ -15,7 +15,7 @@ import com.demos.prizedraw.PrizeDrawActivity;
 import com.demos.span.SpanActivity;
 import com.demos.textview.PicTextActivity;
 import com.demos.viewpager.toplinkcustom.TopLinkCustomActivity;
-import com.demos.viewpager.toplinkmagic.TopLinkMaigcAcivity;
+import com.demos.viewpager.toplinkmagic.TopLinkMagicActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         click(binding.viewpager1, TopLinkCustomActivity.class);
-        click(binding.viewpager2, TopLinkMaigcAcivity.class);
+        click(binding.viewpager2, TopLinkMagicActivity.class);
         click(binding.recycler1, LayoutManagerUI1.class);
         click(binding.magic1, MagicTabActivity1.class);
         click(binding.marquee, MarqueeUI.class);
