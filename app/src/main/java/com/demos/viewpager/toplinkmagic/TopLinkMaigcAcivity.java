@@ -45,10 +45,15 @@ public class TopLinkMaigcAcivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         init();
-        binding.remove.setOnClickListener(v -> {
+        binding.click.setOnClickListener(v -> {
 //            mDataList.remove(0);
 //            commonFragmentAdapter.remove(0);
 //            commonFragmentAdapter.notifyDataSetChanged();
+
+//            FragmentContainerHelper helper = new FragmentContainerHelper(binding.magicindicator);
+//            helper.handlePageSelected(3);
+
+//            binding.magicVp.setCurrentItem(3);
         });
     }
 
