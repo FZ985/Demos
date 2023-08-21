@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.demos.beziertest.TestBezierActivity;
 import com.demos.databinding.ActivityMainBinding;
 import com.demos.layoutmanager.LayoutManagerUI1;
 import com.demos.magic.MagicTabActivity1;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         click(binding.picText, PicTextActivity.class);
         click(binding.span, SpanActivity.class);
         click(binding.appbar, AppbarLayoutActivity.class);
+        click(binding.testbezirer, TestBezierActivity.class);
     }
 
     private void click(View view, Class<?> cls) {

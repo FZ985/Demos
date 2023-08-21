@@ -37,6 +37,7 @@
         <activity android:name=".textview.PicTextActivity" />
         <activity android:name=".span.SpanActivity" />
         <activity android:name=".other.AppbarLayoutActivity" />
+        <activity android:name=".beziertest.TestBezierActivity" />
     </application>
 
 </manifest>
