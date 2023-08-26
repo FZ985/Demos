@@ -5,6 +5,8 @@ pluginManagement {
         maven {
             url "https://jitpack.io"
         }
+//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://repo1.maven.org/maven2/' }
         gradlePluginPortal()
     }
 }
@@ -13,6 +15,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://repo1.maven.org/maven2/' }
         maven {
             url "https://jitpack.io"
         }

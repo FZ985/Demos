@@ -15,6 +15,7 @@ import com.demos.other.AppbarLayoutActivity;
 import com.demos.prizedraw.PrizeDrawActivity;
 import com.demos.span.SpanActivity;
 import com.demos.textview.PicTextActivity;
+import com.demos.utils.SHA256Encryption;
 import com.demos.viewpager.toplinkcustom.TopLinkCustomActivity;
 import com.demos.viewpager.toplinkmagic.TopLinkMagicActivity;
 
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         click(binding.span, SpanActivity.class);
         click(binding.appbar, AppbarLayoutActivity.class);
         click(binding.testbezirer, TestBezierActivity.class);
+
+        SHA256Encryption.main(null);
     }
 
     private void click(View view, Class<?> cls) {
