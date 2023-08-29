@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.demos.Tools;
 import com.demos.base.CommonFragmentStatePagerAdapter;
 import com.demos.databinding.ActivityMagic1Binding;
 import com.demos.viewpager.toplinkcustom.ChildFragment;
@@ -37,6 +36,11 @@ public class MagicTabActivity1 extends AppCompatActivity {
 
     private final String[] t = {"哈哈", "呵呵", "嘿嘿", "嘻嘻嘻嘻"};
 
+    private final Integer[] colors = {Color.parseColor("#ff4a42"),
+            Color.parseColor("#fcde64"),
+            Color.parseColor("#76b0ff"),
+            Color.parseColor("#c683fe")};
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,18 +54,12 @@ public class MagicTabActivity1 extends AppCompatActivity {
         binding.vp.setOffscreenPageLimit(t.length);
 
         initTabs(binding.magic, new ArcPagerIndicator(this)
-                .setColors(Color.parseColor("#ff4a42"),
-                        Color.parseColor("#fcde64"),
-                        Color.parseColor("#76b0ff"),
-                        Color.parseColor("#c683fe"))
+                .setColors(colors)
                 .setStartInterpolator(new AccelerateInterpolator())
                 .setEndInterpolator(new DecelerateInterpolator(2f)));
 
         initTabs(binding.magic2, new OneHalfLinePagerIndicator(this)
-                .setColors(Color.parseColor("#ff4a42"),
-                        Color.parseColor("#fcde64"),
-                        Color.parseColor("#76b0ff"),
-                        Color.parseColor("#c683fe"))
+                .setColors(colors)
                 .setStartInterpolator(new AccelerateInterpolator())
                 .setEndInterpolator(new DecelerateInterpolator(2f)));
 
@@ -69,7 +67,10 @@ public class MagicTabActivity1 extends AppCompatActivity {
                 .setMaxRadius(3f)
                 .setBottomOffset(6f)
                 .setOffset(2f)
-                .setColors(Tools.randomColor(), Tools.randomColor(), Tools.randomColor(), Tools.randomColor()));
+                .setColors(Color.parseColor("#ff4a42"),
+                        Color.parseColor("#fcde64"),
+                        Color.parseColor("#76b0ff"),
+                        Color.parseColor("#c683fe")));
     }
 
     private void initTabs(MagicIndicator indicator, IPagerIndicator pagerIndicator) {
