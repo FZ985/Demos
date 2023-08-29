@@ -23,6 +23,7 @@ import java.util.List;
  * date : 2023/8/29 10:26
  * description :
  */
+@SuppressWarnings("unused")
 public class GradientCircleIndicator extends View implements IPagerIndicator {
     private final RectF mOutRect = new RectF();
 
