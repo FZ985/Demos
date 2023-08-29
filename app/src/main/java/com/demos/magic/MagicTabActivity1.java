@@ -35,7 +35,7 @@ import java.util.List;
 public class MagicTabActivity1 extends AppCompatActivity {
     private ActivityMagic1Binding binding;
 
-    private final String[] t = {"哈哈", "呵呵呵呵", "嘿嘿", "嘻嘻嘻嘻"};
+    private final String[] t = {"哈哈", "呵呵", "嘿嘿", "嘻嘻嘻嘻"};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
