@@ -10,10 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.demos.Tools;
 import com.demos.base.CommonFragmentStatePagerAdapter;
 import com.demos.databinding.ActivityMagic1Binding;
 import com.demos.viewpager.toplinkcustom.ChildFragment;
 
+import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -46,21 +48,31 @@ public class MagicTabActivity1 extends AppCompatActivity {
         }
         binding.vp.setAdapter(new CommonFragmentStatePagerAdapter(getSupportFragmentManager(), f));
         binding.vp.setOffscreenPageLimit(t.length);
-        initTab1();
-        initTab2();
+
+        initTabs(binding.magic, new ArcPagerIndicator(this)
+                .setColors(Color.parseColor("#ff4a42"),
+                        Color.parseColor("#fcde64"),
+                        Color.parseColor("#76b0ff"),
+                        Color.parseColor("#c683fe"))
+                .setStartInterpolator(new AccelerateInterpolator())
+                .setEndInterpolator(new DecelerateInterpolator(2f)));
+
+        initTabs(binding.magic2, new OneHalfLinePagerIndicator(this)
+                .setColors(Color.parseColor("#ff4a42"),
+                        Color.parseColor("#fcde64"),
+                        Color.parseColor("#76b0ff"),
+                        Color.parseColor("#c683fe"))
+                .setStartInterpolator(new AccelerateInterpolator())
+                .setEndInterpolator(new DecelerateInterpolator(2f)));
+
+        initTabs(binding.magic3, new GradientCircleIndicator(this)
+                .setMaxRadius(3f)
+                .setBottomOffset(6f)
+                .setOffset(2f)
+                .setColors(Tools.randomColor(), Tools.randomColor(), Tools.randomColor(), Tools.randomColor()));
     }
 
-    IPagerTitleView getTitleViewFinal(Context context, final int index) {
-        SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
-        simplePagerTitleView.setText(t[index]);
-        simplePagerTitleView.setTextSize(18);
-        simplePagerTitleView.setNormalColor(Color.GRAY);
-        simplePagerTitleView.setSelectedColor(Color.BLACK);
-        simplePagerTitleView.setOnClickListener(v -> binding.vp.setCurrentItem(index));
-        return simplePagerTitleView;
-    }
-
-    private void initTab1() {
+    private void initTabs(MagicIndicator indicator, IPagerIndicator pagerIndicator) {
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
@@ -70,49 +82,22 @@ public class MagicTabActivity1 extends AppCompatActivity {
 
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
-                return getTitleViewFinal(context, index);
+                SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
+                simplePagerTitleView.setText(t[index]);
+                simplePagerTitleView.setTextSize(18);
+                simplePagerTitleView.setNormalColor(Color.GRAY);
+                simplePagerTitleView.setSelectedColor(Color.BLACK);
+                simplePagerTitleView.setOnClickListener(v -> binding.vp.setCurrentItem(index));
+                return simplePagerTitleView;
             }
 
             @Override
             public IPagerIndicator getIndicator(Context context) {
-                return new ArcPagerIndicator(context)
-                        .setColors(Color.parseColor("#ff4a42"),
-                                Color.parseColor("#fcde64"),
-                                Color.parseColor("#76b0ff"),
-                                Color.parseColor("#c683fe"))
-                        .setStartInterpolator(new AccelerateInterpolator())
-                        .setEndInterpolator(new DecelerateInterpolator(2f));
+                return pagerIndicator;
             }
         });
-        binding.magic.setNavigator(commonNavigator);
-        ViewPagerHelper.bind(binding.magic, binding.vp);
+        indicator.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(indicator, binding.vp);
     }
 
-    private void initTab2() {
-        CommonNavigator commonNavigator = new CommonNavigator(this);
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-            @Override
-            public int getCount() {
-                return t.length;
-            }
-
-            @Override
-            public IPagerTitleView getTitleView(Context context, final int index) {
-                return getTitleViewFinal(context, index);
-            }
-
-            @Override
-            public IPagerIndicator getIndicator(Context context) {
-                return new OneHalfLinePagerIndicator(context)
-                        .setColors(Color.parseColor("#ff4a42"),
-                                Color.parseColor("#fcde64"),
-                                Color.parseColor("#76b0ff"),
-                                Color.parseColor("#c683fe"))
-                        .setStartInterpolator(new AccelerateInterpolator())
-                        .setEndInterpolator(new DecelerateInterpolator(2f));
-            }
-        });
-        binding.magic2.setNavigator(commonNavigator);
-        ViewPagerHelper.bind(binding.magic2, binding.vp);
-    }
 }
