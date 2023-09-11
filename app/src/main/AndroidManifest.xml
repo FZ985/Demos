@@ -38,6 +38,7 @@
         <activity android:name=".span.SpanActivity" />
         <activity android:name=".other.AppbarLayoutActivity" />
         <activity android:name=".beziertest.TestBezierActivity" />
+        <activity android:name=".password.PasswordActivity"/>
     </application>
 
 </manifest>

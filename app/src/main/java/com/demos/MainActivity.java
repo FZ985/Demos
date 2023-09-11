@@ -12,6 +12,7 @@ import com.demos.layoutmanager.LayoutManagerUI1;
 import com.demos.magic.MagicTabActivity1;
 import com.demos.marquee.MarqueeUI;
 import com.demos.other.AppbarLayoutActivity;
+import com.demos.password.PasswordActivity;
 import com.demos.prizedraw.PrizeDrawActivity;
 import com.demos.span.SpanActivity;
 import com.demos.textview.PicTextActivity;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         click(binding.span, SpanActivity.class);
         click(binding.appbar, AppbarLayoutActivity.class);
         click(binding.testbezirer, TestBezierActivity.class);
+        click(binding.password, PasswordActivity.class);
 
     }
 

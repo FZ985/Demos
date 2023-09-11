@@ -5,4 +5,14 @@
         <attr name="android:textColor" />
         <attr name="ellipsizeEnd" format="boolean" />
     </declare-styleable>
+
+    <!-- PasswordEditText 假体，代码联想使用   -->
+    <declare-styleable name="PasswordEditText">
+        <attr name="android:hint" />
+        <attr name="android:text" />
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="android:textColorHint" />
+        <attr name="android:tint" />
+    </declare-styleable>
 </resources>
