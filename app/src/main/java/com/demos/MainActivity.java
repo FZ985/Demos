@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.demos.activity.RoundWrapActivity;
 import com.demos.beziertest.TestBezierActivity;
 import com.demos.databinding.ActivityMainBinding;
 import com.demos.layoutmanager.LayoutManagerUI1;
@@ -15,7 +16,6 @@ import com.demos.other.AppbarLayoutActivity;
 import com.demos.password.PasswordActivity;
 import com.demos.prizedraw.PrizeDrawActivity;
 import com.demos.span.SpanActivity;
-import com.demos.textview.PicTextActivity;
 import com.demos.viewpager.toplinkcustom.TopLinkCustomActivity;
 import com.demos.viewpager.toplinkmagic.TopLinkMagicActivity;
 
@@ -35,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
         click(binding.magic1, MagicTabActivity1.class);
         click(binding.marquee, MarqueeUI.class);
         click(binding.prizeDraw, PrizeDrawActivity.class);
-        click(binding.picText, PicTextActivity.class);
         click(binding.span, SpanActivity.class);
         click(binding.appbar, AppbarLayoutActivity.class);
         click(binding.testbezirer, TestBezierActivity.class);
         click(binding.password, PasswordActivity.class);
+        click(binding.roundWrapText, RoundWrapActivity.class);
 
     }
 

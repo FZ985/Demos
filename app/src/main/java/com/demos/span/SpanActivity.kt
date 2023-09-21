@@ -73,7 +73,7 @@ class SpanActivity : AppCompatActivity() {
             )
             //总点击事件
             .totalClickListener { _, t -> Toast.makeText(this, t, Toast.LENGTH_SHORT).show() }
-            .into(binding.tv1);
+            .into(binding.tv1)
 
     }
 }

@@ -12,11 +12,19 @@
         android:orientation="vertical">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/viewpager1"
-            android:layout_width="match_parent"
+            android:id="@+id/round_wrap_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="5dp"
+            android:text="圆角包裹"
+            android:textAllCaps="false" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/viewpager1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="5dp"
             android:text="@string/viewpager1"
             android:textAllCaps="false" />
 
@@ -25,88 +33,79 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="5dp"
             android:text="@string/viewpager2"
             android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/recycler1"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="5dp"
             android:text="@string/layoutmanager1"
             android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/magic1"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="5dp"
             android:text="@string/tab1"
             android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/marquee"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="5dp"
             android:text="自定义跑马灯"
             android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/prize_draw"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="5dp"
             android:text="抽奖"
             android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/pic_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp"
-            android:text="pic_textview"
-            android:textAllCaps="false" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/span"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="5dp"
             android:text="span"
             android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/appbar"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="5dp"
             android:text="AppbarLayout"
             android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/testbezirer"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="5dp"
             android:text="贝塞尔曲线"
             android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/password"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginVertical="5dp"
             android:text="密码输入框"
             android:textAllCaps="false" />
 

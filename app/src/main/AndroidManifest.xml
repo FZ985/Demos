@@ -21,11 +21,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
 
         <activity android:name=".viewpager.toplinkcustom.TopLinkCustomActivity" />
@@ -34,11 +34,19 @@
         <activity android:name=".magic.MagicTabActivity1" />
         <activity android:name=".marquee.MarqueeUI" />
         <activity android:name=".prizedraw.PrizeDrawActivity" />
-        <activity android:name=".textview.PicTextActivity" />
         <activity android:name=".span.SpanActivity" />
         <activity android:name=".other.AppbarLayoutActivity" />
         <activity android:name=".beziertest.TestBezierActivity" />
-        <activity android:name=".password.PasswordActivity"/>
+        <activity android:name=".password.PasswordActivity" />
+        <activity
+            android:name=".activity.RoundWrapActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

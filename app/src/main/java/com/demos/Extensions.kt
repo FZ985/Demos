@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat
  */
 
 val Number.dp
-    get() = (this.toFloat() * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+    get() = (this.toFloat() * Resources.getSystem().displayMetrics.density).toInt()
 
 val Number.sp
     get() = (this.toFloat() * Resources.getSystem().displayMetrics.scaledDensity + 0.5f).toInt()
