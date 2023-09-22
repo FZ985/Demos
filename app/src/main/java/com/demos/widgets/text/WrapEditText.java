@@ -131,7 +131,7 @@ public class WrapEditText extends AppCompatEditText {
             path.moveTo(maxWidth, top);
             if (currentWidth < maxWidth) {
                 float distance = maxWidth - currentWidth;
-                if (distance > radius + radius / 3) {
+                if (distance > Math.sqrt(radius * radius + radius * radius)) {
                     path.lineTo(maxWidth - currentWidth, top);
                     path.lineTo(maxWidth - currentWidth - radius, top + radius);
                     path.quadTo(maxWidth - currentWidth, top + radius, maxWidth - currentWidth, top + radius + radius);
@@ -174,7 +174,7 @@ public class WrapEditText extends AppCompatEditText {
         if (index == lineCount - 1) {
             if (currentWidth < maxWidth) {
                 float distance = maxWidth - currentWidth;
-                if (distance > radius + radius / 3) {
+                if (distance > Math.sqrt(radius * radius + radius * radius)) {
                     path.lineTo(currentWidth, top);
                     path.lineTo(currentWidth + radius, top + radius);
                     path.quadTo(currentWidth, top + radius, currentWidth, top + radius + radius);
