@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.text.Layout;
 import android.text.TextUtils;
@@ -56,7 +58,7 @@ public class WrapEditText extends AppCompatEditText {
         paint.setAntiAlias(true);
         paint.setColor(Color.TRANSPARENT);
         paint.setStyle(Paint.Style.FILL);
-
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC));
     }
 
     @SuppressLint("DrawAllocation")
