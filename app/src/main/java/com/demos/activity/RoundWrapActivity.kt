@@ -15,6 +15,8 @@ import com.demos.databinding.ActivityRoundWrapBinding
  */
 class RoundWrapActivity : AppCompatActivity() {
 
+    val tt = "哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈\n哈哈\n哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈\n哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
+
     private val binding: ActivityRoundWrapBinding by lazy {
         ActivityRoundWrapBinding.inflate(layoutInflater)
     }
@@ -29,6 +31,7 @@ class RoundWrapActivity : AppCompatActivity() {
 
         binding.et.setColor(Color.BLUE)
         binding.wrap.setColor(Tools.randomColor())
+        binding.wrap.text = tt
 
     }
 }
