@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:paddingBottom="200dp">
 
-        <com.demos.widgets.text.WrapTextView
+        <com.demos.widgets.text.AppCompatWrapTextView
             android:id="@+id/wrap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-        <com.demos.widgets.text.WrapEditText
+        <com.demos.widgets.text.AppCompatWrapEditText
             android:id="@+id/et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
