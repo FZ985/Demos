@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="names">
+        <item>action</item>
+        <item>adventure</item>
+        <item>combat</item>
+        <item>moba</item>
+        <item>other</item>
+        <item>role</item>
+        <item>sports</item>
+        <item>words</item>
+    </string-array>
+
+    <string-array name="icons">
+        <item>lucky2_iphone</item>
+        <item>lucky2_iphone</item>
+        <item>lucky2_iphone</item>
+        <item>lucky2_iphone</item>
+        <item>lucky2_iphone</item>
+        <item>lucky2_iphone</item>
+        <item>lucky2_iphone</item>
+        <item>lucky2_iphone</item>
+    </string-array>
+
+    <integer-array name="colors">
+        <item>@color/teal_200</item>
+        <item>@color/c_2E86F6</item>
+    </integer-array>
+</resources>

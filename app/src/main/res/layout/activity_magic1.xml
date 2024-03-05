@@ -21,6 +21,12 @@
         android:layout_height="50dp"
         android:layout_marginTop="5dp" />
 
+    <net.lucode.hackware.magicindicator.MagicIndicator
+        android:id="@+id/magic4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp" />
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"

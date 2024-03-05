@@ -21,11 +21,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".viewpager.toplinkcustom.TopLinkCustomActivity" />
@@ -33,19 +32,20 @@
         <activity android:name=".layoutmanager.LayoutManagerUI1" />
         <activity android:name=".magic.MagicTabActivity1" />
         <activity android:name=".marquee.MarqueeUI" />
-        <activity android:name=".prizedraw.PrizeDrawActivity" />
         <activity android:name=".span.SpanActivity" />
         <activity android:name=".other.AppbarLayoutActivity" />
         <activity android:name=".beziertest.TestBezierActivity" />
         <activity android:name=".password.PasswordActivity" />
         <activity
             android:name=".activity.RoundWrapActivity"
+            android:exported="true"></activity>
+        <activity android:name=".luck1.Luck1Activity" />
+        <activity android:name=".luck2.Luck2Activity" />
+        <activity android:name=".luck3.Luck3Activity" />
+        <activity
+            android:name=".luck4.Lucky4Activity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

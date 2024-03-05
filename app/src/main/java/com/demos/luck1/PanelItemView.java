@@ -1,4 +1,4 @@
-package com.demos.prizedraw;
+package com.demos.luck1;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,10 +8,6 @@ import android.widget.FrameLayout;
 import androidx.annotation.Nullable;
 
 import com.demos.R;
-
-/**
- * Created by jeanboy on 2017/4/20.
- */
 
 public class PanelItemView extends FrameLayout implements ItemView {
 
@@ -27,7 +23,7 @@ public class PanelItemView extends FrameLayout implements ItemView {
 
     public PanelItemView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        inflate(context, R.layout.test_view_panel_item, this);
+        inflate(context, R.layout.lucky1_view_panel_item, this);
         overlay = findViewById(R.id.overlay);
     }
 

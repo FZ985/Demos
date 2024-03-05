@@ -1,0 +1,5 @@
+
+// 计算圆弧的最大宽度
+
+float maxWidth = 2 * radius * (float) Math.sin(Math.toRadians(angle / 2));
+

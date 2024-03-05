@@ -10,4 +10,27 @@
         <attr name="android:textColorHint" />
         <attr name="android:tint" />
     </declare-styleable>
+
+    <declare-styleable name="luckPan2">
+        <attr name="pannum" format="integer" />
+        <attr name="names" format="reference" />
+        <attr name="icons" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="TurntableView">
+        <!--转盘的item数量-->
+        <attr name="Turntable_pannum" format="integer" />
+        <!--转盘的item的文本-->
+        <attr name="Turntable_names" format="reference" />
+        <!--转盘的本地图像地址-->
+        <attr name="Turntable_icons" format="reference" />
+        <!--转盘背景的颜色-->
+        <attr name="Turntable_colors" format="reference" />
+        <!--控件宽占屏幕宽的比例-->
+        <attr name="Turntable_percentage" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="LotteryPanLayout">
+        <attr name="lottery_pan_size" format="float" />
+    </declare-styleable>
 </resources>

@@ -16,6 +16,7 @@ import com.demos.viewpager.toplinkcustom.ChildFragment;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
@@ -71,9 +72,22 @@ public class MagicTabActivity1 extends AppCompatActivity {
                         Color.parseColor("#fcde64"),
                         Color.parseColor("#76b0ff"),
                         Color.parseColor("#c683fe")));
+
+        initTabs(binding.magic4, Color.BLACK, Color.WHITE, new GradientBackgroundIndicator(this)
+                .setHorOffset(15f)
+                .setRadius(40f)
+                .setVerOffset(1f)
+                .setColors(Color.parseColor("#76b0ff"),
+                        Color.parseColor("#c683fe"))
+                .setStartInterpolator(new AccelerateInterpolator())
+                .setEndInterpolator(new DecelerateInterpolator(2f)));
     }
 
     private void initTabs(MagicIndicator indicator, IPagerIndicator pagerIndicator) {
+        initTabs(indicator, Color.GRAY, Color.BLACK, pagerIndicator);
+    }
+
+    private void initTabs(MagicIndicator indicator, int normalColor, int selectColor, IPagerIndicator pagerIndicator) {
         CommonNavigator commonNavigator = new CommonNavigator(this);
         commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
@@ -86,8 +100,9 @@ public class MagicTabActivity1 extends AppCompatActivity {
                 SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
                 simplePagerTitleView.setText(t[index]);
                 simplePagerTitleView.setTextSize(18);
-                simplePagerTitleView.setNormalColor(Color.GRAY);
-                simplePagerTitleView.setSelectedColor(Color.BLACK);
+                simplePagerTitleView.setNormalColor(normalColor);
+                simplePagerTitleView.setSelectedColor(selectColor);
+                simplePagerTitleView.setPadding(UIUtil.dip2px(context, 15), 0, UIUtil.dip2px(context, 15), 0);
                 simplePagerTitleView.setOnClickListener(v -> binding.vp.setCurrentItem(index));
                 return simplePagerTitleView;
             }

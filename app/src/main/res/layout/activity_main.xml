@@ -19,6 +19,7 @@
             android:layout_marginVertical="5dp"
             android:text="圆角包裹"
             android:textAllCaps="false" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/viewpager1"
             android:layout_width="wrap_content"
@@ -65,12 +66,39 @@
             android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/prize_draw"
+            android:id="@+id/luck1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="5dp"
-            android:text="抽奖"
+            android:text="抽奖1"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/luck2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="5dp"
+            android:text="抽奖2"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/luck3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="5dp"
+            android:text="抽奖3"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/luck4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="5dp"
+            android:text="抽奖4"
             android:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton

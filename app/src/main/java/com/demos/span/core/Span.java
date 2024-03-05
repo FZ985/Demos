@@ -44,7 +44,7 @@ public class Span {
     @ColorInt
     private final int highlightColor = Color.TRANSPARENT;
 
-    private OnClickSpanListener onClickSpanListener;
+    private OnSpanClickListener onClickSpanListener;
 
     public Span() {
         builders.clear();
@@ -69,7 +69,15 @@ public class Span {
 
     public void into(TextView textview) {
         if (textview != null && builders.size() > 0) {
-            SpannableStringBuilder string = new SpannableStringBuilder();
+            textview.setText(getSpannable());
+            textview.setMovementMethod(SpanLinkMovementMethodImpl.getInstance());
+            textview.setHighlightColor(highlightColor);
+        }
+    }
+
+    public SpannableStringBuilder getSpannable() {
+        SpannableStringBuilder string = new SpannableStringBuilder();
+        if (builders.size() > 0) {
             for (SpanBuilder build : builders) {
                 String text = build.getText();
                 List<Object> spanList = build.getSpanList();
@@ -88,13 +96,12 @@ public class Span {
                     string.append(span);
                 }
             }
-            textview.setText(string);
-            textview.setMovementMethod(SpanLinkMovementMethodImpl.getInstance());
-            textview.setHighlightColor(highlightColor);
+            return string;
         }
+        return string;
     }
 
-    public Span totalClickListener(OnClickSpanListener listener) {
+    public Span totalClickListener(OnSpanClickListener listener) {
         this.onClickSpanListener = listener;
         return this;
     }
@@ -170,11 +177,11 @@ public class Span {
     }
 
     private static class SpanClick extends ClickableSpan {
-        private final OnClickSpanListener onClickSpanListener;
+        private final OnSpanClickListener onClickSpanListener;
         private final String text;
         private final boolean isUnderLine;
 
-        public SpanClick(String text, boolean isUnderLine, OnClickSpanListener onClickSpanListener) {
+        public SpanClick(String text, boolean isUnderLine, OnSpanClickListener onClickSpanListener) {
             this.onClickSpanListener = onClickSpanListener;
             this.text = text;
             this.isUnderLine = isUnderLine;
@@ -198,7 +205,7 @@ public class Span {
         String getText();
     }
 
-    public interface OnClickSpanListener {
+    public interface OnSpanClickListener {
         void onClick(View widget, String text);
     }
 
@@ -269,7 +276,7 @@ public class Span {
             return this;
         }
 
-        public final SpanBuilder click(OnClickSpanListener listener) {
+        public final SpanBuilder click(OnSpanClickListener listener) {
             spanList.add(new SpanClick(text, isUnderLine, listener));
             return this;
         }

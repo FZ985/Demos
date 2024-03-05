@@ -12,14 +12,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/lucky1_icon_questionmark" />
 
         <View
             android:id="@+id/overlay"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/point_red" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/lucky1_bg_lucky_monkey_item_overlay" />
 
     </RelativeLayout>
 

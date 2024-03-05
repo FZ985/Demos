@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.demos.luck3.TurntableView
+                android:id="@+id/turntable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+            <ImageView
+                android:id="@+id/iv_node"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/lucky2_node" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_changecolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改转盘颜色" />
+
+        <Button
+            android:id="@+id/bt_changedata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改转盘数据" />
+
+        <Button
+            android:id="@+id/bt_point_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="转动到指定位置" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/auto_scroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自动转" />
+
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center" />
+
+</LinearLayout>

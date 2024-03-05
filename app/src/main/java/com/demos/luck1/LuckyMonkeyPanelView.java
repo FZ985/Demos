@@ -1,4 +1,4 @@
-package com.demos.prizedraw;
+package com.demos.luck1;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -11,14 +11,13 @@ import androidx.annotation.Nullable;
 
 import com.demos.R;
 
+
 public class LuckyMonkeyPanelView extends FrameLayout {
 
     private ImageView bg_1;
     private ImageView bg_2;
 
-    private PanelItemView itemView1, itemView2, itemView3,
-            itemView4, itemView6,
-            itemView7, itemView8, itemView9;
+    private PanelItemView itemView1, itemView2, itemView3, itemView4, itemView6, itemView7, itemView8, itemView9;
 
     private ItemView[] itemViewArr = new ItemView[8];
     private int currentIndex = 0;
@@ -43,7 +42,7 @@ public class LuckyMonkeyPanelView extends FrameLayout {
 
     public LuckyMonkeyPanelView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        inflate(context, R.layout.test_view_lucky_mokey_panel, this);
+        inflate(context, R.layout.lucky1_view_lucky_mokey_panel, this);
         setupView();
     }
 
@@ -88,7 +87,7 @@ public class LuckyMonkeyPanelView extends FrameLayout {
     }
 
     private void startMarquee() {
-//        isMarqueeRunning = true;
+        isMarqueeRunning = true;
         new Thread(new Runnable() {
             @Override
             public void run() {
