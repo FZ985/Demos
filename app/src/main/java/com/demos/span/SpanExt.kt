@@ -29,7 +29,7 @@ fun String.textStyle(style: Int): Span.SpanBuilder = Span.build(this).textStyle(
 
 fun String.addSpan(span: Any): Span.SpanBuilder = Span.build(this).addSpan(span)
 
-fun String.click(click: Span.OnClickSpanListener): Span.SpanBuilder =
+fun String.click(click: Span.OnSpanClickListener): Span.SpanBuilder =
     Span.build(this).click(click)
 
 fun Spannable.build(): Span.SpanBuilder = Span.build(this)

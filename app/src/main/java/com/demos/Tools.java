@@ -21,6 +21,11 @@ public class Tools {
         return (int) (dpValue * scale + 0.5f);
     }
 
+    public static int randomNumber(int min, int max) {
+        Random rand = new Random();
+        return rand.nextInt(max - min) + min;
+    }
+
     public static int getScreenWidth() {
         return BaseApp.getInstance().getResources().getDisplayMetrics().widthPixels;
     }

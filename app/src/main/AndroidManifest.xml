@@ -47,6 +47,7 @@
             android:exported="true">
 
         </activity>
+        <activity android:name=".live.LiveRecyclerActivity"/>
     </application>
 
 </manifest>

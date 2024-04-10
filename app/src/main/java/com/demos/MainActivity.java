@@ -10,6 +10,7 @@ import com.demos.activity.RoundWrapActivity;
 import com.demos.beziertest.TestBezierActivity;
 import com.demos.databinding.ActivityMainBinding;
 import com.demos.layoutmanager.LayoutManagerUI1;
+import com.demos.live.LiveRecyclerActivity;
 import com.demos.luck1.Luck1Activity;
 import com.demos.luck2.Luck2Activity;
 import com.demos.luck3.Luck3Activity;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         click(binding.luck2, Luck2Activity.class);
         click(binding.luck3, Luck3Activity.class);
         click(binding.luck4, Lucky4Activity.class);
+        click(binding.liveRecycler, LiveRecyclerActivity.class);
 
 //        queue.add("1");
 //        queue.add("2");
