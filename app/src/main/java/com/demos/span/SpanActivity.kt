@@ -13,8 +13,10 @@ import com.demos.databinding.ActivitySpanBinding
 import com.demos.dp
 import com.demos.getDrawableCompat
 import com.demos.span.core.Span
+import com.demos.span.impl.AnimatedColorSpan
 import com.demos.span.impl.GlideSpannable
 import com.demos.span.impl.ImageSpannable
+import com.demos.span.impl.RainbowSpan
 import com.demos.span.impl.ShortLabelSpannable
 
 
@@ -51,7 +53,7 @@ class SpanActivity : AppCompatActivity() {
                     .setRequestOption(RequestOptions.centerCropTransform())
                     .setDrawableSize(50.dp, 50.dp).build()
             )
-            .add("啊啊啊啊啊啊啊啊啊啊啊啊".deleteLine().textColor(Color.BLACK))
+            .add("啊啊".deleteLine().textColor(Color.BLACK))
             .add("哦哦哦哦哦哦".underLine())
             .add("\nCCCCCCCC".quoteLine(Color.BLUE, 15, 5))
             .add(
@@ -71,9 +73,31 @@ class SpanActivity : AppCompatActivity() {
                     .setDrawableSize(50.dp, 50.dp).build()
                     .textColor(Color.GREEN)
             )
+            .add(
+                RainbowSpan(
+                    "包丰富多彩的包丰富多彩的包丰富多彩的包丰富多彩的",
+                    Color.BLUE,
+                    Color.RED
+                ).build()
+            ).add(
+                "动起来动起来".addSpan(
+                    AnimatedColorSpan(
+                        binding.tv1,
+                        true,
+                        Color.BLUE,
+                        Color.RED,
+                        Color.YELLOW,
+                        Color.GREEN,
+                        Color.CYAN
+                    )
+                )
+            )
             //总点击事件
             .totalClickListener { _, t -> Toast.makeText(this, t, Toast.LENGTH_SHORT).show() }
             .into(binding.tv1)
 
+
     }
+
+
 }
