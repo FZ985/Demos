@@ -78,6 +78,7 @@ public class AnimatedColorSpan extends CharacterStyle implements UpdateAppearanc
             objectAnimator.setRepeatCount(ValueAnimator.INFINITE);
             objectAnimator.start();
         }
+
     }
 
     /**

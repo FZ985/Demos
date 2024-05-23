@@ -23,7 +23,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public class OneHalfLinePagerIndicator extends View implements IPagerIndicator {
-    private Paint mPaint;
+    private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final RectF mInnerRect = new RectF();
     private final RectF mRect = new RectF();
 
@@ -41,7 +41,6 @@ public class OneHalfLinePagerIndicator extends View implements IPagerIndicator {
     }
 
     private void init(Context context) {
-        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.FILL);
     }
 

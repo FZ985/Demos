@@ -81,6 +81,7 @@ public class MagicTabActivity1 extends AppCompatActivity {
                         Color.parseColor("#c683fe"))
                 .setStartInterpolator(new AccelerateInterpolator())
                 .setEndInterpolator(new DecelerateInterpolator(2f)));
+
     }
 
     private void initTabs(MagicIndicator indicator, IPagerIndicator pagerIndicator) {

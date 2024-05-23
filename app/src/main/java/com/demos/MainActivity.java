@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        byte[] bytes = int2Byte(1329);
 //        Logger.e("ssssss:"+ Arrays.toString(bytes));
+
     }
 
     public static byte[] int2Byte(int value) {
