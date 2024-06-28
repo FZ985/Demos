@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.demos.activity.RoundWrapActivity;
 import com.demos.beziertest.TestBezierActivity;
+import com.demos.bottomsheet.BottomSheetActivity1;
 import com.demos.databinding.ActivityMainBinding;
 import com.demos.layoutmanager.LayoutManagerUI1;
 import com.demos.live.LiveRecyclerActivity;
@@ -17,6 +18,7 @@ import com.demos.luck3.Luck3Activity;
 import com.demos.luck4.Lucky4Activity;
 import com.demos.magic.MagicTabActivity1;
 import com.demos.marquee.MarqueeUI;
+import com.demos.merge.BitmapMergeActivity;
 import com.demos.other.AppbarLayoutActivity;
 import com.demos.password.PasswordActivity;
 import com.demos.span.SpanActivity;
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         click(binding.luck3, Luck3Activity.class);
         click(binding.luck4, Lucky4Activity.class);
         click(binding.liveRecycler, LiveRecyclerActivity.class);
+        click(binding.bottomSheet1, BottomSheetActivity1.class);
+        click(binding.bitmapMerge, BitmapMergeActivity.class);
 
 //        queue.add("1");
 //        queue.add("2");
