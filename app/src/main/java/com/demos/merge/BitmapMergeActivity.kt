@@ -7,9 +7,14 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.demos.R
 import com.demos.databinding.ActivityBitmapMergeBinding
 import com.demos.dp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 /**
@@ -23,27 +28,61 @@ class BitmapMergeActivity : AppCompatActivity() {
         ActivityBitmapMergeBinding.inflate(layoutInflater)
     }
 
+    val scope = CoroutineScope(Dispatchers.Main)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        //图片1
-        val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.test)
-        binding.i1.setImageBitmap(bitmap)
 
         //图片2
         val bitmapCode = BitmapFactory.decodeResource(resources, R.mipmap.qrcode_test)
         binding.i2.setImageBitmap(bitmapCode)
 
-        //生成的新图片
-        val newBitmap = mergeBitmap(bitmap, bitmapCode)
-        binding.iv.setImageBitmap(newBitmap)
+        scope.launch {
+            val img =
+                "https://img0.baidu.com/it/u=2605876870,2798209052&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1399"
 
-        binding.save.setOnClickListener {
-            newBitmap?.let {
-                saveBitmap(newBitmap)
+            val bitmap = scaleBitmap(withContext(Dispatchers.IO) {
+                Glide.with(this@BitmapMergeActivity)
+                    .asBitmap()
+                    .load(img)
+                    .submit()
+                    .get()
+            })
+
+            binding.i1.setImageBitmap(bitmap)
+
+            //生成的新图片
+            val newBitmap = mergeBitmap(bitmap, bitmapCode)
+            binding.iv.setImageBitmap(newBitmap)
+
+            binding.save.setOnClickListener {
+                newBitmap?.let {
+                    saveBitmap(newBitmap)
+                }
             }
         }
+
+
+    }
+
+
+    //将bitmap 基于宽度 进行等比 缩放
+    private fun scaleBitmap(originalBitmap: Bitmap): Bitmap {
+        val originalWidth: Int = originalBitmap.width
+        val originalHeight: Int = originalBitmap.height
+        // 你希望的目标宽度
+        val targetWidth: Int = resources.displayMetrics.widthPixels
+
+        if (originalWidth >= targetWidth) {
+            return originalBitmap
+        }
+
+        val scaleFactor = targetWidth.toFloat() / originalWidth
+        val targetHeight = (originalHeight * scaleFactor).toInt()
+
+        return Bitmap.createScaledBitmap(originalBitmap, targetWidth, targetHeight, true)
     }
 
 
