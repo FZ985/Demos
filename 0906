@@ -1,4 +1,27 @@
-利用ContentResolver在不申请sd卡写入权限的情况下将图片、gif保存到系统相册；
+利用ContentResolver在不申请权限的情况下将图片、gif地址保存到系统相册；
+kotlin 高阶函数let、run、also、apply、use的用法用例；
+kotlin 单表达式函数
+   fun sum(x: Int, y: Int): Int {return x + y}
+   等同于：
+   fun sum(x: Int, y: Int): Int = x + y
+   等同于：
+   fun sum(x: Int, y: Int) = x + y
+
+kotlin 中缀函数
+   将函数定义为扩展函数，并在fun前添加 infix 关键字；
+   例，给Int类添加扩展函数add
+   infix fun Int.add(x: Int): Int {return this + x}
+   调用：5.add(3) 等同于 5 add 3
+
+kotlin 本地嵌套函数(用于减少参数检查的代码冗余)
+   fun test(a:String,b:String){
+        fun check(value:String){ if (value.isEmpty()) {throw IllegalArgumentException("error")}}
+        check(a)
+        check(b)
+        //do something...
+   }
+
+
 
 
 
