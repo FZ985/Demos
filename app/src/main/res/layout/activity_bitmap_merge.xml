@@ -20,6 +20,12 @@
                 android:layout_height="wrap_content"
                 android:text="保存" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/save_gif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="保存gif" />
+
             <ImageView
                 android:id="@+id/i1"
                 android:layout_width="240dp"

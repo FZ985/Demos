@@ -7,12 +7,13 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="fill_parent"
+        android:background="#ff0000"
         android:layout_height="fill_parent">
 
+<!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:elevation="0.0dip">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -20,7 +21,7 @@
                 android:layout_height="fill_parent"
                 android:tag="binding_1"
                 app:collapsedTitleTextColor="@color/c_2E86F6"
-                app:contentScrim="@android:color/white"
+                app:contentScrim="@android:color/transparent"
                 app:expandedTitleTextColor="@color/teal_200"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:scrimAnimationDuration="100"
@@ -42,13 +43,13 @@
 
                 </RelativeLayout>
 
-                <androidx.appcompat.widget.Toolbar
-                    android:layout_width="fill_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:title="应用标题"/>
+<!--                <androidx.appcompat.widget.Toolbar-->
+<!--                    android:layout_width="fill_parent"-->
+<!--                    android:layout_height="?attr/actionBarSize"-->
+<!--                    android:theme="@style/ThemeOverlay.AppCompat.Dark"-->
+<!--                    app:layout_collapseMode="pin"-->
+<!--                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--                    app:title="应用标题"/>-->
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
             <com.google.android.material.tabs.TabLayout

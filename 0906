@@ -1,0 +1,14 @@
+利用ContentResolver在不申请sd卡写入权限的情况下将图片、gif保存到系统相册；
+
+
+
+使用ContentResolver不申请sd卡写入权限的情况下将图片、gif保存到系统相册，
+创建ContentValues填写图片的mime_type等等描述内容；
+调用context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+获取系统分配的一个图片uri；
+在使用Glide将图片地址asBitmap的形式加载出来，再使用ContentResolver中openOutputStream打开上述uri的
+OutputStream输出流，然后调用bitmap的compress函数将图片输出到流中；
+保存gif需要用Glide以asFile的形式获取glide加载到本地gif的临时文件，然后创建app沙盒路径中创建空文件，将临时
+文件copy进去，用FileInputStream打开沙盒文件，在用openOutputStream打开输出流，读取到inputStream中的流数据
+写入到outputStream中去，保存成功；
+

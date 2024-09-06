@@ -10,6 +10,8 @@ import android.os.Looper;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.Glide;
 
 import java.io.File;
@@ -20,7 +22,7 @@ import java.io.OutputStream;
 
 /**
  * by JFZ
- * 2024/7/1
+ * 2024/9/06
  * desc：使用glide 将图片加载并保存到本地相册中的帮助类
  **/
 public class GlideSaveImageUtil {
@@ -35,6 +37,7 @@ public class GlideSaveImageUtil {
      * @param imageUrl 图片地址
      * @return 保存成功 返回 uri
      */
+    @Nullable
     public static Uri saveImage(Context context, String imageUrl) {
         return saveImage(context, imageUrl, String.valueOf(System.currentTimeMillis()), "无描述", ImageMime.JPEG);
     }
@@ -49,6 +52,7 @@ public class GlideSaveImageUtil {
      * @param imageMime 图片类型
      * @return 保存成功 返回 uri
      */
+    @Nullable
     public static Uri saveImage(Context context, String imageUrl, String title, String desc, ImageMime imageMime) {
         try {
             Bitmap bitmap = Glide.with(context)

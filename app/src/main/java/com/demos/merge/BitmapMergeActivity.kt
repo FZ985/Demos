@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.demos.R
 import com.demos.databinding.ActivityBitmapMergeBinding
 import com.demos.dp
+import com.demos.utils.saveGifByGlide
 import com.demos.utils.saveToFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,7 +40,7 @@ class BitmapMergeActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val img =
                 "https://img0.baidu.com/it/u=2605876870,2798209052&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1399"
-//            val img = "https://dingyue.ws.126.net/2021/0506/da35f1ddg00qsnuy300jzc000f000dkg.gif"
+            val imgGif = "https://dingyue.ws.126.net/2021/0506/da35f1ddg00qsnuy300jzc000f000dkg.gif"
 
             val bitmap = scaleBitmap(withContext(Dispatchers.IO) {
                 Glide.with(this@BitmapMergeActivity)
@@ -59,6 +60,15 @@ class BitmapMergeActivity : AppCompatActivity() {
             binding.save.setOnClickListener {
                 newBitmap.saveToFile(this@BitmapMergeActivity)?.let {
                     Toast.makeText(this@BitmapMergeActivity, "保存成功", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            binding.saveGif.setOnClickListener {
+                saveGifByGlide(this@BitmapMergeActivity, imgGif, "gif", "gifDesc") {
+                    it?.let {
+                        Toast.makeText(this@BitmapMergeActivity, "保存成功", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
         }
