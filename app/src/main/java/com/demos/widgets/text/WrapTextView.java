@@ -28,6 +28,7 @@ import java.util.LinkedHashMap;
  * date : 2023/9/21 08:26
  * description :
  */
+@Deprecated
 public class WrapTextView extends AppCompatTextView {
 
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
