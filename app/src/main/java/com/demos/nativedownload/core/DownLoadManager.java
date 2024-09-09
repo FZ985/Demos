@@ -50,7 +50,7 @@ public class DownLoadManager {
     }
 
     public void destroy() {
-        ISDOWNLOADING = false;
+        IS_DOWN_LOADING = false;
         Log.e("download", "##销毁下载器##");
         if (DownLoadManagerHolder.INSTANCE != null) {
             if (bean != null) {
@@ -67,7 +67,7 @@ public class DownLoadManager {
         }
     }
 
-    private static boolean ISDOWNLOADING = false;
+    private static boolean IS_DOWN_LOADING = false;
 
     public static class DownLoadTask implements Runnable {
 
@@ -86,14 +86,14 @@ public class DownLoadManager {
 
         @Override
         public void run() {
-            if (ISDOWNLOADING) {
+            if (IS_DOWN_LOADING) {
                 // LogTrackerHelper.with(LogTaskParam.SYSTEM_MSG).exec(
                 // LogTrackerHelper.logDetail() + "##下载中##");
                 Log.e("download", "下载中....");
                 return;
             }
             Log.e("download", "下载开始run..................");
-            ISDOWNLOADING = true;
+            IS_DOWN_LOADING = true;
             if (mCallBack != null) {
                 mCallBack.onStart(bean);
                 // 当前下载的进度
@@ -160,7 +160,7 @@ public class DownLoadManager {
                         // DataBaseUtil.UpdateDownLoadById(bean);
                         while ((length = bufferRead.read(buffer)) != -1) {
                             if (Status.CANCEL.equals(bean.status)) {
-                                ISDOWNLOADING = false;
+                                IS_DOWN_LOADING = false;
                                 mCallBack.onCancel(bean);
                                 return;
                             }
@@ -181,32 +181,32 @@ public class DownLoadManager {
                                 Log.e("download", "bean:mStoreFile:" + mStoreFile);
 
                                 if (file.renameTo(mStoreFile)) {
-                                    ISDOWNLOADING = false;
+                                    IS_DOWN_LOADING = false;
                                     bean.done = true;
                                     mCallBack.onFinished(bean);
                                 } else {
                                     bean.error = "renameTo failed";
-                                    ISDOWNLOADING = false;
+                                    IS_DOWN_LOADING = false;
                                     mCallBack.onError(bean);
                                     file.delete();
                                 }
                             } else {
-                                ISDOWNLOADING = false;
+                                IS_DOWN_LOADING = false;
                                 bean.error = "file status" + file.canRead()
                                         + " or length=" + file.length();
                                 mCallBack.onError(bean);
                             }
                         } else {
-                            ISDOWNLOADING = false;
+                            IS_DOWN_LOADING = false;
                             mCallBack.onStop(bean); // 没下载完,停止了
                         }
                     } else {
-                        ISDOWNLOADING = false;
+                        IS_DOWN_LOADING = false;
                         bean.error = "unSupport this download.";
                         mCallBack.onError(bean);
                     }
                 } catch (IOException e) {
-                    ISDOWNLOADING = false;
+                    IS_DOWN_LOADING = false;
                     bean.error = "" + e.getMessage();
                     mCallBack.onError(bean);
                     file.delete();
@@ -225,7 +225,7 @@ public class DownLoadManager {
                 }
                 // mCallBack.onSuccess(bean);
             }
-            ISDOWNLOADING = false;
+            IS_DOWN_LOADING = false;
         }
     }
 }
