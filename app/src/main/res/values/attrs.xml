@@ -33,4 +33,11 @@
     <declare-styleable name="LotteryPanLayout">
         <attr name="lottery_pan_size" format="float" />
     </declare-styleable>
+
+    <declare-styleable name="MarqueeView">
+        <attr name="viewtextSize" format="dimension" />
+        <attr name="viewtextColor" format="color" />
+        <attr name="speed" format="integer" />
+        <attr name="spacing" format="dimension" />
+    </declare-styleable>
 </resources>

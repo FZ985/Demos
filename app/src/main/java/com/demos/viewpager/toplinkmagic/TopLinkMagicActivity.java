@@ -70,6 +70,7 @@ public class TopLinkMagicActivity extends AppCompatActivity {
             fragments.add(ChildFragment.instance(i));
         }
         binding.magicVp.setAdapter(commonFragmentAdapter = new CommonFragmentStatePagerAdapter(getSupportFragmentManager(), fragments));
+        binding.magicVp.setOffscreenPageLimit(fragments.size());
     }
 
     private void initTop() {

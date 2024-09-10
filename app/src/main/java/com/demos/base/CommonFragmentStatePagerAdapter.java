@@ -3,7 +3,7 @@ package com.demos.base;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * Author: jfz
  * Date: 2020-12-18 14:58
  */
-public class CommonFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
+public class CommonFragmentStatePagerAdapter extends FragmentPagerAdapter {
     private List<Fragment> frags;
 
     public CommonFragmentStatePagerAdapter(@NonNull FragmentManager fm, List<Fragment> frags) {

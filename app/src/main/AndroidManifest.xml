@@ -19,21 +19,21 @@
         android:theme="@style/Theme.Demos"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <activity-->
-<!--            android:name=".TestActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        <!--        <activity-->
+        <!--            android:name=".TestActivity"-->
+        <!--            android:exported="true">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
 
         <activity android:name=".viewpager.toplinkcustom.TopLinkCustomActivity" />
         <activity android:name=".viewpager.toplinkmagic.TopLinkMagicActivity" />
@@ -59,7 +59,9 @@
 
         <activity android:name=".bottomsheet.BottomSheetActivity1" />
 
-        <activity android:name=".merge.BitmapMergeActivity"/>
+        <activity android:name=".merge.BitmapMergeActivity" />
+
+        <activity android:name=".zztestmar.TestMarAct" />
 
     </application>
 

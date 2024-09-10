@@ -24,7 +24,7 @@ public class ChildFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentHomeChildBinding.inflate(inflater, container, false);
+        binding = FragmentHomeChildBinding.inflate(inflater, null, false);
         View view = binding.getRoot();
         init();
         return view;
@@ -34,6 +34,12 @@ public class ChildFragment extends Fragment {
         index = getArguments().getInt("index", 0);
         binding.childTv.setText(String.valueOf(index));
         binding.childTv.setBackgroundColor(Tools.randomColor());
+    }
+
+    @Override
+    public void onDestroy() {
+        binding = null;
+        super.onDestroy();
     }
 
     public static ChildFragment instance(int index) {
