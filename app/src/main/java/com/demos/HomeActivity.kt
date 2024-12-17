@@ -48,27 +48,6 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val str = "123123123123131321哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈123123123123131321哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈123123123123131321哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈123123123123131321哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈99999"
-        binding.ddd.text = str
-//        Ripple.with(this).colors("#F64Dff", "#7733FF").into(binding.ddd)
-
-//        Span.with()
-//            .add(
-//                RainbowSpan(
-//                    str,
-//                    Color.parseColor("#F64Dff"),
-//                    Color.parseColor("#7733FF")
-//                ).build()
-//            )
-//            .into(binding.ddd)
-
-//        val paint = binding.ddd.paint
-//        val colors = intArrayOf(Color.parseColor("#F64Dff"),Color.parseColor("#7733FF"))
-//        val mLinearGradient =  LinearGradient(0f, 0f, paint.measureText(str), 0f, colors, null, Shader.TileMode.CLAMP)
-//        paint.setShader(mLinearGradient)
-//        binding.ddd.invalidate()
-
-
         binding.recycler.layoutManager = LinearLayoutManager(this)
         val adapter = HomeAdapter()
         binding.recycler.adapter = adapter
@@ -132,8 +111,6 @@ class HomeActivity : AppCompatActivity() {
         override fun convert(holder: BaseViewHolder, item: HomeItem) {
             val name = holder.getView<TextView>(R.id.name)
             name.text = item.text
-
-        Ripple.with(context).textColors("#F64Dff", "#7733FF").into(name)
         }
     }
 

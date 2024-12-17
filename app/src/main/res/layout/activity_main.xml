@@ -8,13 +8,6 @@
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
-    <com.demos.widgets.text.LinearGradientTextView
-        android:id="@+id/ddd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="哈哈哈哈哈哈哈哈哈"
-        android:paddingVertical="15dp" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"

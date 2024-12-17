@@ -34,6 +34,8 @@ class SpanActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.ddd.text = "1234567890好好好abcdefgopqrsty"
+
         val d = getDrawableCompat(R.mipmap.ic_launcher_round)
         d?.setBounds(0, 0, d.intrinsicWidth, d.intrinsicHeight)
         val imageSpan = ImageSpan(d!!, ImageSpan.ALIGN_BOTTOM)
