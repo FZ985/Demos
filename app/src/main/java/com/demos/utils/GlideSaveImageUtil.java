@@ -77,21 +77,22 @@ public class GlideSaveImageUtil {
      *
      * @param context  上下文
      * @param imageUrl gif图片地址
-     * @return 保存成功 返回 uri
+     * return 保存成功 返回 uri
      */
     public static void saveGif(Context context, String imageUrl, Callback<Uri> callback) {
         saveGif(context, imageUrl, String.valueOf(System.currentTimeMillis()), "无描述", callback);
     }
+
+    final static Handler handler = new Handler(Looper.getMainLooper());
+
 
     /**
      * @param context  上下文
      * @param imageUrl gif图片地址
      * @param title    标题
      * @param desc     描述
-     * @return 保存成功 返回 uri
+     * return 保存成功 返回 uri
      */
-    final static Handler handler = new Handler(Looper.getMainLooper());
-
     public static void saveGif(Context context, String imageUrl, String title, String desc, Callback<Uri> callback) {
         new Thread(() -> {
             ContentValues values = new ContentValues();

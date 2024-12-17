@@ -1,3 +1,8 @@
 viewpager包： 两个viewpage 联动
 
 nativedownload包：原生的下载
+
+
+kotlin 协程API的概念和用法，了解创建、启动和取消协程，以及协程的调度器和线程管理。
+如何使用 launch 和 async 进行并发操作，KTX库中提供的与页面生命周期绑定的协程，
+ViewModel的 viewModelScope，Lifecycle的lifecycleScope，页面销毁会自动处理。

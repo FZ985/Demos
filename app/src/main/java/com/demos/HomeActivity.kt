@@ -2,14 +2,17 @@ package com.demos
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.demos.activity.RoundWrapActivity
+import com.demos.anim.ConstraintLayoutAnimActivity
 import com.demos.beziertest.TestBezierActivity
 import com.demos.bottomsheet.BottomSheetActivity1
 import com.demos.databinding.ActivityMainBinding
+import com.demos.insertvideo.InsertVideoActivity
 import com.demos.layoutmanager.LayoutManagerUI1
 import com.demos.live.LiveRecyclerActivity
 import com.demos.luck1.Luck1Activity
@@ -44,6 +47,28 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val str = "123123123123131321哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈123123123123131321哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈123123123123131321哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈123123123123131321哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈99999"
+        binding.ddd.text = str
+//        Ripple.with(this).colors("#F64Dff", "#7733FF").into(binding.ddd)
+
+//        Span.with()
+//            .add(
+//                RainbowSpan(
+//                    str,
+//                    Color.parseColor("#F64Dff"),
+//                    Color.parseColor("#7733FF")
+//                ).build()
+//            )
+//            .into(binding.ddd)
+
+//        val paint = binding.ddd.paint
+//        val colors = intArrayOf(Color.parseColor("#F64Dff"),Color.parseColor("#7733FF"))
+//        val mLinearGradient =  LinearGradient(0f, 0f, paint.measureText(str), 0f, colors, null, Shader.TileMode.CLAMP)
+//        paint.setShader(mLinearGradient)
+//        binding.ddd.invalidate()
+
+
         binding.recycler.layoutManager = LinearLayoutManager(this)
         val adapter = HomeAdapter()
         binding.recycler.adapter = adapter
@@ -80,6 +105,7 @@ class HomeActivity : AppCompatActivity() {
                 "两个ViewPager联动效果自定义",
                 TopLinkCustomActivity::class.java
             ),
+            HomeItem("插入视频", InsertVideoActivity::class.java),
             HomeItem("两个ViewPager联动效果Magic实现", TopLinkMagicActivity::class.java),
             HomeItem("自定义layoutManager布局排名网格", LayoutManagerUI1::class.java),
             HomeItem("圆角包裹", RoundWrapActivity::class.java),
@@ -96,13 +122,18 @@ class HomeActivity : AppCompatActivity() {
             HomeItem("直播消息列表test", LiveRecyclerActivity::class.java),
             HomeItem("BottomSheet1", BottomSheetActivity1::class.java),
             HomeItem("图片合并", BitmapMergeActivity::class.java),
-            HomeItem("单条跑马灯", TestMarAct::class.java)
+            HomeItem("单条跑马灯", TestMarAct::class.java),
+            HomeItem("ConstraintLayout约束动画", ConstraintLayoutAnimActivity::class.java)
         )
     }
 
+
     class HomeAdapter : BaseQuickAdapter<HomeItem, BaseViewHolder>(R.layout.item_main_list) {
         override fun convert(holder: BaseViewHolder, item: HomeItem) {
-            holder.setText(R.id.name, item.text)
+            val name = holder.getView<TextView>(R.id.name)
+            name.text = item.text
+
+        Ripple.with(context).textColors("#F64Dff", "#7733FF").into(name)
         }
     }
 
