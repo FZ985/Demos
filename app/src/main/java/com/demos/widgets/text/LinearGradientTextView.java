@@ -19,7 +19,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 /**
  * by JFZ
  * 2024/12/17
- * desc：
+ * desc：文字渐变组件
  **/
 @SuppressLint("DrawAllocation")
 public class LinearGradientTextView extends AppCompatTextView {
@@ -99,5 +99,10 @@ public class LinearGradientTextView extends AppCompatTextView {
             }
             invalidate();
         }
+    }
+
+    //加粗
+    public void setBold(boolean bold){
+        getPaint().setFakeBoldText(bold);
     }
 }
