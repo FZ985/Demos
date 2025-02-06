@@ -34,7 +34,7 @@ class SpanActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.ddd.text = "1234567890好好好abcdefgopqrsty"
+        binding.ddd.text = "1234567890好好好abcdefgopqrsty1234567890好好好abcdefgopqrsty1234567890好好好abcdefgopqrsty"
 
         val d = getDrawableCompat(R.mipmap.ic_launcher_round)
         d?.setBounds(0, 0, d.intrinsicWidth, d.intrinsicHeight)
@@ -97,6 +97,8 @@ class SpanActivity : AppCompatActivity() {
             //总点击事件
             .totalClickListener { _, t -> Toast.makeText(this, t, Toast.LENGTH_SHORT).show() }
             .into(binding.tv1)
+
+
 
 
     }

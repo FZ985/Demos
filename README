@@ -6,3 +6,20 @@ nativedownload包：原生的下载
 kotlin 协程API的概念和用法，了解创建、启动和取消协程，以及协程的调度器和线程管理。
 如何使用 launch 和 async 进行并发操作，KTX库中提供的与页面生命周期绑定的协程，
 ViewModel的 viewModelScope，Lifecycle的lifecycleScope，页面销毁会自动处理。
+
+
+
+
+    已知 a+b=c，求证 3=4；
+
+    解: 因为 a+b=c;
+        所以
+            (4a-3a)+(4b-3b)=(4c-3c);
+        去括号
+             4a-3a+4b-3b=4c-3c;
+        所以
+             3c-3a-3b=4c-4a-4b;
+        所以
+             3(c-a-b)=4(c-a-b);
+        去掉公因式得：
+             3 = 4
