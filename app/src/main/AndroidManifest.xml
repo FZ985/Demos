@@ -77,6 +77,8 @@
 
         <activity android:name=".insertvideo.InsertVideoActivity" />
 
+        <activity android:name=".imagepoint.ImagePointActivity"/>
+
     </application>
 
 </manifest>
