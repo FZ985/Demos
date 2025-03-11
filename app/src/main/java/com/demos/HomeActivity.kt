@@ -11,6 +11,7 @@ import com.demos.activity.RoundWrapActivity
 import com.demos.anim.ConstraintLayoutAnimActivity
 import com.demos.beziertest.TestBezierActivity
 import com.demos.bottomsheet.BottomSheetActivity1
+import com.demos.camera.CameraActivity
 import com.demos.databinding.ActivityMainBinding
 import com.demos.imagepoint.ImagePointActivity
 import com.demos.insertvideo.InsertVideoActivity
@@ -104,7 +105,8 @@ class HomeActivity : AppCompatActivity() {
             HomeItem("图片合并", BitmapMergeActivity::class.java),
             HomeItem("单条跑马灯", TestMarAct::class.java),
             HomeItem("ConstraintLayout约束动画", ConstraintLayoutAnimActivity::class.java),
-            HomeItem("图片点位", ImagePointActivity::class.java)
+            HomeItem("图片点位", ImagePointActivity::class.java),
+            HomeItem("废弃相机的使用", CameraActivity::class.java)
         )
     }
 
