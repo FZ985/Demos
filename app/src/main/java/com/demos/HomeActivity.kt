@@ -29,6 +29,7 @@ import com.demos.password.PasswordActivity
 import com.demos.span.SpanActivity
 import com.demos.viewpager.toplinkcustom.TopLinkCustomActivity
 import com.demos.viewpager.toplinkmagic.TopLinkMagicActivity
+import com.demos.watermark.WaterMarkActivity
 import com.demos.zztestmar.TestMarAct
 import java.util.ArrayDeque
 import java.util.Queue
@@ -82,6 +83,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun homeList(): MutableList<HomeItem> {
         return mutableListOf(
+            HomeItem("背景水印", WaterMarkActivity::class.java),
             HomeItem(
                 "两个ViewPager联动效果自定义",
                 TopLinkCustomActivity::class.java

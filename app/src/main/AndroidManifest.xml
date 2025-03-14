@@ -87,6 +87,8 @@
             android:name=".camera.CameraActivity"
             android:screenOrientation="landscape" />
 
+        <activity android:name=".watermark.WaterMarkActivity"/>
+
     </application>
 
 </manifest>
