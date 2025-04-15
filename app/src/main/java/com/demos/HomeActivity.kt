@@ -13,6 +13,7 @@ import com.demos.beziertest.TestBezierActivity
 import com.demos.bottomsheet.BottomSheetActivity1
 import com.demos.camera.CameraActivity
 import com.demos.databinding.ActivityMainBinding
+import com.demos.ijkplayer.IJKPlayerActivity
 import com.demos.imagepoint.ImagePointActivity
 import com.demos.insertvideo.InsertVideoActivity
 import com.demos.layoutmanager.LayoutManagerUI1
@@ -83,6 +84,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun homeList(): MutableList<HomeItem> {
         return mutableListOf(
+            HomeItem("ijkplayer", IJKPlayerActivity::class.java),
             HomeItem("背景水印", WaterMarkActivity::class.java),
             HomeItem(
                 "两个ViewPager联动效果自定义",

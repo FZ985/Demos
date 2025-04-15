@@ -18,20 +18,15 @@ import androidx.annotation.Nullable;
 public class WatermarkDrawable extends Drawable {
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final String watermarkText;
-    private int textSize = 30;
-    private int textColor = Color.parseColor("#999999");
-
     private int backgroundColor = Color.TRANSPARENT;
-
     private int xOffset = 100;
-
     private int yOffset = 100;
 
 
     public WatermarkDrawable(String text) {
         this.watermarkText = text;
-        paint.setColor(textColor);
-        paint.setTextSize(textSize);
+        paint.setColor(Color.parseColor("#999999"));
+        paint.setTextSize(30);
         paint.setAntiAlias(true);
         paint.setTextAlign(Paint.Align.LEFT);
         paint.setAlpha(100); // 设置透明度，0-255
@@ -55,6 +50,7 @@ public class WatermarkDrawable extends Drawable {
 
         canvas.restore();
     }
+
 
     @Override
     public void setAlpha(int alpha) {
