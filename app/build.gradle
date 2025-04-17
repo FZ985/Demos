@@ -62,5 +62,4 @@ dependencies {
         exclude group: "com.davemorrissey.labs", module: "subsampling-scale-image-view-androidx"
     }
 
-    implementation project(':libIJKPlayer')
 }

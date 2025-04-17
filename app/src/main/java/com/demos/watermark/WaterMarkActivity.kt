@@ -29,13 +29,11 @@ class WaterMarkActivity : AppCompatActivity() {
 
         binding.root.background = WatermarkDrawable("哈哈哈").apply {
             alpha = 90
-            setBackgroundColor(Color.RED)
             setTextSize(50)
             setTextColor(Color.BLUE)
         }
 
     }
-
 
     private fun createMirroredBitmap(sourceBitmap: Bitmap): Bitmap {
         val mirroredBitmap =
