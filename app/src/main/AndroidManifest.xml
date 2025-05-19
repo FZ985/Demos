@@ -69,6 +69,8 @@
 
         <activity android:name=".zztestmar.TestMarAct" />
 
+        <activity android:name=".activity.CalendarBlockActivity"/>
+
         <!--        <activity-->
         <!--            android:name=".anim.ConstraintLayoutAnimActivity"-->
         <!--            android:exported="true"-->

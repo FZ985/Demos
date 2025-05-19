@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.demos.activity.CalendarBlockActivity
 import com.demos.activity.RoundWrapActivity
 import com.demos.anim.ConstraintLayoutAnimActivity
 import com.demos.beziertest.TestBezierActivity
@@ -83,6 +84,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun homeList(): MutableList<HomeItem> {
         return mutableListOf(
+            HomeItem("Github贡献度组件", CalendarBlockActivity::class.java),
             HomeItem("背景水印", WaterMarkActivity::class.java),
             HomeItem(
                 "两个ViewPager联动效果自定义",
