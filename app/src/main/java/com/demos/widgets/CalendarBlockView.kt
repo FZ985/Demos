@@ -20,7 +20,7 @@ import kotlin.math.min
 
 /**
  * by JFZ
- * 2025/5/17
+ * 2025/5/20
  * desc:一个日历块组件
  * 示例：
  *         binding.block.setDateRange(2025, 5, 2026, 4)
@@ -44,12 +44,21 @@ import kotlin.math.min
  *                 .setDrawBlockText(true)
  *                 .setDrawWeekdayText(true)
  *                 .setWeekdayLabelFormatter(object : CalendarBlockView.WeekdayLabelFormatter {
- *                     override fun formatted(pos: Int, label: String,paint: Paint): String {
+ *                     override fun formatted(pos: Int, label: String,paint: Paint,weekdayMode: CalendarBlockView.WeekdayMode): String {
+ *                         if (weekdayMode == CalendarBlockView.WeekdayMode.MONDAY_FIRST) {
+ *                             return when (pos) {
+ *                                 0 -> "1"
+ *                                 1 -> "二"
+ *                                 3 -> "周4"
+ *                                 6 -> "Sunday"
+ *                                 else -> label
+ *                             }
+ *                         }
  *                         return when (pos) {
- *                             0 -> "1"
- *                             1 -> "二"
- *                             3 -> "周4"
- *                             6 -> "Sunday"
+ *                             0 -> "7"
+ *                             1 -> "一"
+ *                             3 -> "周三"
+ *                             6 -> "Saturday"
  *                             else -> label
  *                         }
  *                     }
@@ -150,7 +159,15 @@ class CalendarBlockView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+    enum class WeekdayMode {
+        MONDAY_FIRST,
+        SUNDAY_FIRST
+    }
+
     private var options = Options()
+
+    private var currentWeekdayMode = WeekdayMode.MONDAY_FIRST
+    private var weekdayLabels = getWeekdayLabels(currentWeekdayMode)
 
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = options.blockTextColor
@@ -170,7 +187,6 @@ class CalendarBlockView @JvmOverloads constructor(
     }
     private val monthFormatStr = "%d年%d月"
 
-    private val weekdayLabels = listOf("周一", "周二", "周三", "周四", "周五", "周六", "周日")
     private val weekdayLabelDraws = mutableListOf<String>()
     private val weekdayColors = mutableListOf<Int>()
     private val weekdayPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -183,21 +199,21 @@ class CalendarBlockView @JvmOverloads constructor(
     // 月份矩阵列表，格式：(year, month, [列][7行])
     private val dateBlocks = mutableListOf<Triple<Int, Int, List<List<Int?>>>>()
 
-    // 日期 -> 百分比映射，key: yyyy-MM-dd
+    // 日期 -> 百分比映射，key:YYYY-MM-dd
     private val percentMap = mutableMapOf<String, Int>()
 
     // 默认颜色配置
     var progressColors: List<Int> = listOf(
-        0xFFFF4444.toInt(), 0xFFFF8800.toInt(), 0xFFFFBB33.toInt(),
-        0xFFFFFF00.toInt(), 0xFF99CC00.toInt(), 0xFF669900.toInt(),
-        0xFF33B5E5.toInt(), 0xFF0099CC.toInt(), 0xFFAA66CC.toInt(),
-        0xFF9933CC.toInt()
+        0x1A7D69FF.toInt(), 0x337D69FF.toInt(), 0x4D7D69FF.toInt(),
+        0x667D69FF.toInt(), 0x7F7D69FF.toInt(), 0x997D69FF.toInt(),
+        0xB37D69FF.toInt(), 0xCC7D69FF.toInt(), 0xE67D69FF.toInt(),
+        0xFF7D69FF.toInt()
     )
 
-    private var startYear = 2025
-    private var startMonth = 5
-    private var endYear = 2025
-    private var endMonth = 5
+    private var startYear = -1
+    private var startMonth = -1
+    private var endYear = -1
+    private var endMonth = -1
 
     private val blockParams = mutableMapOf<RectF, BlockData>()
     private var blockClickListener: OnBlockClickListener? = null
@@ -221,12 +237,16 @@ class CalendarBlockView @JvmOverloads constructor(
     private val gestureDetector = GestureDetector(context, gestureListener)
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val totalColumns = dateBlocks.sumOf { it.third.size }
-        val width =
-            weekdayWidth + totalColumns * (options.blockSize + options.blockSpacing) - options.blockSpacing
-        val height = (options.monthTextSizePx + options.monthBlockMargin).toInt() +
-                7 * (options.blockSize + options.blockSpacing) - options.blockSpacing
-        setMeasuredDimension(width.toInt(), height)
+        if (checkDate()) {
+            val totalColumns = dateBlocks.sumOf { it.third.size }
+            val width =
+                weekdayWidth + totalColumns * (options.blockSize + options.blockSpacing) - options.blockSpacing
+            val height = (options.monthTextSizePx + options.monthBlockMargin).toInt() +
+                    7 * (options.blockSize + options.blockSpacing) - options.blockSpacing
+            setMeasuredDimension(width.toInt(), height)
+        } else {
+            setMeasuredDimension(widthMeasureSpec, heightMeasureSpec)
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -235,124 +255,154 @@ class CalendarBlockView @JvmOverloads constructor(
         return handled || super.onTouchEvent(event)
     }
 
+    private fun checkDate(): Boolean {
+        return (startYear != -1 && startMonth != -1 && endYear != -1 && endMonth != -1)
+    }
+
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        if (checkDate()) {
 
-        // 绘制星期标签（左边一列）
-        if (options.isDrawWeekdayText) {
-            weekdayPaint.textAlign = options.weekdayAlign
-            val topOffset = (options.monthTextSizePx + options.monthBlockMargin).toInt()
-            val weekX = when (options.weekdayAlign) {
-                Paint.Align.LEFT -> options.weekdayHorizontalOffset / 2f
-                Paint.Align.CENTER -> weekdayWidth / 2f
-                else -> (weekdayWidth - options.weekdayHorizontalOffset / 2f).toFloat()
-            }
-            for (row in 0 until weekdayLabelDraws.size) {
-                weekdayPaint.color = weekdayColors[row]
-                val weekY =
-                    topOffset + row * (options.blockSize + options.blockSpacing) + options.blockSize / 2 + weekdayPaint.textSize / 3
-                canvas.drawText(
-                    weekdayLabelDraws[row],
-                    weekX,
-                    weekY,
-                    weekdayPaint
-                )
-            }
-        }
-
-        monthTextPaint.textAlign = options.monthAlign
-
-        var colOffset = 0
-        dateBlocks.forEachIndexed { position, (year, month, matrix) ->
-            val totalCols = matrix.size
-            val startX = colOffset * (options.blockSize + options.blockSpacing)
-            val endX =
-                (colOffset + totalCols) * (options.blockSize + options.blockSpacing) - options.blockSpacing
-            val centerX = when (options.monthAlign) {
-                Paint.Align.LEFT -> weekdayWidth + startX
-                Paint.Align.RIGHT -> weekdayWidth + endX
-                else -> weekdayWidth + (startX + endX) / 2f
-            }
-
-            val monthStr =
-                if (options.monthLabelFormatter != null) options.monthLabelFormatter!!.formatted(
-                    position,
-                    year,
-                    month,
-                    monthTextPaint
-                ) else monthFormatStr.format(year, month)
-
-            canvas.drawText(
-                monthStr,
-                centerX.toFloat(),
-                options.monthTextSizePx,
-                monthTextPaint
-            )
-
-            val topOffset = (options.monthTextSizePx + options.monthBlockMargin).toInt()
-
-            for (col in matrix.indices) {
-                for (row in 0 until 7) {
-                    val left =
-                        weekdayWidth + (colOffset + col) * (options.blockSize + options.blockSpacing)
-
-                    val top = topOffset + row * (options.blockSize + options.blockSpacing)
-
-                    val rect = RectF(
-                        left.toFloat(),
-                        top.toFloat(),
-                        (left + options.blockSize).toFloat(),
-                        (top + options.blockSize).toFloat()
+            // 绘制星期标签（左边一列）
+            if (options.isDrawWeekdayText) {
+                weekdayPaint.textAlign = options.weekdayAlign
+                val topOffset = (options.monthTextSizePx + options.monthBlockMargin).toInt()
+                val weekX = when (options.weekdayAlign) {
+                    Paint.Align.LEFT -> options.weekdayHorizontalOffset / 2f
+                    Paint.Align.CENTER -> weekdayWidth / 2f
+                    else -> (weekdayWidth - options.weekdayHorizontalOffset / 2f).toFloat()
+                }
+                for (row in 0 until weekdayLabelDraws.size) {
+                    weekdayPaint.color = weekdayColors[row]
+                    val weekY =
+                        topOffset + row * (options.blockSize + options.blockSpacing) + options.blockSize / 2 + weekdayPaint.textSize / 3
+                    canvas.drawText(
+                        weekdayLabelDraws[row],
+                        weekX,
+                        weekY,
+                        weekdayPaint
                     )
-
-                    val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                        style = Paint.Style.FILL
-                    }
-
-                    val day = matrix[col][row]
-                    if (day != null) {
-                        val percent = getPercentForDay(year, month, day)
-                        paint.color = getColorForPercent(percent)
-                        blockParams[rect] = BlockData(year, month, day, percent)
-                    } else {
-                        paint.color = options.emptyBlockColor
-                    }
-
-                    canvas.drawRoundRect(rect, options.blockRadius, options.blockRadius, paint)
-
-                    if (day != null && options.isDrawBlockText) {
-                        val blockText =
-                            if (options.blockTextFormatter != null) options.blockTextFormatter!!.formatted(
-                                year, month, day, textPaint
-                            ) else day.toString()
-                        canvas.drawText(
-                            blockText,
-                            rect.centerX(),
-                            rect.centerY() + textPaint.textSize / 3,
-                            textPaint
-                        )
-                    }
-
-                    //外部自定义图层
-                    options.blockLayerDraw?.onDrawBlockLayer(
-                        canvas,
-                        rect,
-                        blockPaint,
-                        year,
-                        month,
-                        day,
-                        position,
-                        col,
-                        row
-                    )
-
                 }
             }
 
-            colOffset += matrix.size
-        }
+            monthTextPaint.textAlign = options.monthAlign
 
+            var colOffset = 0
+            dateBlocks.forEachIndexed { position, (year, month, matrix) ->
+                val totalCols = matrix.size
+                val startX = colOffset * (options.blockSize + options.blockSpacing)
+                val endX =
+                    (colOffset + totalCols) * (options.blockSize + options.blockSpacing) - options.blockSpacing
+                val centerX = when (options.monthAlign) {
+                    Paint.Align.LEFT -> weekdayWidth + startX
+                    Paint.Align.RIGHT -> weekdayWidth + endX
+                    else -> weekdayWidth + (startX + endX) / 2f
+                }
+
+                val monthStr =
+                    if (options.monthLabelFormatter != null) options.monthLabelFormatter!!.formatted(
+                        position,
+                        year,
+                        month,
+                        monthTextPaint
+                    ) else monthFormatStr.format(year, month)
+
+                canvas.drawText(
+                    monthStr,
+                    centerX.toFloat(),
+                    options.monthTextSizePx,
+                    monthTextPaint
+                )
+
+                val topOffset = (options.monthTextSizePx + options.monthBlockMargin).toInt()
+
+                for (col in matrix.indices) {
+                    for (row in 0 until 7) {
+                        val left =
+                            weekdayWidth + (colOffset + col) * (options.blockSize + options.blockSpacing)
+
+                        val top = topOffset + row * (options.blockSize + options.blockSpacing)
+
+                        val rect = RectF(
+                            left.toFloat(),
+                            top.toFloat(),
+                            (left + options.blockSize).toFloat(),
+                            (top + options.blockSize).toFloat()
+                        )
+
+                        val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                            style = Paint.Style.FILL
+                        }
+
+                        val day = matrix[col][row]
+                        if (day != null) {
+                            val percent = getPercentForDay(year, month, day)
+                            paint.color = getColorForPercent(percent)
+                            blockParams[rect] = BlockData(year, month, day, percent)
+                        } else {
+                            paint.color = options.emptyBlockColor
+                        }
+
+                        canvas.drawRoundRect(rect, options.blockRadius, options.blockRadius, paint)
+
+                        if (day != null && options.isDrawBlockText) {
+                            val blockText =
+                                if (options.blockTextFormatter != null) options.blockTextFormatter!!.formatted(
+                                    year, month, day, textPaint
+                                ) else day.toString()
+                            canvas.drawText(
+                                blockText,
+                                rect.centerX(),
+                                rect.centerY() + textPaint.textSize / 3,
+                                textPaint
+                            )
+                        }
+
+                        //外部自定义图层
+                        options.blockLayerDraw?.onDrawBlockLayer(
+                            canvas,
+                            rect,
+                            blockPaint,
+                            year,
+                            month,
+                            day,
+                            position,
+                            col,
+                            row
+                        )
+                    }
+                }
+
+                colOffset += matrix.size
+            }
+
+        }
+    }
+
+    //获取星期的标签列表
+    private fun getWeekdayLabels(mode: WeekdayMode): List<String> {
+        return when (mode) {
+            WeekdayMode.MONDAY_FIRST -> listOf(
+                "周一",
+                "周二",
+                "周三",
+                "周四",
+                "周五",
+                "周六",
+                "周日"
+            )
+
+            WeekdayMode.SUNDAY_FIRST -> listOf(
+                "周日",
+                "周一",
+                "周二",
+                "周三",
+                "周四",
+                "周五",
+                "周六"
+            )
+        }
     }
 
     //获取星期的最大宽度
@@ -362,7 +412,12 @@ class CalendarBlockView @JvmOverloads constructor(
         var maxWidth = 0f
         weekdayLabels.forEachIndexed { index, item ->
             val str =
-                options.weekdayLabelFormatter?.formatted(index, weekdayLabels[index], weekdayPaint)
+                options.weekdayLabelFormatter?.formatted(
+                    index,
+                    weekdayLabels[index],
+                    weekdayPaint,
+                    currentWeekdayMode
+                )
                     ?: weekdayLabels[index]
             weekdayLabelDraws.add(str)
             weekdayColors.add(weekdayPaint.color)
@@ -390,9 +445,23 @@ class CalendarBlockView @JvmOverloads constructor(
     private fun buildMatrixForMonth(year: Int, month: Int): List<List<Int?>> {
         val result = mutableListOf<MutableList<Int?>>()
         val firstDayWeek = getFirstDayOfWeek(year, month)
-        val startOffset = when (firstDayWeek) {
-            1 -> 6 // Sunday -> row 6
-            else -> firstDayWeek - 2
+        val startOffset = when (currentWeekdayMode) {
+            WeekdayMode.MONDAY_FIRST -> {
+                when (firstDayWeek) {
+                    Calendar.SUNDAY -> 6
+                    Calendar.MONDAY -> 0
+                    Calendar.TUESDAY -> 1
+                    Calendar.WEDNESDAY -> 2
+                    Calendar.THURSDAY -> 3
+                    Calendar.FRIDAY -> 4
+                    Calendar.SATURDAY -> 5
+                    else -> 0
+                }
+            }
+
+            WeekdayMode.SUNDAY_FIRST -> {
+                firstDayWeek - 1 // Sunday -> 0, Monday -> 1, ... Saturday -> 6
+            }
         }
 
         val totalDays = getDaysInMonth(year, month)
@@ -409,7 +478,6 @@ class CalendarBlockView @JvmOverloads constructor(
                 result[col][row] = day++
             }
         }
-
         return result
     }
 
@@ -457,10 +525,18 @@ class CalendarBlockView @JvmOverloads constructor(
 
     fun setDateRange(startYear: Int, startMonth: Int, endYear: Int, endMonth: Int) {
         blockParams.clear()
-        this.startYear = startYear
-        this.startMonth = startMonth
-        this.endYear = endYear
-        this.endMonth = endMonth
+        if (startYear > endYear) {
+            this.startYear = endYear
+            this.startMonth = endMonth
+            this.endYear = startYear
+            this.endMonth = startMonth
+        } else {
+            this.startYear = startYear
+            this.startMonth = startMonth
+            this.endYear = endYear
+            this.endMonth = endMonth
+        }
+
         buildAllMatrices()
         requestLayout()
     }
@@ -470,7 +546,9 @@ class CalendarBlockView @JvmOverloads constructor(
             val key = "%04d-%02d-%02d".format(it.year, it.month, it.day)
             percentMap[key] = it.percent.coerceIn(0, 100)
         }
-        invalidate()
+        if (checkDate()) {
+            invalidate()
+        }
     }
 
     fun setOptions(options: Options) {
@@ -481,14 +559,32 @@ class CalendarBlockView @JvmOverloads constructor(
         textPaint.textSize = options.blockTextSize
         monthTextPaint.textSize = options.monthTextSizePx
         monthTextPaint.color = options.monthTextColor
+        weekdayLabels = getWeekdayLabels(currentWeekdayMode)
         weekdayLabelWidth()
         requestLayout()
+    }
+
+    fun getOptions(): Options {
+        return options
     }
 
     fun setOnBlockClickListener(listener: OnBlockClickListener) {
         this.blockClickListener = listener
     }
 
+    // 新增设置星期显示模式的方法
+    fun setWeekdayMode(mode: WeekdayMode) {
+        if (checkDate()) {
+            if (currentWeekdayMode != mode) {
+                currentWeekdayMode = mode
+                weekdayLabels = getWeekdayLabels(currentWeekdayMode)
+                buildAllMatrices() // 重新构建日期矩阵以适应新的星期排列
+                weekdayLabelWidth() // 重新计算星期标签宽度
+                requestLayout()
+                invalidate()
+            }
+        }
+    }
 
     class Options {
         //块的大小
@@ -675,7 +771,7 @@ class CalendarBlockView @JvmOverloads constructor(
 
     interface WeekdayLabelFormatter {
 
-        fun formatted(pos: Int, label: String, paint: Paint): String
+        fun formatted(pos: Int, label: String, paint: Paint, weekdayMode: WeekdayMode): String
     }
 
     interface MonthLabelFormatter {

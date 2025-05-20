@@ -12,7 +12,6 @@ import androidx.core.graphics.toColorInt
 import com.demos.databinding.ActivityGithubCalendarBlockBinding
 import com.demos.dp
 import com.demos.widgets.CalendarBlockView
-import com.demos.widgets.CalendarBlockView.OnBlockLayerDraw
 import java.util.Calendar
 import kotlin.math.cos
 import kotlin.math.min
@@ -22,7 +21,6 @@ import kotlin.math.sin
 /**
  * by JFZ
  * 2025/5/19
- * desc：
  **/
 class CalendarBlockActivity : AppCompatActivity() {
 
@@ -34,10 +32,23 @@ class CalendarBlockActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.block.setDateRange(2025, 5, 2026, 4)
+        binding.startYear.setSelection(6)
+        binding.startMonth.setSelection(4)
+        binding.endYear.setSelection(6)
+        binding.endMonth.setSelection(11)
 
+        binding.set.setOnClickListener {
+            val sY = binding.startYear.selectedItem.toString().toInt()
+            val sM = binding.startMonth.selectedItem.toString().toInt()
+            val eY = binding.endYear.selectedItem.toString().toInt()
+            val eM = binding.endMonth.selectedItem.toString().toInt()
+            binding.block.setDateRange(sY, sM, eY, eM)
+            binding.block.setWeekdayMode(if (binding.rb1.isChecked) CalendarBlockView.WeekdayMode.SUNDAY_FIRST else CalendarBlockView.WeekdayMode.MONDAY_FIRST)
+        }
+
+        val options = binding.block.getOptions()
         binding.block.setOptions(
-            CalendarBlockView.Options()
+            options
                 .setBlockSize(25.dp)
                 .setBlockRadius(5.dp.toFloat())
                 .setBlockSpacing(5.dp)
@@ -45,24 +56,38 @@ class CalendarBlockActivity : AppCompatActivity() {
                 .setMonthTextSize(13f.dp.toFloat())
                 .setMonthAlign(Paint.Align.CENTER)
                 .setMonthTextColor(Color.MAGENTA)
-                .setEmptyBlockColor("#c9c9c9".toColorInt())
-                .setDefaultBlockColor("#c9c9c9".toColorInt())
+                .setEmptyBlockColor("#e9e9e9".toColorInt())
+                .setDefaultBlockColor("#e9e9e9".toColorInt())
                 .setBlockTextColor(Color.WHITE)
                 .setBlockTextSize(12.dp.toFloat())
                 .setWeekdayTextSize(12.dp.toFloat())
                 .setWeekdayTextColor(Color.BLUE)
                 .setWeekdayHorizontalOffset(15.dp)
-                .setWeekdayAlign(Paint.Align.CENTER)
+                .setWeekdayAlign(Paint.Align.RIGHT)
                 .setDrawBlockText(true)
                 .setDrawWeekdayText(true)
                 .setWeekdayLabelFormatter(object : CalendarBlockView.WeekdayLabelFormatter {
-                    override fun formatted(pos: Int, label: String, paint: Paint): String {
+                    override fun formatted(
+                        pos: Int,
+                        label: String,
+                        paint: Paint,
+                        weekdayMode: CalendarBlockView.WeekdayMode
+                    ): String {
                         paint.color = randomColor()
+                        if (weekdayMode == CalendarBlockView.WeekdayMode.MONDAY_FIRST) {
+                            return when (pos) {
+                                0 -> "1"
+                                1 -> "二"
+                                3 -> "周4"
+                                6 -> "Sunday"
+                                else -> label
+                            }
+                        }
                         return when (pos) {
-                            0 -> "1"
-                            1 -> "二"
-                            3 -> "周4"
-                            6 -> "Sunday"
+                            0 -> "7"
+                            1 -> "一"
+                            3 -> "周三"
+                            6 -> "Saturday"
                             else -> label
                         }
                     }
@@ -99,7 +124,7 @@ class CalendarBlockActivity : AppCompatActivity() {
                         return day.toString()
                     }
                 })
-                .setBlockLayerDraw(object : OnBlockLayerDraw {
+                .setBlockLayerDraw(object : CalendarBlockView.OnBlockLayerDraw {
                     override fun onDrawBlockLayer(
                         canvas: Canvas,
                         rect: RectF,
@@ -211,19 +236,16 @@ class CalendarBlockActivity : AppCompatActivity() {
         binding.block.setPercentForDays(
             mutableListOf(
                 CalendarBlockView.BlockData(2025, 5, 1, 0),
-                CalendarBlockView.BlockData(2025, 5, 1, 0),
                 CalendarBlockView.BlockData(2025, 5, 2, 10),
                 CalendarBlockView.BlockData(2025, 5, 3, 25),
                 CalendarBlockView.BlockData(2025, 5, 4, 35),
                 CalendarBlockView.BlockData(2025, 5, 5, 45),
                 CalendarBlockView.BlockData(2025, 5, 6, 55),
                 CalendarBlockView.BlockData(2025, 5, 7, 65),
-                CalendarBlockView.BlockData(2025, 6, 8, 76),
-                CalendarBlockView.BlockData(2025, 6, 9, 88),
-                CalendarBlockView.BlockData(2025, 6, 10, 99),
-                CalendarBlockView.BlockData(2025, 6, 11, 50),
-                CalendarBlockView.BlockData(2025, 6, 15, 70),
-                CalendarBlockView.BlockData(2025, 7, 10, 100),
+                CalendarBlockView.BlockData(2025, 5, 8, 76),
+                CalendarBlockView.BlockData(2025, 5, 9, 88),
+                CalendarBlockView.BlockData(2025, 5, 10, 95),
+                CalendarBlockView.BlockData(2025, 5, 10, 95),
             )
         )
     }
