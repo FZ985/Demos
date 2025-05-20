@@ -794,10 +794,12 @@ class CalendarBlockView @JvmOverloads constructor(
     }
 
     interface MonthLabelFormatter {
+
         fun formatted(index: Int, year: Int, month: Int, paint: Paint): String
     }
 
     interface BlockTextFormatter {
+
         fun formatted(year: Int, month: Int, day: Int, paint: Paint): String
     }
 
