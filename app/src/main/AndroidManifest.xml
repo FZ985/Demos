@@ -69,18 +69,13 @@
 
         <activity android:name=".zztestmar.TestMarAct" />
 
-        <activity android:name=".activity.CalendarBlockActivity"/>
+        <activity android:name=".activity.CalendarBlockActivity" />
 
-        <!--        <activity-->
-        <!--            android:name=".anim.ConstraintLayoutAnimActivity"-->
-        <!--            android:exported="true"-->
-        <!--            android:screenOrientation="landscape"-->
-        <!--            android:theme="@style/AppNoActionBar">-->
-        <!--            <intent-filter>-->
-        <!--                <action android:name="android.intent.action.MAIN" />-->
-        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-        <!--            </intent-filter>-->
-        <!--        </activity>-->
+        <activity
+            android:name=".anim.ConstraintLayoutAnimActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppNoActionBar"/>
 
         <activity android:name=".insertvideo.InsertVideoActivity" />
 
