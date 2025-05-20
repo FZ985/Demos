@@ -525,23 +525,17 @@ class CalendarBlockView @JvmOverloads constructor(
 
     fun setDateRange(startYear: Int, startMonth: Int, endYear: Int, endMonth: Int) {
         blockParams.clear()
-        if (startYear > endYear) {
-            this.startYear = endYear
-            this.startMonth = endMonth
-            this.endYear = startYear
-            this.endMonth = startMonth
-        } else if (startYear < endYear) {
+        if (startYear < endYear || (startYear == endYear && startMonth <= endMonth)) {
             this.startYear = startYear
             this.startMonth = startMonth
             this.endYear = endYear
             this.endMonth = endMonth
         } else {
-            this.startYear = startYear
-            this.startMonth = min(startMonth, endMonth)
-            this.endYear = endYear
-            this.endMonth = max(startMonth, endMonth)
+            this.startYear = endYear
+            this.startMonth = endMonth
+            this.endYear = startYear
+            this.endMonth = startMonth
         }
-
         buildAllMatrices()
         requestLayout()
     }
