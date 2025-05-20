@@ -166,7 +166,7 @@ class CalendarBlockView @JvmOverloads constructor(
 
     private var options = Options()
 
-    private var currentWeekdayMode = WeekdayMode.MONDAY_FIRST
+    private var currentWeekdayMode = WeekdayMode.SUNDAY_FIRST
     private var weekdayLabels = getWeekdayLabels(currentWeekdayMode)
 
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -530,11 +530,16 @@ class CalendarBlockView @JvmOverloads constructor(
             this.startMonth = endMonth
             this.endYear = startYear
             this.endMonth = startMonth
-        } else {
+        } else if (startYear < endYear) {
             this.startYear = startYear
             this.startMonth = startMonth
             this.endYear = endYear
             this.endMonth = endMonth
+        } else {
+            this.startYear = startYear
+            this.startMonth = min(startMonth, endMonth)
+            this.endYear = endYear
+            this.endMonth = max(startMonth, endMonth)
         }
 
         buildAllMatrices()
@@ -589,63 +594,83 @@ class CalendarBlockView @JvmOverloads constructor(
     class Options {
         //块的大小
         var blockSize = 100
+            private set
 
         //块的圆角
         var blockRadius = 0f
+            private set
 
         //块之间的间距
         var blockSpacing = 3
+            private set
 
         //块的文字颜色
         var blockTextColor = Color.WHITE
+            private set
 
         //块的文字大小
         var blockTextSize = 30f
+            private set
 
         //是否绘制块文字
         var isDrawBlockText = true
+            private set
 
         //默认块的颜色
         var defaultBlockColor = Color.LTGRAY
+            private set
 
         //空白块的颜色
         var emptyBlockColor = Color.LTGRAY
+            private set
 
         //自定义块的涂层
         var blockLayerDraw: OnBlockLayerDraw? = null
+            private set
 
         //块文字格式化
         var blockTextFormatter: BlockTextFormatter? = null
+            private set
 
-        // px，月份文字和方块之间的垂直间距
+        //年月份文字和方块之间的垂直间距
         var monthBlockMargin = 10
+            private set
 
-        //顶部月份的文字大小
+        //顶部年月份的文字大小
         var monthTextSizePx = 30f
+            private set
 
-        //顶部月份文字颜色
+        //顶部年月份文字颜色
         var monthTextColor = Color.BLACK
+            private set
 
         //顶部年月格式化
         var monthLabelFormatter: MonthLabelFormatter? = null
+            private set
 
         //顶部年月对齐方式
         var monthAlign = Paint.Align.CENTER
+            private set
 
         //星期的文字颜色
         var weekdayTextColor = Color.BLACK
+            private set
 
         //星期的文字大小
         var weekdayTextSize = 30f
+            private set
 
         //星期的横向间距
         var weekdayHorizontalOffset = 10
+            private set
 
         //是否绘制星期文字
         var isDrawWeekdayText = true
+            private set
 
         //星期的对齐方式
         var weekdayAlign = Paint.Align.RIGHT
+            private set
 
         //星期文字格式化
         var weekdayLabelFormatter: WeekdayLabelFormatter? = null

@@ -43,8 +43,12 @@ class CalendarBlockActivity : AppCompatActivity() {
             val eY = binding.endYear.selectedItem.toString().toInt()
             val eM = binding.endMonth.selectedItem.toString().toInt()
             binding.block.setDateRange(sY, sM, eY, eM)
+        }
+
+        binding.rg.setOnCheckedChangeListener { v, checkId ->
             binding.block.setWeekdayMode(if (binding.rb1.isChecked) CalendarBlockView.WeekdayMode.SUNDAY_FIRST else CalendarBlockView.WeekdayMode.MONDAY_FIRST)
         }
+
 
         val options = binding.block.getOptions()
         binding.block.setOptions(
@@ -248,6 +252,8 @@ class CalendarBlockActivity : AppCompatActivity() {
                 CalendarBlockView.BlockData(2025, 5, 10, 95),
             )
         )
+
+        binding.set.performClick()
     }
 
     fun randomColor(alpha: Int = 255): Int {
