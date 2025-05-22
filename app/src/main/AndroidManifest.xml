@@ -87,6 +87,8 @@
 
         <activity android:name=".watermark.WaterMarkActivity" />
 
+        <activity android:name=".activity.SportBallActivity"/>
+
     </application>
 
 </manifest>

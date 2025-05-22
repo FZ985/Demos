@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.demos.activity.CalendarBlockActivity
 import com.demos.activity.RoundWrapActivity
+import com.demos.activity.SportBallActivity
 import com.demos.anim.ConstraintLayoutAnimActivity
 import com.demos.beziertest.TestBezierActivity
 import com.demos.bottomsheet.BottomSheetActivity1
@@ -84,6 +85,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun homeList(): MutableList<HomeItem> {
         return mutableListOf(
+            HomeItem("运动球体", SportBallActivity::class.java),
             HomeItem("Github贡献度组件", CalendarBlockActivity::class.java),
             HomeItem("背景水印", WaterMarkActivity::class.java),
             HomeItem(
