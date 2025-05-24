@@ -89,6 +89,8 @@
 
         <activity android:name=".activity.SportBallActivity"/>
 
+        <activity android:name=".activity.BlurLayoutActivity"/>
+
     </application>
 
 </manifest>
