@@ -8,6 +8,8 @@ kotlin 协程API的概念和用法，了解创建、启动和取消协程，以�
 ViewModel的 viewModelScope，Lifecycle的lifecycleScope，页面销毁会自动处理。
 
 
+
+
 Bitmap 模糊效果的版本兼容，
 Android 12及以上使用新的API RenderEffect，渲染效果，没有模糊范围，性能更佳；
 Android 12一下使用废弃的老的API RenderScript，处理超出模糊范围[0-25]的模糊算法；
@@ -17,8 +19,12 @@ BlurLayerLayout 可获取当前模糊位图bitmap；
 BlurLayerLayout 兼容属性动画渲染；
 BlurLayerLayout 处理view大小改变的情况；
 BlurLayerLayout 处理模糊状态时拦截子view的点击，不让其操作；
-
+自定义BlurSpan，TextView可使用此span实现局部文字模糊效果；
+BlurSpan 动态设置模糊度和模糊样式；
 UI屏幕截图新API PixelCopy的使用；
+
+
+
 
 
 

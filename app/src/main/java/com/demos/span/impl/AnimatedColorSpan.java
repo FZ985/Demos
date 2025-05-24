@@ -15,6 +15,10 @@ import android.util.Property;
 import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+
 /**
  * by JFZ
  * 2024/5/16
@@ -32,10 +36,18 @@ public class AnimatedColorSpan extends CharacterStyle implements UpdateAppearanc
 
     private final boolean playAnim;
 
-    public AnimatedColorSpan(TextView textView, boolean playAnim, int... colors) {
+    public AnimatedColorSpan(LifecycleOwner owner, TextView textView, boolean playAnim, int... colors) {
         this.view = textView;
         this.colors = colors;
         this.playAnim = playAnim;
+        owner.getLifecycle().addObserver(new DefaultLifecycleObserver() {
+            @Override
+            public void onDestroy(@NonNull LifecycleOwner owner) {
+                if (playAnim && objectAnimator != null) {
+                    objectAnimator.cancel();
+                }
+            }
+        });
     }
 
     public void setTranslateXPercentage(float percentage) {

@@ -68,7 +68,7 @@ public class Span {
     }
 
     public void into(TextView textview) {
-        if (textview != null && builders.size() > 0) {
+        if (textview != null && !builders.isEmpty()) {
             textview.setText(getSpannable());
             textview.setMovementMethod(SpanLinkMovementMethodImpl.getInstance());
             textview.setHighlightColor(highlightColor);
@@ -77,7 +77,7 @@ public class Span {
 
     public SpannableStringBuilder getSpannable() {
         SpannableStringBuilder string = new SpannableStringBuilder();
-        if (builders.size() > 0) {
+        if (!builders.isEmpty()) {
             for (SpanBuilder build : builders) {
                 String text = build.getText();
                 List<Object> spanList = build.getSpanList();
@@ -193,7 +193,7 @@ public class Span {
         }
 
         @Override
-        public void onClick(View widget) {
+        public void onClick(@NonNull View widget) {
             if (onClickSpanListener != null) {
                 onClickSpanListener.onClick(widget, text);
             }

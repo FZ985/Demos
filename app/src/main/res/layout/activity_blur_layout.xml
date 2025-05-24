@@ -14,14 +14,14 @@
             android:id="@+id/show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="show" />
+            android:text="显示内容" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/blur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="blur" />
+            android:text="模糊内容" />
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView

@@ -14,6 +14,7 @@ import com.demos.dp
 import com.demos.getDrawableCompat
 import com.demos.span.core.Span
 import com.demos.span.impl.AnimatedColorSpan
+import com.demos.span.impl.BlurSpan
 import com.demos.span.impl.GlideSpannable
 import com.demos.span.impl.ImageSpannable
 import com.demos.span.impl.RainbowSpan
@@ -34,7 +35,8 @@ class SpanActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.ddd.text = "1234567890好好好abcdefgopqrsty1234567890好好好abcdefgopqrsty1234567890好好好abcdefgopqrsty"
+        binding.ddd.text =
+            "1234567890好好好abcdefgopqrsty1234567890好好好abcdefgopqrsty1234567890好好好abcdefgopqrsty"
 
         val d = getDrawableCompat(R.mipmap.ic_launcher_round)
         d?.setBounds(0, 0, d.intrinsicWidth, d.intrinsicHeight)
@@ -81,9 +83,12 @@ class SpanActivity : AppCompatActivity() {
                     Color.BLUE,
                     Color.RED
                 ).build()
-            ).add(
+            )
+            .add(BlurSpan("我是模糊的内容我是模糊的内容我是模糊的内容我是模糊的内容", 15f).build())
+            .add(
                 "动起来动起来".addSpan(
                     AnimatedColorSpan(
+                        this,
                         binding.tv1,
                         true,
                         Color.BLUE,
@@ -97,8 +102,6 @@ class SpanActivity : AppCompatActivity() {
             //总点击事件
             .totalClickListener { _, t -> Toast.makeText(this, t, Toast.LENGTH_SHORT).show() }
             .into(binding.tv1)
-
-
 
 
     }
