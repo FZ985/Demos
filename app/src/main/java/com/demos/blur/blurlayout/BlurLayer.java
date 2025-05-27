@@ -1,4 +1,4 @@
-package com.demos.widgets.blurlayout;
+package com.demos.blur.blurlayout;
 
 
 import android.graphics.Bitmap;
@@ -12,11 +12,11 @@ import androidx.annotation.Nullable;
  **/
 public interface BlurLayer {
 
-    void showLayer();
+    void showBlurLayer();
 
-    void hideLayer();
+    void hideBlurLayer();
 
-    void releaseLayer();
+    void releaseBlurLayer();
 
     void setRadiusAndScaleFactor(float blurRadius, float scaleFactor);
 

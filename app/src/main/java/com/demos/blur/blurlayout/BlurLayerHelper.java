@@ -1,4 +1,4 @@
-package com.demos.widgets.blurlayout;
+package com.demos.blur.blurlayout;
 
 
 import android.graphics.Bitmap;
@@ -35,14 +35,14 @@ public class BlurLayerHelper implements BlurLayer {
 
     public final void onSizeChanged(int w, int h, int oldw, int oldh) {
         if (showLayer) {
-            releaseLayer();
+            releaseBlurLayer();
             bitmap = view2Bitmap();
         }
     }
 
     @Override
-    public synchronized final void showLayer() {
-        releaseLayer();
+    public void showBlurLayer() {
+        releaseBlurLayer();
         if (view == null) return;
         if (view.getWidth() == 0 && view.getMeasuredWidth() == 0) {
             view.post(() -> {
@@ -58,14 +58,14 @@ public class BlurLayerHelper implements BlurLayer {
     }
 
     @Override
-    public final void hideLayer() {
-        releaseLayer();
+    public void hideBlurLayer() {
+        releaseBlurLayer();
         if (view == null) return;
         view.invalidate();
     }
 
     @Override
-    public void releaseLayer() {
+    public void releaseBlurLayer() {
         if (bitmap != null && !bitmap.isRecycled()) {
             bitmap.recycle();
         }
@@ -101,7 +101,7 @@ public class BlurLayerHelper implements BlurLayer {
         this.blurRadius = blurRadius;
         this.scaleFactor = scaleFactor;
         if (showLayer) {
-            showLayer();
+            showBlurLayer();
         }
     }
 

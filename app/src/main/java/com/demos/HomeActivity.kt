@@ -7,12 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.demos.activity.BlurLayoutActivity
 import com.demos.activity.CalendarBlockActivity
 import com.demos.activity.RoundWrapActivity
 import com.demos.activity.SportBallActivity
 import com.demos.anim.ConstraintLayoutAnimActivity
 import com.demos.beziertest.TestBezierActivity
+import com.demos.blur.BlurActivity
 import com.demos.bottomsheet.BottomSheetActivity1
 import com.demos.camera.CameraActivity
 import com.demos.databinding.ActivityMainBinding
@@ -86,7 +86,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun homeList(): MutableList<HomeItem> {
         return mutableListOf(
-            HomeItem("模糊布局", BlurLayoutActivity::class.java),
+            HomeItem("模糊相关", BlurActivity::class.java),
             HomeItem("运动球体", SportBallActivity::class.java),
             HomeItem("Github贡献度组件", CalendarBlockActivity::class.java),
             HomeItem("背景水印", WaterMarkActivity::class.java),

@@ -1,4 +1,4 @@
-package com.demos.widgets.blurlayout;
+package com.demos.blur.blurlayout;
 
 
 import android.content.Context;
@@ -55,13 +55,18 @@ public class BlurLayerLinearLayout extends LinearLayout implements BlurLayer {
     }
 
     @Override
-    public void showLayer() {
-        helper.showLayer();
+    public void showBlurLayer() {
+        helper.showBlurLayer();
     }
 
     @Override
-    public void hideLayer() {
-        helper.hideLayer();
+    public void hideBlurLayer() {
+        helper.hideBlurLayer();
+    }
+
+    @Override
+    public void releaseBlurLayer() {
+        helper.releaseBlurLayer();
     }
 
     @Override
@@ -76,13 +81,8 @@ public class BlurLayerLinearLayout extends LinearLayout implements BlurLayer {
     }
 
     @Override
-    public void releaseLayer() {
-        helper.releaseLayer();
-    }
-
-    @Override
     protected void onDetachedFromWindow() {
-        helper.releaseLayer();
+        helper.releaseBlurLayer();
         super.onDetachedFromWindow();
         ((BlurLayerHelper) helper).setView(null);
     }

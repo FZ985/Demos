@@ -1,4 +1,4 @@
-package com.demos.activity
+package com.demos.blur
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.createBitmap
 import androidx.core.view.isVisible
 import com.demos.databinding.ActivityBlurLayoutBinding
-
 
 /**
  * by JFZ
@@ -34,7 +33,7 @@ class BlurLayoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 //        val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.image_01)
-//        val radius = 40f
+        val radius = 40f
 //        BlurUtil.blurBitmap(this, bitmap, radius, .2f)?.let {
 //            binding.image3.setImageBitmap(it)
 //        }
@@ -42,20 +41,19 @@ class BlurLayoutActivity : AppCompatActivity() {
 //            binding.image2.setImageBitmap(it.scale(bitmap.width, bitmap.height, true))
 //        }
 
-        binding.ll.showLayer()
+        binding.ll.showBlurLayer()
 
         binding.show.setOnClickListener {
-            binding.ll.hideLayer()
+            binding.ll.hideBlurLayer()
         }
 
         binding.blur.setOnClickListener {
-            binding.ll.showLayer()
+            binding.ll.showBlurLayer()
         }
 
         binding.view.setOnClickListener {
             binding.view.isVisible = false
         }
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

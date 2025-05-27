@@ -75,7 +75,7 @@
             android:name=".anim.ConstraintLayoutAnimActivity"
             android:exported="true"
             android:screenOrientation="landscape"
-            android:theme="@style/AppNoActionBar"/>
+            android:theme="@style/AppNoActionBar" />
 
         <activity android:name=".insertvideo.InsertVideoActivity" />
 
@@ -87,9 +87,14 @@
 
         <activity android:name=".watermark.WaterMarkActivity" />
 
-        <activity android:name=".activity.SportBallActivity"/>
+        <activity android:name=".activity.SportBallActivity" />
 
-        <activity android:name=".activity.BlurLayoutActivity"/>
+        <activity android:name=".blur.BlurActivity" />
+        <activity android:name=".blur.BlurLayoutActivity" />
+        <activity android:name=".blur.BlurNestedScrollViewActivity" />
+        <activity android:name=".blur.BlurScrollViewActivity" />
+        <activity android:name=".blur.BlurWebViewActivity" />
+        <activity android:name=".blur.BlurRecyclerViewActivity" />
 
     </application>
 

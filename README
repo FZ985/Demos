@@ -9,7 +9,6 @@ ViewModel的 viewModelScope，Lifecycle的lifecycleScope，页面销毁会自动
 
 
 
-
 Bitmap 模糊效果的版本兼容，
 Android 12及以上使用新的API RenderEffect，渲染效果，没有模糊范围，性能更佳；
 Android 12一下使用废弃的老的API RenderScript，处理超出模糊范围[0-25]的模糊算法；
@@ -22,6 +21,18 @@ BlurLayerLayout 处理模糊状态时拦截子view的点击，不让其操作；
 自定义BlurSpan，TextView可使用此span实现局部文字模糊效果；
 BlurSpan 动态设置模糊度和模糊样式；
 UI屏幕截图新API PixelCopy的使用；
+
+基于Android12 的实时模糊工具包;
+创建BlurTool，实现NestedScrollView、ScrollView的滑动实时模糊效果；
+RecyclerView、WebView待处理；
+
+BlurTool 重构为 BlurRender；
+创建CompatBlurRender模糊兼容渲染，分发滑动view进行模糊；
+实现NestedScrollView、ScrollView的滑动实时模糊效果；
+实现RecyclerView、WebView、ListView、GridView的滑动实时模糊效果；
+同时RecyclerView、WebView、ListView、GridView的模糊处理给予PixelCopy API获取屏幕快照实现，
+性能更快，但模糊程度需要取舍，PixelCopy是基于屏幕的，包括重叠层，所以模糊程度是radius的2倍多
+
 
 
 
