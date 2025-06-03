@@ -47,6 +47,10 @@ final class AnyViewRender extends BlurRender<View> {
                 sourceBitmap,
                 copyResult -> {
                     if (copyResult == PixelCopy.SUCCESS) {
+                        if (sourceBitmap == null) return;
+                        if (mActivity == null) return;
+                        if (mActivity.isFinishing()) return;
+
                         blurView.getLocationInWindow(blurLocation);
                         int x = blurLocation[0];
                         int y = blurLocation[1];
