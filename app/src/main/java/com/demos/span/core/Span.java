@@ -37,7 +37,7 @@ import java.util.List;
  * description : 富文本的简单使用，（背景色、文字大小、删除线、下划线、加粗、倾斜等）
  */
 @SuppressWarnings("unused")
-public class Span {
+public final class Span {
 
     private final List<SpanBuilder> builders = new ArrayList<>();
 
@@ -209,10 +209,10 @@ public class Span {
         void onClick(View widget, String text);
     }
 
-    public static class SpanBuilder {
+    public final static class SpanBuilder {
         private final String text;
         private final List<Object> spanList = new ArrayList<>();
-        protected boolean isUnderLine = false;
+        boolean isUnderLine = false;
 
         public SpanBuilder(String string) {
             this.text = string;
@@ -225,33 +225,33 @@ public class Span {
             addSpan(spannable);
         }
 
-        public final SpanBuilder backgroundColor(@ColorInt int color) {
+        public SpanBuilder backgroundColor(@ColorInt int color) {
             spanList.add(new BackgroundColorSpan(color));
             return this;
         }
 
-        public final SpanBuilder textColor(@ColorInt int color) {
+        public SpanBuilder textColor(@ColorInt int color) {
             spanList.add(new ForegroundColorSpan(color));
             return this;
         }
 
-        public final SpanBuilder textSize(int dpSize) {
+        public SpanBuilder textSize(int dpSize) {
             spanList.add(new AbsoluteSizeSpan(dpSize, true));
             return this;
         }
 
-        public final SpanBuilder underLine() {
+        public SpanBuilder underLine() {
             isUnderLine = true;
             spanList.add(new UnderlineSpan());
             return this;
         }
 
-        public final SpanBuilder deleteLine() {
+        public SpanBuilder deleteLine() {
             spanList.add(new StrikethroughSpan());
             return this;
         }
 
-        public final SpanBuilder quoteLine(@ColorInt int color, int stripeWidth, int gapWidth) {
+        public SpanBuilder quoteLine(@ColorInt int color, int stripeWidth, int gapWidth) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 spanList.add(new QuoteSpan(color, stripeWidth, gapWidth));
             }
@@ -266,26 +266,26 @@ public class Span {
          *
          * @param style 文字样式
          */
-        public final SpanBuilder textStyle(int style) {
+        public SpanBuilder textStyle(int style) {
             spanList.add(new StyleSpan(style));
             return this;
         }
 
-        public final SpanBuilder addSpan(Object span) {
+        public SpanBuilder addSpan(Object span) {
             spanList.add(span);
             return this;
         }
 
-        public final SpanBuilder click(OnSpanClickListener listener) {
+        public SpanBuilder click(OnSpanClickListener listener) {
             spanList.add(new SpanClick(text, isUnderLine, listener));
             return this;
         }
 
-        protected final String getText() {
+        String getText() {
             return text;
         }
 
-        protected final List<Object> getSpanList() {
+        List<Object> getSpanList() {
             return spanList;
         }
     }

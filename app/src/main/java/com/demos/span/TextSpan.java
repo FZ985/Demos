@@ -21,7 +21,7 @@ import java.util.List;
  * date : 2023/12/28 09:45
  * description : 仅更改文字大小、颜色的span 工具
  */
-public class TextSpan {
+public final class TextSpan {
 
     private final List<TextBuilder> builders = new ArrayList<>();
 
@@ -60,11 +60,10 @@ public class TextSpan {
         return string;
     }
 
-    public static class TextBuilder {
+    public final static class TextBuilder {
 
         private final String text;
         private final List<TextCreator> creators = new ArrayList<>();
-
 
         public TextBuilder(String string) {
             this.text = string;
@@ -77,7 +76,7 @@ public class TextSpan {
             addSpan(spannable);
         }
 
-        public final TextBuilder textColor(@ColorInt int color) {
+        public TextBuilder textColor(@ColorInt int color) {
             if (!TextUtils.isEmpty(text)) {
                 creators.add(new TextCreator(new ForegroundColorSpan(color),
                         0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE));
@@ -85,7 +84,7 @@ public class TextSpan {
             return this;
         }
 
-        public final TextBuilder textSize(int dpSize) {
+        public TextBuilder textSize(int dpSize) {
             if (!TextUtils.isEmpty(text)) {
                 creators.add(new TextCreator(new AbsoluteSizeSpan(dpSize, true),
                         0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE));
@@ -93,7 +92,7 @@ public class TextSpan {
             return this;
         }
 
-        public final TextBuilder textStyle(int style) {
+        public TextBuilder textStyle(int style) {
             if (!TextUtils.isEmpty(text)) {
                 creators.add(new TextCreator(new StyleSpan(style),
                         0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE));
@@ -101,21 +100,21 @@ public class TextSpan {
             return this;
         }
 
-        public final TextBuilder addSpan(Object span) {
+        public TextBuilder addSpan(Object span) {
             if (!TextUtils.isEmpty(text)) {
                 creators.add(new TextCreator(span, 0, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE));
             }
             return this;
         }
 
-        public final TextBuilder addSpan(TextCreator creator) {
+        public TextBuilder addSpan(TextCreator creator) {
             if (!TextUtils.isEmpty(text)) {
                 creators.add(creator);
             }
             return this;
         }
 
-        final String getText() {
+        String getText() {
             return text;
         }
 
