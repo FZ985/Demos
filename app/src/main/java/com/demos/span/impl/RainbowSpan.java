@@ -8,24 +8,19 @@ import android.text.TextPaint;
 import android.text.style.CharacterStyle;
 import android.text.style.UpdateAppearance;
 
-import com.demos.span.core.Span;
-
 /**
  * by JFZ
  * 2024/5/16
  * desc：渐变效果
  **/
-public class RainbowSpan extends CharacterStyle implements UpdateAppearance, Span.Spannable {
+public class RainbowSpan extends CharacterStyle implements UpdateAppearance {
     private final int[] colors;
-
-    private String text;
 
     final Matrix matrix = new Matrix();
 
     private Shader shader;
 
-    public RainbowSpan(String text, int... colors) {
-        this.text = text;
+    public RainbowSpan(int... colors) {
         this.colors = colors;
     }
 
@@ -43,11 +38,4 @@ public class RainbowSpan extends CharacterStyle implements UpdateAppearance, Spa
     }
 
 
-    @Override
-    public String getText() {
-        if (text == null) {
-            text = "";
-        }
-        return text;
-    }
 }

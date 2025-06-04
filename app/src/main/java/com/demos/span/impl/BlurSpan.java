@@ -5,28 +5,23 @@ import android.graphics.BlurMaskFilter;
 import android.text.TextPaint;
 import android.text.style.CharacterStyle;
 
-import com.demos.span.core.Span;
-
 /**
  * by JFZ
  * 2025/5/24
  * desc：
  **/
-public class BlurSpan extends CharacterStyle implements Span.Spannable {
+public class BlurSpan extends CharacterStyle {
 
-    private String text;
 
     private final float radius;
 
     private BlurMaskFilter.Blur style = BlurMaskFilter.Blur.NORMAL;
 
-    public BlurSpan(String text, float radius) {
-        this.text = text;
+    public BlurSpan(float radius) {
         this.radius = radius;
     }
 
-    public BlurSpan(String text, float radius, BlurMaskFilter.Blur style) {
-        this.text = text;
+    public BlurSpan(float radius, BlurMaskFilter.Blur style) {
         this.radius = radius;
         this.style = style;
     }
@@ -37,11 +32,4 @@ public class BlurSpan extends CharacterStyle implements Span.Spannable {
         tp.setMaskFilter(new BlurMaskFilter(radius, style));
     }
 
-    @Override
-    public String getText() {
-        if (text == null) {
-            text = "";
-        }
-        return text;
-    }
 }

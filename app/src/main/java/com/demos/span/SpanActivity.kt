@@ -78,13 +78,14 @@ class SpanActivity : AppCompatActivity() {
                     .textColor(Color.GREEN)
             )
             .add(
-                RainbowSpan(
-                    "包丰富多彩的包丰富多彩的包丰富多彩的包丰富多彩的",
-                    Color.BLUE,
-                    Color.RED
-                ).build()
+                "包丰富多彩的包丰富多彩的包丰富多彩的包丰富多彩的".addSpan(
+                    RainbowSpan(
+                        Color.BLUE,
+                        Color.RED
+                    )
+                )
             )
-            .add(BlurSpan("我是模糊的内容我是模糊的内容我是模糊的内容我是模糊的内容", 15f).build())
+            .add("我是模糊的内容我是模糊的内容我是模糊的内容我是模糊的内容".addSpan(BlurSpan(15f)))
             .add(
                 "动起来动起来".addSpan(
                     AnimatedColorSpan(
