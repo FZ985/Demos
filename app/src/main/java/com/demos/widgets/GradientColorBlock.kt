@@ -42,11 +42,11 @@ class GradientColorBlock @JvmOverloads constructor(
     @SuppressLint("DrawAllocation", "UseKtx")
     override fun onDraw(canvas: Canvas) {
         val rectWidth = (width - options.spacing * (options.colors.size - 1)) / options.colors.size
+        blockPaint.color = options.blockBackgroundColor
         options.colors.forEachIndexed { i, _ ->
             val left = i * (rectWidth + options.spacing).toFloat()
             val right = (left + rectWidth).toFloat()
             val blockRect = RectF(left, 0f, right, height.toFloat())
-            blockPaint.color = options.blockBackgroundColor
             canvas.drawRoundRect(blockRect, options.radius, options.radius, blockPaint)
             path.reset()
             path.addRoundRect(blockRect, options.radius, options.radius, Path.Direction.CW)
