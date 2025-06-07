@@ -95,6 +95,7 @@
         <activity android:name=".blur.BlurScrollViewActivity" />
         <activity android:name=".blur.BlurWebViewActivity" />
         <activity android:name=".blur.BlurRecyclerViewActivity" />
+        <activity android:name=".activity.GradientColorActivity" />
 
     </application>
 

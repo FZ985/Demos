@@ -2,6 +2,7 @@ package com.demos.utils
 
 import android.content.ContentResolver
 import android.content.ContentValues
+import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Environment
@@ -162,6 +163,39 @@ fun saveGifByGlide(
             }
         } else {
             block(null)
+        }
+    }
+}
+
+//插入视频
+fun insertVideoToGalleryCompat(context: Context, videoFile: File, call: (uri: Uri) -> Unit) {
+    val values = ContentValues()
+    values.put(MediaStore.Video.Media.DISPLAY_NAME, videoFile.name)
+    values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
+    values.put(
+        MediaStore.Video.Media.RELATIVE_PATH,
+        Environment.DIRECTORY_MOVIES
+    ) // 设置相对路径，适用于Android 10及以上
+    val contentResolver = context.contentResolver
+    val uri = contentResolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values)
+    if (uri != null) {
+        try {
+            FileInputStream(videoFile).use { inStream ->
+                contentResolver.openOutputStream(uri).use { out ->
+                    if (out != null) {
+                        val buffer = ByteArray(1024)
+                        var len: Int
+                        while (inStream.read(buffer).also { len = it } != -1) {
+                            out.write(buffer, 0, len)
+                        }
+                        out.flush()
+
+                        call(uri)
+                    }
+                }
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 }

@@ -157,20 +157,6 @@ public class GlideSaveImageUtil {
      * @return 保存成功 返回 uri
      */
     public static Uri saveBitmap(Context context, Bitmap bitmap, String title, String desc, ImageMime mime) {
-        //方法1
-//        try {
-//            String insertImage = MediaStore.Images.Media.insertImage(
-//                    context.getContentResolver(),
-//                    bitmap,
-//                    title,
-//                    desc
-//            );
-//            return Uri.parse(insertImage);
-//        } catch (Exception e) {
-//            return null;
-//        }
-
-        //方法2
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, title);
         values.put(MediaStore.Images.Media.DESCRIPTION, desc);

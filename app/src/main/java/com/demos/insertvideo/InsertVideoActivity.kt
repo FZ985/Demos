@@ -2,6 +2,7 @@ package com.demos.insertvideo
 
 import android.content.ContentValues
 import android.content.Context
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -56,7 +57,7 @@ class InsertVideoActivity : AppCompatActivity() {
                     override fun complete(file: File?) {
                         file?.let {
                             Logger.e("下载成功:" + it.absolutePath)
-                            insertVideoToGalleryCompat(this@InsertVideoActivity, file)
+                            insertVideoToGalleryCompat(this@InsertVideoActivity, file) {}
                         }
 
                     }
@@ -86,14 +87,15 @@ class InsertVideoActivity : AppCompatActivity() {
     }
 
 
-    fun insertVideoToGalleryCompat(context: Context, videoFile: File) {
+    fun insertVideoToGalleryCompat(context: Context, videoFile: File, call: (uri: Uri) -> Unit) {
         val values = ContentValues()
         values.put(MediaStore.Video.Media.DISPLAY_NAME, videoFile.name)
         values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")
         values.put(
             MediaStore.Video.Media.RELATIVE_PATH,
             Environment.DIRECTORY_MOVIES
-        ) // 设置相对路径，适用于Android 10及以上
+        )
+        // 设置相对路径，适用于Android 10及以上
         val contentResolver = context.contentResolver
         val uri = contentResolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, values)
         if (uri != null) {
@@ -107,6 +109,8 @@ class InsertVideoActivity : AppCompatActivity() {
                                 out.write(buffer, 0, len)
                             }
                             out.flush()
+
+                            call(uri)
                         }
                     }
                 }
