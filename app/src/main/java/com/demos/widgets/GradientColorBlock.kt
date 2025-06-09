@@ -103,7 +103,7 @@ class GradientColorBlock @JvmOverloads constructor(
             "#8E24AA".toColorInt(),
         )
             set(colorArr) {
-                if (colorArr.isNotEmpty()) {
+                if (colorArr.isNotEmpty() && colorArr.size > 1) {
                     field = colorArr
                 }
             }
