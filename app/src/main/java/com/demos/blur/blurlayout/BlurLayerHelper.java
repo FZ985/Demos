@@ -44,16 +44,18 @@ public class BlurLayerHelper implements BlurLayer {
     public void showBlurLayer() {
         releaseBlurLayer();
         if (view == null) return;
-        if (view.getWidth() == 0 && view.getMeasuredWidth() == 0) {
-            view.post(() -> {
+        if (view.getVisibility() == View.VISIBLE) {
+            if (view.getWidth() == 0 && view.getMeasuredWidth() == 0) {
+                view.post(() -> {
+                    showLayer = true;
+                    bitmap = view2Bitmap();
+                    view.invalidate();
+                });
+            } else {
                 showLayer = true;
                 bitmap = view2Bitmap();
                 view.invalidate();
-            });
-        } else {
-            showLayer = true;
-            bitmap = view2Bitmap();
-            view.invalidate();
+            }
         }
     }
 
