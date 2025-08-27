@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.demos.activity.CalendarBlockActivity
+import com.demos.activity.FloatBallActivity
 import com.demos.activity.GradientColorActivity
 import com.demos.activity.RoundWrapActivity
 import com.demos.activity.SportBallActivity
@@ -87,6 +88,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun homeList(): MutableList<HomeItem> {
         return mutableListOf(
+            HomeItem("悬浮view(应用内)", FloatBallActivity::class.java),
             HomeItem("渐变色块", GradientColorActivity::class.java),
             HomeItem("模糊相关", BlurActivity::class.java),
             HomeItem("运动球体", SportBallActivity::class.java),

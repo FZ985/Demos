@@ -7,10 +7,10 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="fill_parent"
-        android:background="#ff0000"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:background="#ff0000">
 
-<!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+        <!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -20,14 +20,15 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:tag="binding_1"
+                app:collapsedTitleGravity="center_horizontal"
                 app:collapsedTitleTextColor="@color/c_2E86F6"
                 app:contentScrim="@android:color/transparent"
                 app:expandedTitleTextColor="@color/teal_200"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:scrimAnimationDuration="100"
                 app:scrimVisibleHeightTrigger="60dp"
-                app:collapsedTitleGravity="center_horizontal"
-                app:titleEnabled="true">
+                app:titleEnabled="true"
+                app:toolbarId="@+id/collapsing_toolbar">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -43,13 +44,25 @@
 
                 </RelativeLayout>
 
-<!--                <androidx.appcompat.widget.Toolbar-->
-<!--                    android:layout_width="fill_parent"-->
-<!--                    android:layout_height="?attr/actionBarSize"-->
-<!--                    android:theme="@style/ThemeOverlay.AppCompat.Dark"-->
-<!--                    app:layout_collapseMode="pin"-->
-<!--                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-<!--                    app:title="应用标题"/>-->
+                <!--                                <androidx.appcompat.widget.Toolbar-->
+                <!--                    android:layout_width="fill_parent"-->
+                <!--                    android:layout_height="?attr/actionBarSize"-->
+                <!--                    android:alpha="0.5"-->
+                <!--                    android:background="@color/white"-->
+                <!--                    android:theme="@style/ThemeOverlay.AppCompat.Dark"-->
+                <!--                    app:layout_collapseMode="pin"-->
+                <!--                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+                <!--                    app:title="应用标题" />-->
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/collapsing_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:alpha="0.5"
+                    android:background="?colorPrimary"
+                    app:layout_collapseMode="pin" />
+
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
             <com.google.android.material.tabs.TabLayout
