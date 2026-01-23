@@ -36,9 +36,10 @@ public class MarqueeExampleAdapter extends MarqueeView.Adapter {
     }
 
     @Override
-    public void onConvert(Context context, View view, int position) {
+    public boolean onConvert(Context context, View view, int position, Runnable runnable) {
         TextView tv = view.findViewById(R.id.tv);
         tv.setText(data.get(position));
+        return false;
     }
 
     @Override
@@ -124,8 +125,8 @@ public class MarqueeExampleAdapter extends MarqueeView.Adapter {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                    animEndForEnd(view);
-                    view.setVisibility(View.GONE);
+                animEndForEnd(view);
+                view.setVisibility(View.GONE);
             }
 
             @Override

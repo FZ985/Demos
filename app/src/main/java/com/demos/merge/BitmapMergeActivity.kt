@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.demos.R
 import com.demos.databinding.ActivityBitmapMergeBinding
 import com.demos.dp
-import com.demos.utils.saveGifByGlide
-import com.demos.utils.saveToFile
+import com.demos.utils.save.saveGifByGlide
+import com.demos.utils.save.saveToFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

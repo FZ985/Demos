@@ -101,10 +101,16 @@ public class MarqueeView extends FrameLayout {
                 if (itemCount > 0) {
                     View itemView = buildItemView();
                     if (itemView != null) {
-                        mAdapter.onConvert(getContext(), itemView, currentPosition);
-                        MarqueeView.super.addView(itemView);
-                        registerClick(itemView, currentPosition);
-                        itemView.post(() -> mAdapter.enterAnim(itemView, currentPosition));
+                        boolean isConvert = mAdapter.onConvert(getContext(), itemView, currentPosition, () -> {
+                            MarqueeView.super.addView(itemView);
+                            registerClick(itemView, currentPosition);
+                            itemView.post(() -> mAdapter.enterAnim(itemView, currentPosition));
+                        });
+                        if (!isConvert) {
+                            MarqueeView.super.addView(itemView);
+                            registerClick(itemView, currentPosition);
+                            itemView.post(() -> mAdapter.enterAnim(itemView, currentPosition));
+                        }
                     }
                 }
             }
@@ -146,10 +152,16 @@ public class MarqueeView extends FrameLayout {
             View view = buildItemView();
             if (view != null) {
                 super.addView(view);
-                mAdapter.onConvert(getContext(), view, currentPosition);
-                isStop = false;
-                registerClick(view, currentPosition);
-                view.post(() -> mAdapter.firstAnim(view, currentPosition));
+                boolean isConvert = mAdapter.onConvert(getContext(), view, currentPosition, () -> {
+                    isStop = false;
+                    registerClick(view, currentPosition);
+                    view.post(() -> mAdapter.firstAnim(view, currentPosition));
+                });
+                if (!isConvert) {
+                    isStop = false;
+                    registerClick(view, currentPosition);
+                    view.post(() -> mAdapter.firstAnim(view, currentPosition));
+                }
             }
         } else {
             startLoop(10);
@@ -339,7 +351,7 @@ public class MarqueeView extends FrameLayout {
             return false;
         }
 
-        public abstract void onConvert(Context context, View view, int position);
+        public abstract boolean onConvert(Context context, View view, int position, Runnable runnable);
 
         public void firstAnim(View view, int position) {
             enterAnim(view, position);

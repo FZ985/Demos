@@ -1,4 +1,4 @@
-package com.demos.utils
+package com.demos.utils.save
 
 import android.content.ContentResolver
 import android.content.ContentValues
@@ -24,11 +24,13 @@ import java.io.IOException
  * by JFZ
  * 2024/9/06
  * desc：使用glide 将图片加载并保存到本地相册中的帮助类
+ * 注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用，或者使用 GlideSaveImageUtilCompat
  **/
 
 
 /**
  * 插入图片到本地相册
+ * 注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用，或者使用 GlideSaveImageUtilCompat
  */
 fun Bitmap.insertToLocal(
     contentResolver: ContentResolver,
@@ -50,6 +52,7 @@ fun Bitmap.insertToLocal(
 
 /**
  * 保存bitmap 到本地相册
+ * 注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用，或者使用 GlideSaveImageUtilCompat
  */
 fun Bitmap.saveToFile(
     context: AppCompatActivity,
@@ -82,6 +85,7 @@ fun Bitmap.saveToFile(
 
 
 //通过glide加载，获取bitmap并保存到本地
+//注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用，或者使用 GlideSaveImageUtilCompat
 fun saveImageByGlide(
     activity: AppCompatActivity,
     imageUrl: String,
@@ -106,6 +110,7 @@ fun saveImageByGlide(
 }
 
 //通过glide加载，获取file,并保存gif到本地
+//注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用，或者使用 GlideSaveImageUtilCompat
 fun saveGifByGlide(
     activity: AppCompatActivity,
     imageUrl: String,
@@ -168,7 +173,8 @@ fun saveGifByGlide(
 }
 
 //插入视频
-fun insertVideoToGalleryCompat(context: Context, videoFile: File, call: (uri: Uri) -> Unit) {
+//注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用,或者使用 GlideSaveImageUtilCompat
+fun insertVideoToGallery(context: Context, videoFile: File, call: (uri: Uri) -> Unit) {
     val values = ContentValues()
     values.put(MediaStore.Video.Media.DISPLAY_NAME, videoFile.name)
     values.put(MediaStore.Video.Media.MIME_TYPE, "video/mp4")

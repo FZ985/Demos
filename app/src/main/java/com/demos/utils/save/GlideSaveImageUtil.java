@@ -1,4 +1,4 @@
-package com.demos.utils;
+package com.demos.utils.save;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -24,6 +24,8 @@ import java.io.OutputStream;
  * by JFZ
  * 2024/9/06
  * desc：使用glide 将图片加载并保存到本地相册中的帮助类
+ * <p>
+ * 注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用，或者使用 GlideSaveImageUtilCompat
  **/
 public class GlideSaveImageUtil {
 
@@ -32,6 +34,8 @@ public class GlideSaveImageUtil {
 
     /**
      * 保存静态图片 （jpeg,png）
+     * <p>
+     * 注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用，或者使用 GlideSaveImageUtilCompat
      *
      * @param context  上下文
      * @param imageUrl 图片地址
@@ -44,6 +48,8 @@ public class GlideSaveImageUtil {
 
     /**
      * 保存静态图片 （jpeg,png）
+     * <p>
+     * 注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用，或者使用 GlideSaveImageUtilCompat
      *
      * @param context   上下文
      * @param imageUrl  图片地址
@@ -74,10 +80,12 @@ public class GlideSaveImageUtil {
 
     /**
      * 保存gif 图片
+     * <p>
+     * 注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用，或者使用 GlideSaveImageUtilCompat
      *
      * @param context  上下文
      * @param imageUrl gif图片地址
-     * return 保存成功 返回 uri
+     *                 return 保存成功 返回 uri
      */
     public static void saveGif(Context context, String imageUrl, Callback<Uri> callback) {
         saveGif(context, imageUrl, String.valueOf(System.currentTimeMillis()), "无描述", callback);
@@ -87,11 +95,13 @@ public class GlideSaveImageUtil {
 
 
     /**
+     * 注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用，或者使用 GlideSaveImageUtilCompat
+     *
      * @param context  上下文
      * @param imageUrl gif图片地址
      * @param title    标题
      * @param desc     描述
-     * return 保存成功 返回 uri
+     *                 return 保存成功 返回 uri
      */
     public static void saveGif(Context context, String imageUrl, String title, String desc, Callback<Uri> callback) {
         new Thread(() -> {
@@ -148,6 +158,8 @@ public class GlideSaveImageUtil {
 
     /**
      * 保存bitmap 到本地相册
+     * <p>
+     * 注意： Android Q 以下需要先申请 WRITE_EXTERNAL_STORAGE 权限再调用，或者使用 GlideSaveImageUtilCompat
      *
      * @param context 上下文
      * @param bitmap  bitmap

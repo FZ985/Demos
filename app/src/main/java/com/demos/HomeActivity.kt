@@ -63,8 +63,39 @@ class HomeActivity : AppCompatActivity() {
         adapter.setOnItemClickListener { _, _, pos ->
             val item = adapter.getItem(pos)
             startActivity(Intent(this, item.cls))
+
+//            try {
+//                val intent = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+//                intent.setData(Uri.parse("package:" + getPackageName()))
+//                startActivity(intent)
+//            } catch (e: ActivityNotFoundException) {
+//                // 可以采用备用方案
+//            }
+
+//            try {
+//                val intent = Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+//                startActivity(intent)
+//            } catch (e: ActivityNotFoundException) {
+                 ////备用方案
+//            }
+
+//            try {
+//                val pm: PackageManager = getPackageManager()
+//                val launchIntent: Intent? = pm.getLaunchIntentForPackage("com.miui.securitycenter")
+//                if (launchIntent != null) {
+//                    launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                    startActivity(launchIntent)
+//                } else {
+//                    // 没有找到启动 Intent，可能应用未安装或者没有 launcher activity
+//                    Toast.makeText(this, "未找到应用", Toast.LENGTH_SHORT).show()
+//                }
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
+
         }
     }
+
 
     private fun queueTask() {
         val empty = queue.isEmpty()

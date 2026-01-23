@@ -58,6 +58,8 @@ dependencies {
 // fragment快速实现（可选）已废弃
     implementation 'com.geyifeng.immersionbar:immersionbar-components:3.2.2'
 
+    implementation 'com.github.getActivity:XXPermissions:26.5'
+
     implementation ('com.github.li-xiaojun:XPopup:2.10.0'){
         exclude group: "com.davemorrissey.labs", module: "subsampling-scale-image-view-androidx"
     }

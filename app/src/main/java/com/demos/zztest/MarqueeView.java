@@ -149,11 +149,8 @@ public class MarqueeView extends HorizontalScrollView {
 
     public void setText(CharSequence text) {
         this.mText = text;
-//        buildMsgText(mTextView);
-//        buildMsgText(mGhostTextView);
         mTextView.setText(mText);
         mGhostTextView.setText(mText);
-
         measureText = (int) mTextView.getPaint().measureText(mText, 0, mText.length());
         resetMarqueeView();
         if (measureText > viewWidth) {
@@ -166,8 +163,6 @@ public class MarqueeView extends HorizontalScrollView {
     public void setText(CharSequence text, int aTextColor) {
         this.mText = text;
         textColor = aTextColor;
-//        buildMsgText(mTextView);
-//        buildMsgText(mGhostTextView);
         mTextView.setText(mText);
         mTextView.setTextColor(aTextColor);
         mGhostTextView.setText(mText);
