@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.demos.jiguanganim.AnimBackgroundColorActivity
 import com.demos.activity.CalendarBlockActivity
 import com.demos.activity.FloatBallActivity
 import com.demos.activity.GradientColorActivity
@@ -76,7 +77,7 @@ class HomeActivity : AppCompatActivity() {
 //                val intent = Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
 //                startActivity(intent)
 //            } catch (e: ActivityNotFoundException) {
-                 ////备用方案
+            ////备用方案
 //            }
 
 //            try {
@@ -119,6 +120,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun homeList(): MutableList<HomeItem> {
         return mutableListOf(
+            HomeItem("极光背景", AnimBackgroundColorActivity::class.java),
             HomeItem("悬浮view(应用内)", FloatBallActivity::class.java),
             HomeItem("渐变色块", GradientColorActivity::class.java),
             HomeItem("模糊相关", BlurActivity::class.java),
