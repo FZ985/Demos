@@ -2,13 +2,13 @@ package com.demos.merge
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.os.Bundle
+import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.applyCanvas
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.demos.R
+import com.demos.activity.BaseActivity
 import com.demos.databinding.ActivityBitmapMergeBinding
 import com.demos.dp
 import com.demos.utils.save.saveGifByGlide
@@ -23,16 +23,17 @@ import kotlinx.coroutines.withContext
  * 2024/6/28
  * desc：
  **/
-class BitmapMergeActivity : AppCompatActivity() {
+class BitmapMergeActivity : BaseActivity() {
 
     private val binding: ActivityBitmapMergeBinding by lazy {
         ActivityBitmapMergeBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
 
+    override fun initView() {
         //图片2
         val bitmapCode = BitmapFactory.decodeResource(resources, R.mipmap.qrcode_test)
         binding.i2.setImageBitmap(bitmapCode)
@@ -94,7 +95,7 @@ class BitmapMergeActivity : AppCompatActivity() {
 
     private fun mergeBitmap(bitmap: Bitmap, bmp: Bitmap): Bitmap {
         //以图片1 创建背景
-        val backgroundBmp = Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config)
+        val backgroundBmp = Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config!!)
         return backgroundBmp.applyCanvas {
             //绘制背景
             drawBitmap(bitmap, 0f, 0f, null)

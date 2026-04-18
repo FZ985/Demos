@@ -1,8 +1,8 @@
 package com.demos.blur
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import com.demos.activity.BaseActivity
 import com.demos.databinding.ActivityBlurBinding
 
 
@@ -11,16 +11,17 @@ import com.demos.databinding.ActivityBlurBinding
  * 2025/5/26
  * desc：
  **/
-class BlurActivity : AppCompatActivity() {
+class BlurActivity : BaseActivity() {
 
     private val binding: ActivityBlurBinding by lazy {
         ActivityBlurBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
 
+    override fun initView() {
         binding.blurContent.setOnClickListener {
             startActivity(Intent(this, BlurLayoutActivity::class.java))
         }

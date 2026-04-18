@@ -1,15 +1,14 @@
 package com.demos.marquee;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.demos.Logger;
+import com.demos.activity.BaseActivity;
 import com.demos.databinding.UiMarqueeBinding;
 import com.demos.marquee.core.MarqueeView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +18,19 @@ import java.util.List;
  * date : 2023/6/30 14:53
  * description :
  */
-public class MarqueeUI extends AppCompatActivity {
+public class MarqueeUI extends BaseActivity {
     private UiMarqueeBinding binding;
     MarqueeExampleAdapter adapter = new MarqueeExampleAdapter();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @NotNull
+    public View getApplyWindowView() {
         binding = UiMarqueeBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        return binding.getRoot();
+    }
 
+    @Override
+    public void initView() {
         List<String> d = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             d.add("iiiiii" + i);

@@ -3,11 +3,11 @@ package com.demos.blur
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
-import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.isVisible
+import com.demos.activity.BaseActivity
 import com.demos.blur.render.BlurConfig
 import com.demos.blur.render.CompatBlurRender
 import com.demos.databinding.ActivityBlurScrollviewBinding
@@ -17,18 +17,19 @@ import com.demos.databinding.ActivityBlurScrollviewBinding
  * 2025/5/23
  * desc：
  **/
-class BlurScrollViewActivity : AppCompatActivity() {
+class BlurScrollViewActivity : BaseActivity() {
 
     private val binding: ActivityBlurScrollviewBinding by lazy {
         ActivityBlurScrollviewBinding.inflate(layoutInflater)
     }
 
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
     @SuppressLint("WrongConstant")
     @RequiresApi(Build.VERSION_CODES.S)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
+    override fun initView() {
         binding.view.setOnClickListener {
             binding.view.isVisible = false
         }

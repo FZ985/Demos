@@ -2,14 +2,13 @@ package com.demos.magic;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
+import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.demos.activity.BaseActivity;
 import com.demos.base.CommonFragmentStatePagerAdapter;
 import com.demos.databinding.ActivityMagic1Binding;
 import com.demos.viewpager.toplinkcustom.ChildFragment;
@@ -24,6 +23,8 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import java.util.List;
  * date : 2023/6/30 08:56
  * description :
  */
-public class MagicTabActivity1 extends AppCompatActivity {
+public class MagicTabActivity1 extends BaseActivity {
     private ActivityMagic1Binding binding;
 
     private final String[] t = {"哈哈", "呵呵", "嘿嘿", "嘻嘻嘻嘻"};
@@ -43,10 +44,13 @@ public class MagicTabActivity1 extends AppCompatActivity {
             Color.parseColor("#c683fe")};
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public @NotNull View getApplyWindowView() {
         binding = ActivityMagic1Binding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        return binding.getRoot();
+    }
+
+    @Override
+    public void initView() {
         List<Fragment> f = new ArrayList<>();
         for (int i = 0; i < t.length; i++) {
             f.add(ChildFragment.instance(i));

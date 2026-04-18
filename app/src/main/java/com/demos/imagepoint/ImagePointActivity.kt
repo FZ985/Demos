@@ -4,11 +4,11 @@ import android.app.ProgressDialog
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Paint
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import androidx.core.graphics.applyCanvas
 import androidx.core.view.isVisible
 import com.demos.R
+import com.demos.activity.BaseActivity
 import com.demos.databinding.ActivityImagePointBinding
 import com.demos.merge.MapPointHelper
 
@@ -18,16 +18,17 @@ import com.demos.merge.MapPointHelper
  * 2025/2/7
  * desc：
  **/
-class ImagePointActivity : AppCompatActivity() {
+class ImagePointActivity : BaseActivity() {
 
     private val binding: ActivityImagePointBinding by lazy {
         ActivityImagePointBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
 
+    override fun initView() {
         val progressDialog = ProgressDialog.show(this, "", "loading...")
         MapPointHelper.getInstance().init(this, R.mipmap.v2_ic_loc_map) {
             progressDialog.dismiss()

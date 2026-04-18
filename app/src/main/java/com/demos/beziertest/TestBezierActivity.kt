@@ -1,8 +1,7 @@
 package com.demos.beziertest
 
-import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import com.demos.activity.BaseActivity
 import com.demos.click.PerfectClickListener
 import com.demos.databinding.ZzTestBezierBinding
 
@@ -12,15 +11,17 @@ import com.demos.databinding.ZzTestBezierBinding
  *  date : 2023/8/21 09:54
  *  description :
  */
-class TestBezierActivity : AppCompatActivity() {
+class TestBezierActivity : BaseActivity() {
 
     private val binding: ZzTestBezierBinding by lazy {
         ZzTestBezierBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
+    override fun initView() {
         binding.click.setOnClickListener(object : PerfectClickListener() {
             override fun onViewClick(v: View) {
                 binding.bv.start()

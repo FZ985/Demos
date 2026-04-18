@@ -15,7 +15,13 @@
     <uses-feature android:name="android.hardware.camera.any" />
     <uses-feature android:name="android.hardware.camera" />
 
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
 
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION"/>
+
+    <uses-permission android:name="android.permission.DETECT_SCREEN_RECORDING"/>
+    <uses-permission android:name="android.permission.DETECT_SCREEN_CAPTURE"/>
     <application
         android:name=".BaseApp"
         android:allowBackup="true"
@@ -100,6 +106,7 @@
         <activity android:name=".activity.GradientColorActivity" />
         <activity android:name=".activity.FloatBallActivity" />
         <activity android:name=".jiguanganim.AnimBackgroundColorActivity" />
+        <activity android:name=".screenrecord.ScreenCatchActivity" />
 
     </application>
 

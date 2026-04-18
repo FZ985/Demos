@@ -1,15 +1,13 @@
 package com.demos.anim
 
-import android.os.Build
-import android.os.Bundle
 import android.transition.TransitionManager
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
-import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import com.demos.R
+import com.demos.activity.BaseActivity
 import com.demos.databinding.ActivityAnimConstraintLayoutBinding
 import com.demos.dp
 
@@ -19,7 +17,7 @@ import com.demos.dp
  * 2024/10/26
  * desc：
  **/
-class ConstraintLayoutAnimActivity : AppCompatActivity() {
+class ConstraintLayoutAnimActivity : BaseActivity() {
 
     private var contentAreaHeight = 0;
 
@@ -27,10 +25,11 @@ class ConstraintLayoutAnimActivity : AppCompatActivity() {
         ActivityAnimConstraintLayoutBinding.inflate(layoutInflater)
     }
 
-    @RequiresApi(Build.VERSION_CODES.R)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
+    override fun initView() {
         window.setDecorFitsSystemWindows(false)
         val controller = window.insetsController
         if (controller != null) {

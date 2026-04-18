@@ -5,9 +5,8 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.RectF
-import android.os.Bundle
+import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.toColorInt
 import com.demos.databinding.ActivityGithubCalendarBlockBinding
 import com.demos.dp
@@ -22,16 +21,17 @@ import kotlin.math.sin
  * by JFZ
  * 2025/5/19
  **/
-class CalendarBlockActivity : AppCompatActivity() {
+class CalendarBlockActivity : BaseActivity() {
 
     private val binding: ActivityGithubCalendarBlockBinding by lazy {
         ActivityGithubCalendarBlockBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
 
+    override fun initView() {
         binding.startYear.setSelection(6)
         binding.startMonth.setSelection(4)
         binding.endYear.setSelection(6)

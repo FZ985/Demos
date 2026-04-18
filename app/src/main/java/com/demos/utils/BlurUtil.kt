@@ -37,7 +37,8 @@ object BlurUtil {
         scaleFactor: Float = 1f,
         oldRenderScriptRepeat: Boolean = true
     ): Bitmap? {
-        val originBmp = bitmap.copy(bitmap.getConfig(), true)
+        val config = bitmap.config ?: Bitmap.Config.ARGB_8888
+        val originBmp = bitmap.copy(config, true)
         val originW = originBmp.width
         val originH = originBmp.height
 

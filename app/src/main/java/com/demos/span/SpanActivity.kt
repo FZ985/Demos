@@ -2,13 +2,13 @@ package com.demos.span
 
 import android.graphics.Color
 import android.graphics.Typeface
-import android.os.Bundle
 import android.text.style.ImageSpan
 import android.text.style.URLSpan
+import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.request.RequestOptions
 import com.demos.R
+import com.demos.activity.BaseActivity
 import com.demos.databinding.ActivitySpanBinding
 import com.demos.dp
 import com.demos.getDrawableCompat
@@ -26,15 +26,16 @@ import com.demos.span.impl.ShortLabelSpannable
  *  date : 2023/8/1 17:34
  *  description :
  */
-class SpanActivity : AppCompatActivity() {
+class SpanActivity : BaseActivity() {
     private val binding: ActivitySpanBinding by lazy {
         ActivitySpanBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
 
+    override fun initView() {
         binding.ddd.text =
             "1234567890好好好abcdefgopqrsty1234567890好好好abcdefgopqrsty1234567890好好好abcdefgopqrsty"
 

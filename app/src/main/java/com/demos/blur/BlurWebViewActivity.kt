@@ -5,15 +5,15 @@ import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Rect
 import android.os.Build
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.PixelCopy
+import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
+import com.demos.activity.BaseActivity
 import com.demos.blur.render.BlurConfig
 import com.demos.blur.render.CompatBlurRender
 import com.demos.databinding.ActivityBlurWebviewBinding
@@ -23,18 +23,19 @@ import com.demos.databinding.ActivityBlurWebviewBinding
  * 2025/5/23
  * desc：
  **/
-class BlurWebViewActivity : AppCompatActivity() {
+class BlurWebViewActivity : BaseActivity() {
 
     private val binding: ActivityBlurWebviewBinding by lazy {
         ActivityBlurWebviewBinding.inflate(layoutInflater)
     }
 
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
     @SuppressLint("WrongConstant")
     @RequiresApi(Build.VERSION_CODES.S)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
+    override fun initView() {
         binding.web.settings.javaScriptEnabled = true
         binding.web.settings.domStorageEnabled = true
         binding.web.settings.blockNetworkImage = false

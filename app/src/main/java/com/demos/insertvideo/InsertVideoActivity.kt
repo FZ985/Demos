@@ -4,12 +4,12 @@ import android.content.ContentValues
 import android.content.Context
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import com.demos.Logger
+import com.demos.activity.BaseActivity
 import com.demos.databinding.ActivityInsertVideoBinding
 import com.demos.nativedownload.NativeDownload
 import com.demos.nativedownload.core.DownLoadListener
@@ -24,15 +24,17 @@ import java.nio.file.Files
  * 2024/11/15
  * desc：
  **/
-class InsertVideoActivity : AppCompatActivity() {
+class InsertVideoActivity : BaseActivity() {
 
     private val binding: ActivityInsertVideoBinding by lazy {
         ActivityInsertVideoBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
+    override fun initView() {
         initData()
     }
 

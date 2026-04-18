@@ -1,10 +1,9 @@
 package com.demos.activity
 
-import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.demos.R
 import com.demos.databinding.ActivityFloatBallBinding
 import com.demos.widgets.floatball.FloatingBallLayout
@@ -16,7 +15,7 @@ import com.demos.widgets.floatball.attachToActivity
  * 2025/8/27
  * desc：
  **/
-class FloatBallActivity : AppCompatActivity() {
+class FloatBallActivity : BaseActivity() {
 
     private val binding: ActivityFloatBallBinding by lazy {
         ActivityFloatBallBinding.inflate(
@@ -24,10 +23,7 @@ class FloatBallActivity : AppCompatActivity() {
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
+    override fun initView() {
         binding.showBall.setOnClickListener {
             val ball = FloatingBallLayout(this).apply {
                 // 可往里加任意子 View（图标、菜单等），点击事件都能正常触发
@@ -60,5 +56,9 @@ class FloatBallActivity : AppCompatActivity() {
                 marginDp = 16
             )
         }
+    }
+
+    override fun getApplyWindowView(): View {
+        return binding.root
     }
 }

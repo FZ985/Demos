@@ -2,10 +2,10 @@ package com.demos.blur
 
 import android.annotation.SuppressLint
 import android.os.Build
-import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.demos.activity.BaseActivity
 import com.demos.blur.render.BlurConfig
 import com.demos.blur.render.CompatBlurRender
 import com.demos.databinding.ActivityBlurNestedScrollviewBinding
@@ -15,18 +15,19 @@ import com.demos.databinding.ActivityBlurNestedScrollviewBinding
  * 2025/5/23
  * desc：
  **/
-class BlurNestedScrollViewActivity : AppCompatActivity() {
+class BlurNestedScrollViewActivity : BaseActivity() {
 
     private val binding: ActivityBlurNestedScrollviewBinding by lazy {
         ActivityBlurNestedScrollviewBinding.inflate(layoutInflater)
     }
 
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
     @SuppressLint("WrongConstant")
     @RequiresApi(Build.VERSION_CODES.S)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
+    override fun initView() {
         binding.view.setOnClickListener {
             binding.view.isVisible = false
         }

@@ -1,9 +1,8 @@
 package com.demos.activity
 
 import android.graphics.Color
-import android.os.Bundle
+import android.view.View
 import android.widget.SeekBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.ColorUtils
 import com.demos.databinding.ActivityGradientColorBinding
 import com.demos.widgets.GradientColorBlock
@@ -14,7 +13,7 @@ import com.demos.widgets.GradientColorBlock
  * 2025/6/6
  * desc：
  **/
-class GradientColorActivity : AppCompatActivity() {
+class GradientColorActivity : BaseActivity() {
 
     private val binding: ActivityGradientColorBinding by lazy {
         ActivityGradientColorBinding.inflate(layoutInflater)
@@ -22,10 +21,12 @@ class GradientColorActivity : AppCompatActivity() {
 
     val option = GradientColorBlock.BlockOptions()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
 
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
+    override fun initView() {
         binding.block.setOptions(option)
         binding.blockPercent.setOptions(option)
 

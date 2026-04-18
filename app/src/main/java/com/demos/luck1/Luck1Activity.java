@@ -1,13 +1,12 @@
 package com.demos.luck1;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.demos.activity.BaseActivity;
 import com.demos.databinding.ActivityLuck1Binding;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -16,16 +15,19 @@ import java.util.Random;
  * date : 2023/10/20 10:52
  * description :
  */
-public class Luck1Activity extends AppCompatActivity {
+public class Luck1Activity extends BaseActivity {
 
     private ActivityLuck1Binding binding;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @NotNull
+    public View getApplyWindowView() {
         binding = ActivityLuck1Binding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        return binding.getRoot();
+    }
 
+    @Override
+    public void initView() {
         binding.btnAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

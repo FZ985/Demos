@@ -1,34 +1,38 @@
 package com.demos.live;
 
-import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.demos.R;
 import com.demos.Tools;
+import com.demos.activity.BaseActivity;
 import com.demos.databinding.ActivityLiveRecyclerBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * by JFZ
  * 2024/4/10
  * desc：
  **/
-public class LiveRecyclerActivity extends AppCompatActivity {
+public class LiveRecyclerActivity extends BaseActivity {
 
     private ActivityLiveRecyclerBinding binding;
     private final ItemAdapter adapter = new ItemAdapter();
     LinearLayoutManager layoutManager;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public @NotNull View getApplyWindowView() {
         binding = ActivityLiveRecyclerBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        return binding.getRoot();
+    }
+
+    @Override
+    public void initView() {
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true);
         binding.recycler.setLayoutManager(layoutManager);

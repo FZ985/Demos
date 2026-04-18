@@ -1,7 +1,6 @@
 package com.demos.activity
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import com.demos.databinding.ActivitySportBallBinding
 
 
@@ -10,15 +9,17 @@ import com.demos.databinding.ActivitySportBallBinding
  * 2025/5/22
  * desc：
  **/
-class SportBallActivity : AppCompatActivity() {
+class SportBallActivity : BaseActivity() {
 
     private val binding: ActivitySportBallBinding by lazy {
         ActivitySportBallBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
+    override fun initView() {
         binding.ball.post {
             binding.ball.setCollidableViews(binding.v1, binding.v2)
         }

@@ -1,7 +1,7 @@
 package com.demos.other
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import com.demos.activity.BaseActivity
 import com.demos.databinding.ActivityAppbarLayoutBinding
 
 
@@ -10,14 +10,16 @@ import com.demos.databinding.ActivityAppbarLayoutBinding
  *  date : 2023/8/18 09:56
  *  description :
  */
-class AppbarLayoutActivity : AppCompatActivity() {
+class AppbarLayoutActivity : BaseActivity() {
 
     private val binding: ActivityAppbarLayoutBinding by lazy {
         ActivityAppbarLayoutBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
+    override fun initView() {
     }
 }

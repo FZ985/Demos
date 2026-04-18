@@ -1,19 +1,20 @@
 package com.demos.layoutmanager;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.demos.R;
+import com.demos.activity.BaseActivity;
 import com.demos.databinding.ActivityLayoutmanager1Binding;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +24,19 @@ import java.util.List;
  * date : 2023/6/27 13:39
  * description :
  */
-public class LayoutManagerUI1 extends AppCompatActivity {
+public class LayoutManagerUI1 extends BaseActivity {
 
     private ActivityLayoutmanager1Binding binding;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @NotNull
+    public View getApplyWindowView() {
         binding = ActivityLayoutmanager1Binding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        return binding.getRoot();
+    }
+
+    @Override
+    public void initView() {
         binding.recycler.setLayoutManager(new TestGridManager());
 //        binding.recycler.setLayoutManager(new ArcLayoutManager(this));
 //        binding.recycler.setLayoutManager(new RectangleLayoutManager(this,3,4));

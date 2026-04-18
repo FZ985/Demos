@@ -3,15 +3,14 @@ package com.demos.luck3;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.demos.R;
+import com.demos.activity.BaseActivity;
 import com.demos.databinding.ActivityLuck3Binding;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
@@ -20,16 +19,19 @@ import java.util.ArrayList;
  * date : 2023/10/20 10:52
  * description :
  */
-public class Luck3Activity extends AppCompatActivity {
+public class Luck3Activity extends BaseActivity {
 
     private ActivityLuck3Binding binding;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @NotNull
+    public View getApplyWindowView() {
         binding = ActivityLuck3Binding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        return binding.getRoot();
+    }
 
+    @Override
+    public void initView() {
         binding.btPointTo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,32 +1,35 @@
 package com.demos.luck2;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.demos.BaseApp;
 import com.demos.R;
+import com.demos.activity.BaseActivity;
 import com.demos.databinding.ActivityLuck2Binding;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * author : JFZ
  * date : 2023/10/20 10:52
  * description :
  */
-public class Luck2Activity extends AppCompatActivity implements LuckPanLayout.AnimationEndListener {
+public class Luck2Activity extends BaseActivity implements LuckPanLayout.AnimationEndListener {
 
     private ActivityLuck2Binding binding;
 
     private String[] strs = BaseApp.getInstance().getResources().getStringArray(R.array.names);
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @NotNull
+    public View getApplyWindowView() {
         binding = ActivityLuck2Binding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        return binding.getRoot();
+    }
+
+    @Override
+    public void initView() {
         binding.luckpanLayout.setAnimationEndListener(this);
     }
 

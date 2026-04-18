@@ -4,14 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.hardware.Camera;
-import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.demos.activity.BaseActivity;
 import com.demos.databinding.ActivityCameraBinding;
 import com.gyf.immersionbar.ImmersionBar;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
@@ -20,7 +19,7 @@ import java.io.File;
  * 2025/2/14
  * desc：
  **/
-public class CameraActivity extends AppCompatActivity {
+public class CameraActivity extends BaseActivity {
 
     private ActivityCameraBinding binding;
 
@@ -28,12 +27,14 @@ public class CameraActivity extends AppCompatActivity {
     private CameraPreview mPreview;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @NotNull
+    public View getApplyWindowView() {
         binding = ActivityCameraBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        getSupportActionBar().hide();
+        return binding.getRoot();
+    }
 
+    @Override
+    public void initView() {
         ImmersionBar.with(this)
                 .fullScreen(true)
                 .statusBarColorInt(Color.TRANSPARENT)

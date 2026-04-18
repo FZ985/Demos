@@ -1,16 +1,16 @@
 package com.demos.viewpager.toplinkcustom;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.demos.R;
+import com.demos.activity.BaseActivity;
 import com.demos.base.CommonFragmentStatePagerAdapter;
 import com.demos.databinding.ActivityViewpageLinkSuctomBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,19 +20,24 @@ import java.util.List;
  * date : 2023/6/27 09:46
  * description :
  */
-public class TopLinkCustomActivity extends AppCompatActivity {
+public class TopLinkCustomActivity extends BaseActivity {
 
     private ActivityViewpageLinkSuctomBinding binding;
 
     private final int count = 10;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @NotNull
+    public View getApplyWindowView() {
         binding = ActivityViewpageLinkSuctomBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        return binding.getRoot();
+    }
+
+    @Override
+    public void initView() {
         initData();
     }
+
 
     private void initData() {
         binding.link.setAdapter(R.layout.item_vp, new ScalePagerAdapter() {

@@ -1,7 +1,7 @@
 package com.demos.jiguanganim
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import com.demos.activity.BaseActivity
 import com.demos.databinding.ActivityAnimBackgroundColorBinding
 
 /**
@@ -9,15 +9,19 @@ import com.demos.databinding.ActivityAnimBackgroundColorBinding
  * 2026/1/29
  * desc：
  **/
-class AnimBackgroundColorActivity : AppCompatActivity() {
+class AnimBackgroundColorActivity : BaseActivity() {
     private val binding: ActivityAnimBackgroundColorBinding by lazy {
         ActivityAnimBackgroundColorBinding.inflate(
             layoutInflater
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun initView() {
+
     }
+
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
 }

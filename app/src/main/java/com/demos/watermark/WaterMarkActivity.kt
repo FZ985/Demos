@@ -6,9 +6,9 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Shader
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import androidx.core.graphics.applyCanvas
+import com.demos.activity.BaseActivity
 import com.demos.databinding.ActivityWatermarkBinding
 
 
@@ -17,16 +17,17 @@ import com.demos.databinding.ActivityWatermarkBinding
  * 2025/3/13
  * desc：
  **/
-class WaterMarkActivity : AppCompatActivity() {
+class WaterMarkActivity : BaseActivity() {
 
     private val binding: ActivityWatermarkBinding by lazy {
         ActivityWatermarkBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
 
+    override fun initView() {
         binding.root.background = WatermarkDrawable("哈哈哈").apply {
             alpha = 90
             setTextSize(50)

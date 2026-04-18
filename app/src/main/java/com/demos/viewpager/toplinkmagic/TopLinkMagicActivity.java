@@ -2,16 +2,14 @@ package com.demos.viewpager.toplinkmagic;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.demos.R;
+import com.demos.activity.BaseActivity;
 import com.demos.base.CommonFragmentStatePagerAdapter;
 import com.demos.databinding.ActivityToplinkMagicBinding;
 import com.demos.viewpager.toplinkcustom.ChildFragment;
@@ -24,6 +22,8 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerInd
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.CommonPagerTitleView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,17 +33,20 @@ import java.util.List;
  * Author: jfz
  * Date: 2020-12-21 9:53
  */
-public class TopLinkMagicActivity extends AppCompatActivity {
+public class TopLinkMagicActivity extends BaseActivity {
     private ActivityToplinkMagicBinding binding;
     private final String[] CHANNELS = {"CUPCAKE", "DONUT", "ECLAIR", "GINGERBREAD", "HONEYCOMB", "ICE_CREAM_SANDWICH", "JELLY_BEAN", "KITKAT", "LOLLIPOP", "M", "NOUGAT"};
     private List<String> mDataList = Arrays.asList(CHANNELS);
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @NotNull
+    public View getApplyWindowView() {
         binding = ActivityToplinkMagicBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        return binding.getRoot();
+    }
 
+    @Override
+    public void initView() {
         init();
         binding.click.setOnClickListener(v -> {
 //            mDataList.remove(0);

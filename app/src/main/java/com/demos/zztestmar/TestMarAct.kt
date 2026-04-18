@@ -1,10 +1,10 @@
 package com.demos.zztestmar
 
 import android.graphics.Color
-import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import com.demos.Tools
+import com.demos.activity.BaseActivity
 import com.demos.databinding.ZzzMarActBinding
 import com.demos.span.core.Span
 
@@ -14,15 +14,17 @@ import com.demos.span.core.Span
  * 2024/9/10
  * desc：
  **/
-class TestMarAct : AppCompatActivity() {
+class TestMarAct : BaseActivity() {
 
     private val binding: ZzzMarActBinding by lazy {
         ZzzMarActBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
+    override fun initView() {
         binding.click.setOnClickListener {
             binding.mar.setText(
                 Tools.randomNumber(20, 1999)
@@ -49,7 +51,7 @@ class TestMarAct : AppCompatActivity() {
         binding.marquee.setOnMarqueeStateListener {
             Log.d("Marquee", "不需要滚动！")
         }
-        binding.marquee.bindLifecycle(getLifecycle()) // 绑定生命周期
+        binding.marquee.bindLifecycle(lifecycle) // 绑定生命周期
         binding.marquee.startMarquee()
     }
 }

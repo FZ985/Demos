@@ -5,15 +5,14 @@ import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.Rect
 import android.os.Build
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.PixelCopy
 import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.createBitmap
 import androidx.core.view.isVisible
+import com.demos.activity.BaseActivity
 import com.demos.databinding.ActivityBlurLayoutBinding
 
 /**
@@ -21,17 +20,19 @@ import com.demos.databinding.ActivityBlurLayoutBinding
  * 2025/5/23
  * desc：
  **/
-class BlurLayoutActivity : AppCompatActivity() {
+class BlurLayoutActivity : BaseActivity() {
 
     private val binding: ActivityBlurLayoutBinding by lazy {
         ActivityBlurLayoutBinding.inflate(layoutInflater)
     }
 
+    override fun getApplyWindowView(): View {
+        return binding.root
+    }
+
     @SuppressLint("WrongConstant")
     @RequiresApi(Build.VERSION_CODES.S)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun initView() {
 //        val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.image_01)
         val radius = 40f
 //        BlurUtil.blurBitmap(this, bitmap, radius, .2f)?.let {

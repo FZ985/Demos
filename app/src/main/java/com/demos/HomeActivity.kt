@@ -1,13 +1,11 @@
 package com.demos
 
 import android.content.Intent
-import android.os.Bundle
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.demos.jiguanganim.AnimBackgroundColorActivity
+import com.demos.activity.BaseActivity
 import com.demos.activity.CalendarBlockActivity
 import com.demos.activity.FloatBallActivity
 import com.demos.activity.GradientColorActivity
@@ -21,6 +19,7 @@ import com.demos.camera.CameraActivity
 import com.demos.databinding.ActivityMainBinding
 import com.demos.imagepoint.ImagePointActivity
 import com.demos.insertvideo.InsertVideoActivity
+import com.demos.jiguanganim.AnimBackgroundColorActivity
 import com.demos.layoutmanager.LayoutManagerUI1
 import com.demos.live.LiveRecyclerActivity
 import com.demos.luck1.Luck1Activity
@@ -32,6 +31,7 @@ import com.demos.marquee.MarqueeUI
 import com.demos.merge.BitmapMergeActivity
 import com.demos.other.AppbarLayoutActivity
 import com.demos.password.PasswordActivity
+import com.demos.screenrecord.ScreenCatchActivity
 import com.demos.span.SpanActivity
 import com.demos.viewpager.toplinkcustom.TopLinkCustomActivity
 import com.demos.viewpager.toplinkmagic.TopLinkMagicActivity
@@ -46,17 +46,18 @@ import java.util.Queue
  * 2024/9/10
  * desc：
  **/
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val queue: Queue<String> = ArrayDeque()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun getApplyWindowView() = binding.root
 
+    private val queue: Queue<String> = ArrayDeque()
+
+
+    override fun initView() {
         binding.recycler.layoutManager = LinearLayoutManager(this)
         val adapter = HomeAdapter()
         binding.recycler.adapter = adapter
@@ -97,7 +98,6 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-
     private fun queueTask() {
         val empty = queue.isEmpty()
         Logger.e("empty:" + empty + ",size:" + queue.size)
@@ -120,6 +120,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun homeList(): MutableList<HomeItem> {
         return mutableListOf(
+            HomeItem("录屏检测", ScreenCatchActivity::class.java),
             HomeItem("极光背景", AnimBackgroundColorActivity::class.java),
             HomeItem("悬浮view(应用内)", FloatBallActivity::class.java),
             HomeItem("渐变色块", GradientColorActivity::class.java),
