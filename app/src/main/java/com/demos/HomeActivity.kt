@@ -29,6 +29,7 @@ import com.demos.luck4.Lucky4Activity
 import com.demos.magic.MagicTabActivity1
 import com.demos.marquee.MarqueeUI
 import com.demos.merge.BitmapMergeActivity
+import com.demos.nfc.NfcActivity
 import com.demos.other.AppbarLayoutActivity
 import com.demos.password.PasswordActivity
 import com.demos.screenrecord.ScreenCatchActivity
@@ -120,6 +121,7 @@ class HomeActivity : BaseActivity() {
 
     private fun homeList(): MutableList<HomeItem> {
         return mutableListOf(
+            HomeItem("Nfc信息", NfcActivity::class.java),
             HomeItem("录屏检测", ScreenCatchActivity::class.java),
             HomeItem("极光背景", AnimBackgroundColorActivity::class.java),
             HomeItem("悬浮view(应用内)", FloatBallActivity::class.java),

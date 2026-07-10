@@ -63,7 +63,9 @@ dependencies {
 
     implementation 'com.github.getActivity:XXPermissions:26.5'
 
-    implementation ('com.github.li-xiaojun:XPopup:2.10.0'){
+//    implementation "com.google.code.gson:gson:2.13.1"
+
+    implementation('com.github.li-xiaojun:XPopup:2.10.0') {
         exclude group: "com.davemorrissey.labs", module: "subsampling-scale-image-view-androidx"
     }
 
